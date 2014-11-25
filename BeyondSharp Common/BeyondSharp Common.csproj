@@ -40,10 +40,15 @@
   <ItemGroup>
     <Compile Include="FrameworkEngine.cs" />
     <Compile Include="FrameworkEngineSide.cs" />
+    <Compile Include="Framework\ICommonAtom.cs" />
+    <Compile Include="Framework\ICommonDatum.cs" />
+    <Compile Include="Framework\ICommonMovable.cs" />
+    <Compile Include="Framework\ICommonTurf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

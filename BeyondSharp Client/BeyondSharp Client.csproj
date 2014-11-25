@@ -48,6 +48,10 @@
     <Compile Include="ClientFrameworkEngine.cs" />
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramOptions.cs" />
+    <Compile Include="Framework\ClientAtom.cs" />
+    <Compile Include="Framework\ClientDatum.cs" />
+    <Compile Include="Framework\ClientMovable.cs" />
+    <Compile Include="Framework\ClientTurf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">
