@@ -37,6 +37,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeyondSharp Common\BeyondSharp Common.csproj">
+      <Project>{57fb1b19-e032-40dc-a0d6-84bfc2d23bd6}</Project>
+      <Name>BeyondSharp Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
