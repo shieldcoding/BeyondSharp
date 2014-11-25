@@ -10,7 +10,7 @@ namespace BeyondSharp.Server
     {
         public static ServerFrameworkEngine Engine { get; private set; }
 
-        public ServerProgramOptions Options { get; private set; }
+        public static ServerProgramOptions Options { get; private set; }
 
         public static void Main(string[] args)
         {

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Common", "Beyon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Server", "BeyondSharp Server\BeyondSharp Server.csproj", "{AD7E10C3-3F63-4C22-9006-E045A474CD1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Client", "BeyondSharp Client\BeyondSharp Client.csproj", "{12C51DED-2D4C-40EF-870A-B43639486106}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD7E10C3-3F63-4C22-9006-E045A474CD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD7E10C3-3F63-4C22-9006-E045A474CD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD7E10C3-3F63-4C22-9006-E045A474CD1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C51DED-2D4C-40EF-870A-B43639486106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C51DED-2D4C-40EF-870A-B43639486106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C51DED-2D4C-40EF-870A-B43639486106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C51DED-2D4C-40EF-870A-B43639486106}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
