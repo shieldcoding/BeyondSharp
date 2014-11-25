@@ -1,11 +1,11 @@
-﻿using BeyondSharp.Common.Framework;
+﻿using BeyondSharp.Common.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeyondSharp.Client.Framework
+namespace BeyondSharp.Client.Entity
 {
     internal class ClientMovable : ClientAtom, ICommonMovable
     {

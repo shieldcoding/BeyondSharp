@@ -38,17 +38,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ICommonMobile.cs" />
     <Compile Include="FrameworkEngine.cs" />
     <Compile Include="FrameworkEngineSide.cs" />
-    <Compile Include="Framework\ICommonAtom.cs" />
-    <Compile Include="Framework\ICommonDatum.cs" />
-    <Compile Include="Framework\ICommonMovable.cs" />
-    <Compile Include="Framework\ICommonTurf.cs" />
+    <Compile Include="Entity\ICommonAtom.cs" />
+    <Compile Include="Entity\ICommonDatum.cs" />
+    <Compile Include="Entity\ICommonMovable.cs" />
+    <Compile Include="Entity\ICommonTurf.cs" />
+    <Compile Include="Entity\IEntityComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entity\Component\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

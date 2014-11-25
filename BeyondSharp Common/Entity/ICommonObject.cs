@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeyondSharp.Common.Framework
+namespace BeyondSharp.Common.Entity
 {
-    public interface ICommonAtom
+    public interface ICommonObject : ICommonMovable
     {
     }
 }

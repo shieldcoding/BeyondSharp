@@ -50,6 +50,7 @@
     <Compile Include="ClientProgramOptions.cs" />
     <Compile Include="Framework\ClientAtom.cs" />
     <Compile Include="Framework\ClientDatum.cs" />
+    <Compile Include="Framework\ClientMobile.cs" />
     <Compile Include="Framework\ClientMovable.cs" />
     <Compile Include="Framework\ClientTurf.cs" />
   </ItemGroup>

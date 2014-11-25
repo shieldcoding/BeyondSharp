@@ -1,13 +1,13 @@
-﻿using BeyondSharp.Common.Framework;
+﻿using BeyondSharp.Common.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeyondSharp.Server.Framework
+namespace BeyondSharp.Client.Entity
 {
-    public class ServerTurf : ServerAtom, ICommonTurf
+    internal class ClientAtom : ClientDatum, ICommonAtom
     {
     }
 }
