@@ -48,7 +48,9 @@
     <Compile Include="Entity\ServerMovable.cs" />
     <Compile Include="Entity\ServerObject.cs" />
     <Compile Include="Entity\ServerTurf.cs" />
-    <Compile Include="ServerFrameworkEngine.cs" />
+    <Compile Include="Network\ServerNetworkManager.cs" />
+    <Compile Include="ServerEngine.cs" />
+    <Compile Include="ServerEngineComponent.cs" />
     <Compile Include="ServerProgram.cs" />
     <Compile Include="ServerProgramOptions.cs" />
   </ItemGroup>

@@ -10,5 +10,13 @@ namespace BeyondSharp.Server.Entity
     public class ServerDatum : ICommonDatum
     {
         public string Tag { get; private set; }
+
+        /// <summary>
+        /// Unregisters the datum from the entity manager.
+        /// </summary>
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

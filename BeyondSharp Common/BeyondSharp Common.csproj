@@ -40,13 +40,16 @@
   <ItemGroup>
     <Compile Include="Entity\ICommonMobile.cs" />
     <Compile Include="Entity\ICommonObject.cs" />
-    <Compile Include="FrameworkEngine.cs" />
-    <Compile Include="FrameworkEngineSide.cs" />
+    <Compile Include="Entity\IEntityManager.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="EngineSide.cs" />
     <Compile Include="Entity\ICommonAtom.cs" />
     <Compile Include="Entity\ICommonDatum.cs" />
     <Compile Include="Entity\ICommonMovable.cs" />
     <Compile Include="Entity\ICommonTurf.cs" />
     <Compile Include="Entity\IEntityComponent.cs" />
+    <Compile Include="IEngineComponent.cs" />
+    <Compile Include="Network\INetworkManagerEngineComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    public class ServerFrameworkEngine : FrameworkEngine
+    public class ServerEngine : Engine
     {
-        public ServerFrameworkEngine()
+        public ServerEngine()
         {
-            Side = FrameworkEngineSide.Server;
+            Side = EngineSide.Server;
         }
     }
 }

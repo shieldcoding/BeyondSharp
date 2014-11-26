@@ -45,7 +45,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientFrameworkEngine.cs" />
+    <Compile Include="ClientEngine.cs" />
+    <Compile Include="ClientEngineComponent.cs" />
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramOptions.cs" />
     <Compile Include="Entity\ClientAtom.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Entity\ClientMovable.cs" />
     <Compile Include="Entity\ClientObject.cs" />
     <Compile Include="Entity\ClientTurf.cs" />
+    <Compile Include="Network\ClientNetworkManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">

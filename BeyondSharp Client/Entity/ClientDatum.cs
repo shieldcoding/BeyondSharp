@@ -10,5 +10,10 @@ namespace BeyondSharp.Client.Entity
     internal class ClientDatum : ICommonDatum
     {
         public string Tag { get; private set; }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

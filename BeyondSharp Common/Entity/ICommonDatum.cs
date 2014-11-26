@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BeyondSharp.Common.Entity
 {
     /// <summary>
-    /// The base entity-type for objects shared between the server and its clients.
+    /// The base entity-type for objects, datums in their base state are not shared between the server and its clients.
     /// </summary>
     public interface ICommonDatum
     {
@@ -15,5 +15,10 @@ namespace BeyondSharp.Common.Entity
         /// A unique tag that can be set and then used to retrieve this datum.
         /// </summary>
         string Tag { get; }
+
+        /// <summary>
+        /// Initiates the process of deleting the entity.
+        /// </summary>
+        void Delete();
     }
 }

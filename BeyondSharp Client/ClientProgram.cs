@@ -8,7 +8,7 @@ namespace BeyondSharp.Client
 {
     public static class ClientProgram
     {
-        public static ClientFrameworkEngine Engine { get; private set; }
+        public static ClientEngine Engine { get; private set; }
 
         public static ClientProgramOptions Options { get; private set; }
 
