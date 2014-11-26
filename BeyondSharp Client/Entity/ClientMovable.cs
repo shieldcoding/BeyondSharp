@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    internal class ClientMovable : ClientAtom, ICommonMovable
+    internal abstract class ClientMovable : ClientAtom, ICommonMovable
     {
     }
 }

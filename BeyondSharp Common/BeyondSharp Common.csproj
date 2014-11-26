@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\ICommonMobile.cs" />
+    <Compile Include="Entity\ICommonObject.cs" />
     <Compile Include="FrameworkEngine.cs" />
     <Compile Include="FrameworkEngineSide.cs" />
     <Compile Include="Entity\ICommonAtom.cs" />

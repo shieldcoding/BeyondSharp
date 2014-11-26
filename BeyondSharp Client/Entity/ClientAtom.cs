@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    internal class ClientAtom : ClientDatum, ICommonAtom
+    internal abstract class ClientAtom : ClientDatum, ICommonAtom
     {
+        public string Name { get; private set; }
     }
 }

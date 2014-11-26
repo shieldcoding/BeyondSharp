@@ -11,5 +11,6 @@ namespace BeyondSharp.Common.Entity
     /// </summary>
     public interface ICommonAtom
     {
+        string Name { get; }
     }
 }

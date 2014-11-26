@@ -42,11 +42,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\ServerAtom.cs" />
-    <Compile Include="Framework\ServerDatum.cs" />
-    <Compile Include="Framework\ServerMobile.cs" />
-    <Compile Include="Framework\ServerMovable.cs" />
-    <Compile Include="Framework\ServerTurf.cs" />
+    <Compile Include="Entity\ServerAtom.cs" />
+    <Compile Include="Entity\ServerDatum.cs" />
+    <Compile Include="Entity\ServerMobile.cs" />
+    <Compile Include="Entity\ServerMovable.cs" />
+    <Compile Include="Entity\ServerObject.cs" />
+    <Compile Include="Entity\ServerTurf.cs" />
     <Compile Include="ServerFrameworkEngine.cs" />
     <Compile Include="ServerProgram.cs" />
     <Compile Include="ServerProgramOptions.cs" />

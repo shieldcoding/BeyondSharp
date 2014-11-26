@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    public class ServerAtom : ServerDatum, ICommonAtom
+    public abstract class ServerAtom : ServerDatum, ICommonAtom
     {
+        public string Name { get; private set; }
     }
 }
