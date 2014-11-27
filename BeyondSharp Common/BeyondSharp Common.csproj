@@ -52,6 +52,7 @@
     <Compile Include="Entity\IEntityComponent.cs" />
     <Compile Include="IEngineComponent.cs" />
     <Compile Include="Network\INetworkManagerEngineComponent.cs" />
+    <Compile Include="Network\NetworkConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">

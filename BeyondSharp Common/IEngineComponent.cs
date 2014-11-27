@@ -10,5 +10,7 @@ namespace BeyondSharp.Common
         where EngineType : Engine
     {
         EngineType Engine { get; }
+
+        void Initialize();
     }
 }

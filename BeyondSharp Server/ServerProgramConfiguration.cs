@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BeyondSharp.Common.Network;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,18 +14,29 @@ namespace BeyondSharp.Server
     {
         public NetworkConfiguration Network { get; private set; }
 
+        public ServerProgramConfiguration()
+        {
+            Network = new NetworkConfiguration();
+        }
+
         public class NetworkConfiguration
         {
             [JsonProperty]
-            public IPAddress Address { get; set; }
+            public string Address { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(7777)]
-            public int Port { get; set; }
+            [DefaultValue(NetworkConstants.DEFAULT_PORT)]
+            public int Port { get; private set; }
+
+            [JsonProperty]
+            [DefaultValue(NetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS)]
+            public int MaximumConnections { get; private set; }
 
             public NetworkConfiguration()
             {
-                Address = IPAddress.Any;
+                Address = IPAddress.Any.ToString();
+                Port = NetworkConstants.DEFAULT_PORT;
+                MaximumConnections = NetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS;
             }
         }
     }

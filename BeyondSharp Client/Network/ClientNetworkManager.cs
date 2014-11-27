@@ -19,5 +19,10 @@ namespace BeyondSharp.Client.Network
         {
 
         }
+
+        public override void Initialize()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

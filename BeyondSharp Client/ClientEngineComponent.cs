@@ -15,5 +15,7 @@ namespace BeyondSharp.Client
         {
             Engine = engine;
         }
+        
+        public abstract void Initialize();
     }
 }
