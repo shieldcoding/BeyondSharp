@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    public abstract class ServerMovable : ServerAtom, ICommonMovable
+    public abstract class ServerMovable : ServerEntity, ICommonMovable
     {
     }
 }

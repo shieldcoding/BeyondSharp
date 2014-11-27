@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client
 {
-    internal abstract class ClientEngineComponent : IEngineComponent<ClientEngine>
+    internal abstract class ClientEngineComponent : ICommonEngineComponent<ClientEngine>
     {
         public ClientEngine Engine { get; private set; }
 
@@ -17,5 +17,6 @@ namespace BeyondSharp.Client
         }
         
         public abstract void Initialize();
+
     }
 }

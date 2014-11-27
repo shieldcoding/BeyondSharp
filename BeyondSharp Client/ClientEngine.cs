@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client
 {
-    public class ClientEngine : Engine
+    public class ClientEngine : ICommonEngine
     {
-        public ClientEngine()
-        {
-            Side = EngineSide.Client;
-        }
+        public EngineSide Side { get { return EngineSide.Client; } }
     }
 }

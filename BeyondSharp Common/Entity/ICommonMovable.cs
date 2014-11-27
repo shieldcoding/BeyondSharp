@@ -11,7 +11,7 @@ namespace BeyondSharp.Common.Entity
     /// 
     /// For clarification purposes, a mappable object capable of motion means that the object can have its location changed.
     /// </summary>
-    public interface ICommonMovable : ICommonAtom
+    public interface ICommonMovable : ICommonEntity
     {
     }
 }

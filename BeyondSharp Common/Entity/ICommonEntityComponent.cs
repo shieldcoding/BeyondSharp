@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Entity
 {
-    interface IEntityManager
+    public interface ICommonEntityComponent
     {
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Network
 {
-    public class ServerNetworkManager : ServerEngineComponent, INetworkManagerEngineComponent<ServerEngine>
+    public class ServerNetworkManager : ServerEngineComponent, ICommonNetworkManager<ServerEngine>
     {
         public NetServer Server { get; private set; }
 

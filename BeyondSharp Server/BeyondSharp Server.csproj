@@ -46,12 +46,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\ServerAtom.cs" />
-    <Compile Include="Entity\ServerDatum.cs" />
+    <Compile Include="Entity\ServerEntity.cs" />
+    <Compile Include="Entity\ServerEntityManager.cs" />
     <Compile Include="Entity\ServerMobile.cs" />
     <Compile Include="Entity\ServerMovable.cs" />
     <Compile Include="Entity\ServerObject.cs" />
-    <Compile Include="Entity\ServerTurf.cs" />
     <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,8 +85,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Language\" />
-    <Folder Include="Resources\" />
+    <Folder Include="World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Entity
 {
-    /// <summary>
-    /// The base entity-type for mappable objects shared between the server and its clients.
-    /// </summary>
-    public interface ICommonAtom
+    public interface ICommonEntity
     {
+        Guid ID { get; }
+        
         string Name { get; }
+
+        string Description { get; }
     }
 }

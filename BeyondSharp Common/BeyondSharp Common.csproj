@@ -40,18 +40,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ICommonEntity.cs" />
     <Compile Include="Entity\ICommonMobile.cs" />
     <Compile Include="Entity\ICommonObject.cs" />
-    <Compile Include="Entity\IEntityManager.cs" />
-    <Compile Include="Engine.cs" />
+    <Compile Include="Entity\ICommonEntityManager.cs" />
+    <Compile Include="ICommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
-    <Compile Include="Entity\ICommonAtom.cs" />
-    <Compile Include="Entity\ICommonDatum.cs" />
     <Compile Include="Entity\ICommonMovable.cs" />
-    <Compile Include="Entity\ICommonTurf.cs" />
     <Compile Include="Entity\IEntityComponent.cs" />
-    <Compile Include="IEngineComponent.cs" />
-    <Compile Include="Network\INetworkManagerEngineComponent.cs" />
+    <Compile Include="Entity\ManagedEntityCollection.cs" />
+    <Compile Include="ICommonEngineComponent.cs" />
+    <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\Component\" />
+    <Folder Include="World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

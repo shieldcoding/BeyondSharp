@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    internal class ClientTurf : ClientAtom, ICommonAtom
+    public class ClientEntity : ICommonEntity
     {
+        public Guid ID { get; internal set; }
+        
+        public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

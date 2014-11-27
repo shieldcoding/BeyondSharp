@@ -9,11 +9,11 @@ namespace BeyondSharp.Common
     /// <summary>
     /// Represents a sided instance of the BeyondSharp engine.
     /// </summary>
-    public abstract class Engine
+    public interface ICommonEngine
     {
         /// <summary>
         /// The sided (client/server) context of the engine.
         /// </summary>
-        public EngineSide Side { get; protected set; }
+        EngineSide Side { get; }
     }
 }
