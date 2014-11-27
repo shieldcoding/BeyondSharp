@@ -61,11 +61,29 @@ namespace BeyondSharp.Server.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The configuration file does not exist, using default configuration..
+        ///   Looks up a localized string similar to Configuration file does not exist, using default configuration..
         /// </summary>
         internal static string ProgramNoConfiguration {
             get {
                 return ResourceManager.GetString("ProgramNoConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command-line arguments have been processed..
+        /// </summary>
+        internal static string ProgramProcessedCommandLine {
+            get {
+                return ResourceManager.GetString("ProgramProcessedCommandLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuration file has been processed..
+        /// </summary>
+        internal static string ProgramProcessedConfiguration {
+            get {
+                return ResourceManager.GetString("ProgramProcessedConfiguration", resourceCulture);
             }
         }
         

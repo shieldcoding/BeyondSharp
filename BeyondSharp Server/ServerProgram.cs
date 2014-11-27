@@ -21,9 +21,11 @@ namespace BeyondSharp.Server
         {
             if (ProcessCommandLine(arguments))
             {
+                Console.WriteLine(Localization.Strings.ProgramProcessedCommandLine);
+
                 if (ProcessConfiguration())
                 {
-
+                    Console.WriteLine(Localization.Strings.ProgramProcessedConfiguration);
                 }
             }
         }
