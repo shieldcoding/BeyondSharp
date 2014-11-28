@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    public abstract class ServerEngineComponent : ICommonEngineComponent<ServerEngine>
+    public abstract class ServerEngineComponent : ICommonEngineComponent
     {
         public ServerEngine Engine { get; private set; }
 

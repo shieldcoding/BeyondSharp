@@ -47,8 +47,7 @@
     <Compile Include="ICommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
     <Compile Include="Entity\ICommonMovable.cs" />
-    <Compile Include="Entity\IEntityComponent.cs" />
-    <Compile Include="Entity\ManagedEntityCollection.cs" />
+    <Compile Include="Entity\ICommonEntityComponent.cs" />
     <Compile Include="ICommonEngineComponent.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />

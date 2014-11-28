@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Entity
 {
-    public interface ICommonEntityManager<EngineType, EntityType> : ICommonEngineComponent<EngineType>
-        where EngineType : ICommonEngine
+    public interface ICommonEntityManager<EntityType> : ICommonEngineComponent
         where EntityType : ICommonEntity
     {
         /// <summary>
@@ -24,11 +23,13 @@ namespace BeyondSharp.Common.Entity
         /// <returns></returns>
         IEnumerable<FilteredType> GetEntities<FilteredType>() where FilteredType : EntityType;
 
+
         /// <summary>
         /// Registers an entity with the entity manager.
         /// </summary>
         /// <param name="entity">The entity to be registered.</param>
-        void RegisterEntity(EntityType entity);
+        /// <returns>The ID of the entity.</returns>
+        Guid RegisterEntity(EntityType entity);
 
         /// <summary>
         /// Unregisters an entity with the entity manager.

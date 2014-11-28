@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Network
 {
-    internal class ClientNetworkManager : ClientEngineComponent, ICommonNetworkManager<ClientEngine>
+    internal class ClientNetworkManager : ClientEngineComponent, ICommonNetworkManager
     {
         public NetConnection Connection { get; private set; }
 

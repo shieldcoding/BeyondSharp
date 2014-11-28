@@ -13,10 +13,9 @@ namespace BeyondSharp.Server.Entity
 
         public ServerEntityManager Manager { get; internal set; }
 
-        public string Tag { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
+
     }
 }

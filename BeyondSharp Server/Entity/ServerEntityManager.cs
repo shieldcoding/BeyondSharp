@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    public class ServerEntityManager : ServerEngineComponent, ICommonEntityManager<ServerEngine, ServerEntity>
+    public class ServerEntityManager : ServerEngineComponent, ICommonEntityManager<ServerEntity>
     {
-        private List<ServerEntity> _entities = new List<ServerEntity>();
-        private Dictionary<Guid, ServerEntity> _entityLookup = new Dictionary<Guid, ServerEntity>();
+        private List<ServerEntity> _entityList = null;
+        private Dictionary<Guid, ServerEntity> _entityIDLookup = null;
 
         public ServerEntityManager(ServerEngine engine)
             :base(engine)
         {
-
+            _entityList = new List<ServerEntity>();
+            _entityIDLookup = new Dictionary<Guid, ServerEntity>();
         }
 
         public override void Initialize()
@@ -25,24 +26,41 @@ namespace BeyondSharp.Server.Entity
 
         public ServerEntity GetEntity(Guid id)
         {
-            if (_entityLookup.ContainsKey(id))
-                return _entityLookup[id];
+            if (_entityIDLookup.ContainsKey(id))
+                return _entityIDLookup[id];
             else
                 return null;
         }
 
-        public IEnumerable<FilteredType> GetEntities<FilteredType>() where FilteredType : ServerEntity
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<FilteredEntityType> GetEntities<FilteredEntityType>() where FilteredEntityType : ServerEntity
+        { return _entityList.OfType<FilteredEntityType>(); }
 
-        public void RegisterEntity(ServerEntity entity)
+        public Guid RegisterEntity(ServerEntity entity)
         {
+            if (_entityList.Contains(entity))
+            {
+                if (entity.ID == default(Guid))
+                    return default(Guid);
+            }
+            else
+            {
+                entity.ID = Guid.NewGuid();
+                entity.Manager = this;
+
+                _entityList.Add(entity);
+                _entityIDLookup.Add(entity.ID, entity);
+            }
+
+            return entity.ID;
         }
 
         public void UnregisterEntity(ServerEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                throw new ArgumentNullException();
+
+            _entityList.Remove(entity);
+            _entityIDLookup.Remove(entity.ID);
         }
     }
 }

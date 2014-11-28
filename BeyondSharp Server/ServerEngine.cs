@@ -1,4 +1,5 @@
 ﻿using BeyondSharp.Common;
+using BeyondSharp.Server.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    public class ServerEngine : ICommonEngine
+    public class ServerEngine : CommonEngine<ServerEngineComponent>
     {
-        public EngineSide Side { get { return EngineSide.Server; } }
+        public ServerEntityManager EntityManager { get; private set; }
 
-        public ServerEngine()
+        internal ServerEngine()
         {
+            Side = EngineSide.Server;
         }
-
     }
 }

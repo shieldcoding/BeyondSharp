@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Network
 {
-    public interface ICommonNetworkManager<EngineType> : ICommonEngineComponent<EngineType>
-        where EngineType : ICommonEngine
+    public interface ICommonNetworkManager : ICommonEngineComponent
     {
         NetPeerConfiguration Configuration { get; }
     }
