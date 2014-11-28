@@ -55,11 +55,14 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Network\ServerNetworkManager.cs" />
+    <Compile Include="ServerConstants.cs" />
     <Compile Include="ServerEngine.cs" />
     <Compile Include="ServerEngineComponent.cs" />
     <Compile Include="ServerProgram.cs" />
     <Compile Include="ServerProgramConfiguration.cs" />
     <Compile Include="ServerProgramOptions.cs" />
+    <Compile Include="World\ServerWorld.cs" />
+    <Compile Include="World\ServerWorldManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">
@@ -84,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\Component\" />
-    <Folder Include="World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

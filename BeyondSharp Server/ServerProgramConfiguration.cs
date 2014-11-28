@@ -12,11 +12,26 @@ namespace BeyondSharp.Server
 {
     public class ServerProgramConfiguration
     {
+        public RuntimeConfiguration Runtime { get; private set; }
+
         public NetworkConfiguration Network { get; private set; }
 
         public ServerProgramConfiguration()
         {
+            Runtime = new RuntimeConfiguration();
             Network = new NetworkConfiguration();
+        }
+
+        public class RuntimeConfiguration
+        {
+            [JsonProperty]
+            [DefaultValue(ServerConstants.DEFAULT_RUNTIME_PATH)]
+            public string Path { get; private set; }
+
+            public RuntimeConfiguration()
+            {
+                Path = ServerConstants.DEFAULT_RUNTIME_PATH;
+            }
         }
 
         public class NetworkConfiguration

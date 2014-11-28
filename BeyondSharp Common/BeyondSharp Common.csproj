@@ -48,6 +48,8 @@
     <Compile Include="ICommonEngineComponent.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
+    <Compile Include="World\ICommonWorld.cs" />
+    <Compile Include="World\ICommonWorldManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">
@@ -60,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\Component\" />
-    <Folder Include="World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

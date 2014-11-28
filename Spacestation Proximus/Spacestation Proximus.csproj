@@ -39,9 +39,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Code\Mobile\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BeyondSharp Server\BeyondSharp Server.csproj">
       <Project>{ad7e10c3-3f63-4c22-9006-e045a474cd1f}</Project>
@@ -53,6 +51,9 @@
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\SpacestationProximus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

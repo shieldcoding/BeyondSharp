@@ -17,5 +17,6 @@ namespace BeyondSharp.Server
         }
 
         public abstract void Initialize();
+
     }
 }

@@ -12,32 +12,32 @@ namespace BeyondSharp.Common
     public abstract class CommonEngine<EngineComponentType>
         where EngineComponentType : ICommonEngineComponent
     {
-        protected List<EngineComponentType> _components = null;
-
         /// <summary>
         /// The sided (client/server) context of the engine.
         /// </summary>
         public EngineSide Side { get; protected set; }
+
+        public List<EngineComponentType> Components { get; private set; }
 
         /// <summary>
         /// Retrieves all engine components owned by this engine.
         /// </summary>
         /// <returns>All engine components owned by the engine.</returns>
         public IEnumerable<EngineComponentType> GetComponents()
-        { return _components; }
+        { return Components; }
 
         public EngineComponentType GetComponent<FilteredEngineComponentType>() where FilteredEngineComponentType : EngineComponentType
-        { return _components.OfType<FilteredEngineComponentType>().FirstOrDefault(); }
+        { return Components.OfType<FilteredEngineComponentType>().FirstOrDefault(); }
 
         public void RegisterComponent(EngineComponentType engineComponent)
         {
             if (engineComponent == null)
                 throw new ArgumentNullException();
 
-            if (_components.Contains(engineComponent))
+            if (Components.Contains(engineComponent))
                 return;
 
-            _components.Add(engineComponent);
+            Components.Add(engineComponent);
         }
 
         public void UnregisterComponent(EngineComponentType engineComponent)
@@ -45,7 +45,7 @@ namespace BeyondSharp.Common
             if (engineComponent == null)
                 throw new ArgumentNullException();
 
-            _components.Remove(engineComponent);
+            Components.Remove(engineComponent);
         }
     }
 }

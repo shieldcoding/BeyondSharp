@@ -54,6 +54,8 @@
     <Compile Include="Entity\ClientEntityComponent.cs" />
     <Compile Include="Entity\ClientEntityManager.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
+    <Compile Include="World\ClientWorld.cs" />
+    <Compile Include="World\ClientWorldManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">
@@ -67,9 +69,7 @@
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="World\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
