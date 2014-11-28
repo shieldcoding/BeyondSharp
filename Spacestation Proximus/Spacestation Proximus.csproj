@@ -40,7 +40,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Code\" />
+    <Folder Include="Code\Mobile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeyondSharp Server\BeyondSharp Server.csproj">

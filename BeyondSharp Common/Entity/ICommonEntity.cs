@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Entity
 {
-    public interface ICommonEntity
+    public interface ICommonEntity<EntityComponentType>
+        where EntityComponentType : ICommonEntityComponent
     {
         Guid ID { get; }
         

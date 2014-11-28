@@ -51,9 +51,8 @@
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramOptions.cs" />
     <Compile Include="Entity\ClientEntity.cs" />
-    <Compile Include="Entity\ClientMobile.cs" />
-    <Compile Include="Entity\ClientMovable.cs" />
-    <Compile Include="Entity\ClientObject.cs" />
+    <Compile Include="Entity\ClientEntityComponent.cs" />
+    <Compile Include="Entity\ClientEntityManager.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
   </ItemGroup>
   <ItemGroup>

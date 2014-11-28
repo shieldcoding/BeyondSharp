@@ -41,12 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\ICommonEntity.cs" />
-    <Compile Include="Entity\ICommonMobile.cs" />
-    <Compile Include="Entity\ICommonObject.cs" />
     <Compile Include="Entity\ICommonEntityManager.cs" />
-    <Compile Include="ICommonEngine.cs" />
+    <Compile Include="CommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
-    <Compile Include="Entity\ICommonMovable.cs" />
     <Compile Include="Entity\ICommonEntityComponent.cs" />
     <Compile Include="ICommonEngineComponent.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
