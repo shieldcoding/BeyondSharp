@@ -49,6 +49,7 @@
     <Compile Include="ClientEngine.cs" />
     <Compile Include="ClientEngineComponent.cs" />
     <Compile Include="ClientProgram.cs" />
+    <Compile Include="ClientProgramConfiguration.cs" />
     <Compile Include="ClientProgramOptions.cs" />
     <Compile Include="Entity\ClientEntity.cs" />
     <Compile Include="Entity\ClientEntityComponent.cs" />
@@ -64,6 +65,10 @@
     </Reference>
     <Reference Include="Lidgren.Network">
       <HintPath>..\Dependencies\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
