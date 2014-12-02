@@ -49,7 +49,7 @@
     <Compile Include="Entity\ServerEntity.cs" />
     <Compile Include="Entity\ServerEntityComponent.cs" />
     <Compile Include="Entity\ServerEntityManager.cs" />
-    <Compile Include="Graphics\ServerIcon.cs" />
+    <Compile Include="Graphics\ServerImage.cs" />
     <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,6 +79,7 @@
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Strings.resx">

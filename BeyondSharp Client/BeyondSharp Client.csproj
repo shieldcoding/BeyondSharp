@@ -53,6 +53,7 @@
     <Compile Include="Entity\ClientEntity.cs" />
     <Compile Include="Entity\ClientEntityComponent.cs" />
     <Compile Include="Entity\ClientEntityManager.cs" />
+    <Compile Include="Graphics\ClientImage.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
     <Compile Include="World\ClientWorld.cs" />
     <Compile Include="World\ClientWorldManager.cs" />
@@ -68,6 +69,7 @@
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

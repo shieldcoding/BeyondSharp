@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Graphics
 {
-    public interface IIcon
+    /// <summary>
+    /// The server stores changes to images as operations to be executed by the client.
+    /// </summary>
+    public class ImageOperation
     {
     }
 }
