@@ -47,7 +47,9 @@
     <Compile Include="CommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
     <Compile Include="Entity\ICommonEntityComponent.cs" />
-    <Compile Include="Graphics\IIcon.cs" />
+    <Compile Include="Graphics\Image.cs" />
+    <Compile Include="Graphics\ImageBlendMethod.cs" />
+    <Compile Include="Graphics\ImageOperation.cs" />
     <Compile Include="ICommonEngineComponent.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
@@ -62,6 +64,7 @@
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
