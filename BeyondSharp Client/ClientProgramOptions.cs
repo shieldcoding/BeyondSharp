@@ -8,5 +8,9 @@ namespace BeyondSharp.Client
 {
     public class ClientProgramOptions
     {
+        private const string DEFAULT_CONFIGURATION_PATH = "client_configuration.json";
+
+        [Option('c', "configuration", DefaultValue = DEFAULT_CONFIGURATION_PATH)]
+        public string ConfigurationPath { get; set; }
     }
 }

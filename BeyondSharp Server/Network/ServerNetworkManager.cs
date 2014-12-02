@@ -28,6 +28,7 @@ namespace BeyondSharp.Server.Network
             Configuration.MaximumConnections = ServerProgram.Configuration.Network.MaximumConnections;
 
             Server = new NetServer(Configuration);
+            Server.Start();
         }
     }
 }

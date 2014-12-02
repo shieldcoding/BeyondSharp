@@ -39,7 +39,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeyondSharp Server\BeyondSharp Server.csproj">
       <Project>{ad7e10c3-3f63-4c22-9006-e045a474cd1f}</Project>
