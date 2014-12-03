@@ -15,9 +15,15 @@ namespace BeyondSharp.Client.Graphics
             throw new NotImplementedException();
         }
 
+        public override ClientImage Blend(Color color, ImageBlendMethod method)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ClientImage Crop(Rectangle area)
         {
             throw new NotImplementedException();
         }
+
     }
 }

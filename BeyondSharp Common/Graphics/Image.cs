@@ -15,8 +15,18 @@ namespace BeyondSharp.Common.Graphics
         /// </summary>
         /// <param name="image">The image to be blended into this one.</param>
         /// <param name="method">The blending method to be used.</param>
-        /// <returns>An image representing the source image blended by the supplied image.</returns>
+        /// <returns>An image representing the source image blended by the supplied image with the supplied method.</returns>
         public abstract ImageType Blend(ImageType image, ImageBlendMethod method);
+
+        /// <summary>
+        /// Blend the current image with the supplied color using the specified blending method.
+        /// 
+        /// This is effectively blending the image by a solid-color image of the same-size using the supplied color.
+        /// </summary>
+        /// <param name="color">The color to be blended into this one.</param>
+        /// <param name="method">The blending method to be used.</param>
+        /// <returns>An image representing the source image blended by the supplied color with the supplied method.</returns>
+        public abstract ImageType Blend(Color color, ImageBlendMethod method);
 
         /// <summary>
         /// Crops the image to the specified area.
