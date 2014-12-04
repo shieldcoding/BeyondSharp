@@ -35,6 +35,11 @@ namespace BeyondSharp.Client.Network
             Client = new NetClient(Configuration);
         }
         
+        /// <summary>
+        /// Initiates a new connection to the specified host on the optionally specified port (defaulting if needed).
+        /// </summary>
+        /// <param name="host">The host to be connected to.</param>
+        /// <param name="port">The port with which to connect to the host on.</param>
         public void Connect(string host, int port = NetworkConstants.DEFAULT_PORT)
         {
             if (string.IsNullOrWhiteSpace(host))
@@ -42,6 +47,8 @@ namespace BeyondSharp.Client.Network
 
             Connection = Client.Connect(host, port);
             IsConnected = true;
+
+            Dispatcher.DispatchConnectRequest();
         }
 
         public void Disconnect()
