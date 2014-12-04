@@ -26,6 +26,11 @@ namespace BeyondSharp.Server.Entity
             throw new NotImplementedException();
         }
 
+        public override void Update(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
         public ServerEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
@@ -73,5 +78,6 @@ namespace BeyondSharp.Server.Entity
                 _entityIDLookup.Remove(entity.ID);
             }
         }
+
     }
 }

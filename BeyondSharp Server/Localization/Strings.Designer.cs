@@ -61,6 +61,15 @@ namespace BeyondSharp.Server.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server and client are operating on different versions of the network protocol..
+        /// </summary>
+        internal static string NetworkDisconnectProtocolMismatch {
+            get {
+                return ResourceManager.GetString("NetworkDisconnectProtocolMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuration file does not exist, using default configuration..
         /// </summary>
         internal static string ProgramNoConfiguration {

@@ -9,11 +9,36 @@ namespace BeyondSharp.Common.Network
     public enum NetworkProtocol
     {
         /// <summary>
-        /// Used for the connection handshake.
+        /// Sent by the client to initiate a connection with the server.
         /// 
         /// <see cref="BeyondSharp.Client.Network.ClientNetworkManager"/>
+        /// 
+        /// Parameters
+        /// (Double) Protocol Version
         /// </summary>
-        Connect,
+        ConnectRequest,
+
+        /// <summary>
+        /// Sent by the server in response to the client's connection request, and is then sent back by the client with authentication details.
+        /// 
+        /// Parameters (Client)
+        /// (String) Username
+        /// (Guid) Token
+        /// </summary>
+        ConnectAuth,
+
+        /// <summary>
+        /// Sent by the server when the client is clear to connect, and is then sent back by the client to notify the server that the client is ready.
+        /// </summary>
+        ConnectAccept,
+
+        /// <summary>
+        /// Sent by either side to notify the other that it is terminating the connection gracefully.
+        /// 
+        /// Parameters
+        /// (Boolean) Reason Included
+        /// (String) Reason [Optional]
+        /// </summary>
         Disconnect,
         WorldData,
         WorldTimeSync,

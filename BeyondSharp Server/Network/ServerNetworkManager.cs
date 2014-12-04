@@ -36,5 +36,12 @@ namespace BeyondSharp.Server.Network
             Server = new NetServer(Configuration);
             Server.Start();
         }
+
+        public override void Update(TimeSpan elapsedTime)
+        {
+            NetIncomingMessage message = null;
+            while ((message = Server.ReadMessage()) != null)
+                Processor.ProcessMessage(message);
+        }
     }
 }

@@ -21,5 +21,10 @@ namespace BeyondSharp.Client.World
         {
             throw new NotImplementedException();
         }
+
+        public override void Update(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

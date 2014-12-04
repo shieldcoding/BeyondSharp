@@ -51,6 +51,7 @@
     <Compile Include="Graphics\ImageBlendMethod.cs" />
     <Compile Include="Graphics\ImageOperation.cs" />
     <Compile Include="ICommonEngineComponent.cs" />
+    <Compile Include="Network\ICommonAccount.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
     <Compile Include="Network\NetworkProtocol.cs" />

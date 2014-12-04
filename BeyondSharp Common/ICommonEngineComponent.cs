@@ -9,5 +9,7 @@ namespace BeyondSharp.Common
     public interface ICommonEngineComponent
     {
         void Initialize();
+
+        void Update(TimeSpan elapsedTime);
     }
 }

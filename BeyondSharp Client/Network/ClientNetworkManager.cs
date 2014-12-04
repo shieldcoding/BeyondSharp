@@ -34,6 +34,11 @@ namespace BeyondSharp.Client.Network
         {
             Client = new NetClient(Configuration);
         }
+
+        public override void Update(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
         
         /// <summary>
         /// Initiates a new connection to the specified host on the optionally specified port (defaulting if needed).

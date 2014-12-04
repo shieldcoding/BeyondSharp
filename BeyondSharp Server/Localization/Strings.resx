@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NetworkDisconnectProtocolMismatch" xml:space="preserve">
+    <value>The server and client are operating on different versions of the network protocol.</value>
+  </data>
   <data name="ProgramNoConfiguration" xml:space="preserve">
     <value>Configuration file does not exist, using default configuration.</value>
   </data>

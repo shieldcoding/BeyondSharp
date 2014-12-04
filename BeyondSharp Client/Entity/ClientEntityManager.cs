@@ -26,6 +26,11 @@ namespace BeyondSharp.Client.Entity
             throw new NotImplementedException();
         }
 
+        public override void Update(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
         public ClientEntity GetEntity(Guid id)
         {
             if (id == default(Guid))

@@ -18,5 +18,6 @@ namespace BeyondSharp.Client
         
         public abstract void Initialize();
 
+        public abstract void Update(TimeSpan elapsedTime);
     }
 }

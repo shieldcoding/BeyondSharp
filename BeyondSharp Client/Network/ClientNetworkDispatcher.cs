@@ -25,8 +25,8 @@ namespace BeyondSharp.Client.Network
 
         protected NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
         {
-            var message = Manager.Client.CreateMessage(sizeof(int) + additionalCapacity);
-            message.Write((int)protocol);
+            var message = Manager.Client.CreateMessage(sizeof(short) + additionalCapacity);
+            message.Write((short)protocol);
 
             return message;
         }
@@ -36,7 +36,7 @@ namespace BeyondSharp.Client.Network
         /// </summary>
         public void DispatchConnectRequest()
         {
-            var message = CreateMessage(NetworkProtocol.Connect, sizeof(double));
+            var message = CreateMessage(NetworkProtocol.ConnectRequest, sizeof(double));
             message.Write(NetworkConstants.VERSION);
 
             DispatchMessage(message);
