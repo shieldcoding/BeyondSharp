@@ -15,9 +15,15 @@ namespace BeyondSharp.Server.Network
 
         public NetPeerConfiguration Configuration { get; private set; }
 
+        internal ServerNetworkDispatcher Dispatcher { get; private set; }
+
+        internal ServerNetworkProcessor Processor { get; private set; }
+
         public ServerNetworkManager(ServerEngine engine)
             :base(engine)
         {
+            Dispatcher = new ServerNetworkDispatcher(this);
+            Processor = new ServerNetworkProcessor(this);
         }
 
         public override void Initialize()

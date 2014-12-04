@@ -55,7 +55,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Network\ServerNetworkDispatcher.cs" />
     <Compile Include="Network\ServerNetworkManager.cs" />
+    <Compile Include="Network\ServerNetworkProcessor.cs" />
     <Compile Include="ServerConstants.cs" />
     <Compile Include="ServerEngine.cs" />
     <Compile Include="ServerEngineComponent.cs" />

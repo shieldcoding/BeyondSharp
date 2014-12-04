@@ -53,6 +53,7 @@
     <Compile Include="ICommonEngineComponent.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
+    <Compile Include="Network\NetworkProtocol.cs" />
     <Compile Include="World\ICommonWorld.cs" />
     <Compile Include="World\ICommonWorldManager.cs" />
   </ItemGroup>

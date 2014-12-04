@@ -55,7 +55,9 @@
     <Compile Include="Entity\ClientEntityComponent.cs" />
     <Compile Include="Entity\ClientEntityManager.cs" />
     <Compile Include="Graphics\ClientImage.cs" />
+    <Compile Include="Network\ClientNetworkDispatcher.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
+    <Compile Include="Network\ClientNetworkProcessor.cs" />
     <Compile Include="World\ClientWorld.cs" />
     <Compile Include="World\ClientWorldManager.cs" />
   </ItemGroup>
