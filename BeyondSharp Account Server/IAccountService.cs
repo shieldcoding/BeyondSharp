@@ -1,4 +1,4 @@
-﻿using BeyondSharp.AccountServer.Models;
+﻿using BeyondSharp.AccountServer.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,6 @@ namespace BeyondSharp.AccountServer
         LoginResult Login(string username, string password);
 
         [OperationContract]
-        VerifyResult Authorize(string username, Guid authenticationToken);
+        VerifyResult Verify(string username, Guid authenticationToken);
     }
 }

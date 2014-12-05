@@ -1,19 +1,20 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeyondSharp.AccountServer.Models
+namespace BeyondSharp.AccountServer.Results
 {
     [DataContract]
-    public class LoginResult
+    public class VerifyResult
     {
+        [DataMember]
         public bool Success { get; set; }
 
-        public Guid AuthenticationToken { get; set; }
-
-        public DateTime AuthenticationExpiry { get; set; }
+        [DataMember]
+        public string Message { get; set; }
     }
 }
