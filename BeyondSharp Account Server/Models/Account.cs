@@ -11,12 +11,8 @@ namespace BeyondSharp.AccountServer.Models
     [Table("Accounts")]
     public class Account
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
 
-        [Required]
-        [MaxLength(32)]
         public string Username { get; set; }
 
         [Required]
