@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Client", "Beyon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Content Creator", "BeyondSharp Content Creator\BeyondSharp Content Creator.csproj", "{EFAAEEBE-7E31-42DB-8ADA-0F6D910A1690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Account Server", "BeyondSharp Account Server\BeyondSharp Account Server.csproj", "{6D9DAFDD-6F4A-4981-AF88-9A5757A067F8}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "BeyondSharp Account Cloud Service", "BeyondSharp Azure Account Service\BeyondSharp Account Cloud Service.ccproj", "{22DB874C-C446-40CF-A324-C1E1C959D555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeyondSharp Account Service", "BeyondSharp WCF Service Role\BeyondSharp Account Service.csproj", "{64E01B68-577F-4933-B916-2661D3BF7DD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,14 @@ Global
 		{EFAAEEBE-7E31-42DB-8ADA-0F6D910A1690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFAAEEBE-7E31-42DB-8ADA-0F6D910A1690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFAAEEBE-7E31-42DB-8ADA-0F6D910A1690}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D9DAFDD-6F4A-4981-AF88-9A5757A067F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D9DAFDD-6F4A-4981-AF88-9A5757A067F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D9DAFDD-6F4A-4981-AF88-9A5757A067F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D9DAFDD-6F4A-4981-AF88-9A5757A067F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22DB874C-C446-40CF-A324-C1E1C959D555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22DB874C-C446-40CF-A324-C1E1C959D555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22DB874C-C446-40CF-A324-C1E1C959D555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22DB874C-C446-40CF-A324-C1E1C959D555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E01B68-577F-4933-B916-2661D3BF7DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E01B68-577F-4933-B916-2661D3BF7DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E01B68-577F-4933-B916-2661D3BF7DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E01B68-577F-4933-B916-2661D3BF7DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
