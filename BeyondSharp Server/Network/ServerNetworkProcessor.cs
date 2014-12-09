@@ -12,30 +12,51 @@ namespace BeyondSharp.Server.Network
     {
         public ServerNetworkManager Manager { get; private set; }
 
-        public ServerNetworkProcessor(ServerNetworkManager manager)
+        public NetIncomingMessage CurrentMessage { get; internal set; }
+
+        public ServerPlayer CurrentPlayer { get; internal set; }
+
+        internal ServerNetworkProcessor(ServerNetworkManager manager)
         {
             Manager = manager;
         }
 
-        public void ProcessMessage(NetIncomingMessage message)
+        internal void ProcessMessage(NetIncomingMessage message)
         {
-            var protocol = (NetworkProtocol)message.ReadInt16();
+            CurrentMessage = message;
+            CurrentPlayer = Manager.GetOrRegisterPlayer(message.SenderConnection);
+
+            switch (message.MessageType)
+            {
+                case NetIncomingMessageType.Data:
+                    ProcessDataMessage();
+                    break;
+            }
+
+            CurrentMessage = null;
+            CurrentPlayer = null;
+        }
+
+        private void ProcessDataMessage()
+        {
+            var protocol = (NetworkProtocol) CurrentMessage.ReadInt16();
 
             switch (protocol)
             {
                 case NetworkProtocol.ConnectRequest:
-                    ProcessConnectRequest(message);
+                    ProcessConnectRequest();
                     return;
             }
         }
 
-        private void ProcessConnectRequest(NetIncomingMessage message)
+        private void ProcessConnectRequest()
         {
-            var version = message.ReadDouble();
+            var version = CurrentMessage.ReadDouble();
 
             if (version != NetworkConstants.VERSION)
             {
-
+                CurrentPlayer.Disconnect(Localization.Network.DisconnectProtocolMismatch);
+                return;
             }
         }
     }

@@ -22,14 +22,14 @@ namespace BeyondSharp.Server.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Engine {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Engine() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace BeyondSharp.Server.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BeyondSharp.Server.Localization.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BeyondSharp.Server.Localization.Engine", typeof(Engine).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,56 @@ namespace BeyondSharp.Server.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server and client are operating on different versions of the network protocol..
-        /// </summary>
-        internal static string NetworkDisconnectProtocolMismatch {
-            get {
-                return ResourceManager.GetString("NetworkDisconnectProtocolMismatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Configuration file does not exist, using default configuration..
         /// </summary>
-        internal static string ProgramNoConfiguration {
+        internal static string NoConfiguration {
             get {
-                return ResourceManager.GetString("ProgramNoConfiguration", resourceCulture);
+                return ResourceManager.GetString("NoConfiguration", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Command-line arguments have been processed..
         /// </summary>
-        internal static string ProgramProcessedCommandLine {
+        internal static string ProcessedCommandLine {
             get {
-                return ResourceManager.GetString("ProgramProcessedCommandLine", resourceCulture);
+                return ResourceManager.GetString("ProcessedCommandLine", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Configuration file has been processed..
         /// </summary>
-        internal static string ProgramProcessedConfiguration {
+        internal static string ProcessedConfiguration {
             get {
-                return ResourceManager.GetString("ProgramProcessedConfiguration", resourceCulture);
+                return ResourceManager.GetString("ProcessedConfiguration", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Reading the program&apos;s command-line..
         /// </summary>
-        internal static string ProgramReadingCommandLine {
+        internal static string ReadingCommandLine {
             get {
-                return ResourceManager.GetString("ProgramReadingCommandLine", resourceCulture);
+                return ResourceManager.GetString("ReadingCommandLine", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Reading the program&apos;s configuration..
         /// </summary>
-        internal static string ProgramReadingConfiguration {
+        internal static string ReadingConfiguration {
             get {
-                return ResourceManager.GetString("ProgramReadingConfiguration", resourceCulture);
+                return ResourceManager.GetString("ReadingConfiguration", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Saving the program&apos;s configuration..
         /// </summary>
-        internal static string ProgramSavingConfiguration {
+        internal static string SavingConfiguration {
             get {
-                return ResourceManager.GetString("ProgramSavingConfiguration", resourceCulture);
+                return ResourceManager.GetString("SavingConfiguration", resourceCulture);
             }
         }
     }

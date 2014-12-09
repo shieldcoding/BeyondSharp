@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Entity\ServerEntity.cs" />
     <Compile Include="Entity\ServerEntityComponent.cs" />
+    <Compile Include="Entity\ServerEntityController.cs" />
     <Compile Include="Entity\ServerEntityManager.cs" />
     <Compile Include="Graphics\ServerImage.cs" />
     <Compile Include="Localization\Strings.Designer.cs">
@@ -55,10 +56,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Network\ServerAccount.cs" />
     <Compile Include="Network\ServerNetworkDispatcher.cs" />
     <Compile Include="Network\ServerNetworkManager.cs" />
     <Compile Include="Network\ServerNetworkProcessor.cs" />
+    <Compile Include="Network\ServerPlayer.cs" />
     <Compile Include="ServerConstants.cs" />
     <Compile Include="ServerEngine.cs" />
     <Compile Include="ServerEngineComponent.cs" />

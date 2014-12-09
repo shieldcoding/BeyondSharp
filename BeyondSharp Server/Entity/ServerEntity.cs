@@ -17,5 +17,6 @@ namespace BeyondSharp.Server.Entity
 
         public string Description { get; set; }
 
+
     }
 }

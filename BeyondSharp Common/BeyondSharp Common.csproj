@@ -43,6 +43,7 @@
     <Compile Include="Entity\Component\Attributes\SynchronizedComponentAttribute.cs" />
     <Compile Include="Entity\Component\IEntityLightingComponent.cs" />
     <Compile Include="Entity\ICommonEntity.cs" />
+    <Compile Include="Entity\ICommonEntityController.cs" />
     <Compile Include="Entity\ICommonEntityManager.cs" />
     <Compile Include="CommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
@@ -51,8 +52,8 @@
     <Compile Include="Graphics\ImageBlendMethod.cs" />
     <Compile Include="Graphics\ImageOperation.cs" />
     <Compile Include="ICommonEngineComponent.cs" />
-    <Compile Include="Network\ICommonAccount.cs" />
     <Compile Include="Network\ICommonNetworkManager.cs" />
+    <Compile Include="Network\ICommonPlayer.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
     <Compile Include="Network\NetworkProtocol.cs" />
     <Compile Include="World\ICommonWorld.cs" />
