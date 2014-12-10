@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    public class ServerEngine : CommonEngine<ServerEngineComponent>
+    public class ServerEngine : Engine<ServerEngineComponent>
     {
         private const string RUNTIME_DOMAIN_FRIENDLY_NAME = "BeyondSharp Runtime Domain";
 

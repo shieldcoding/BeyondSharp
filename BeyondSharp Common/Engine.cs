@@ -9,7 +9,7 @@ namespace BeyondSharp.Common
     /// <summary>
     /// Represents a sided instance of the BeyondSharp engine.
     /// </summary>
-    public abstract class CommonEngine<EngineComponentType>
+    public abstract class Engine<EngineComponentType>
         where EngineComponentType : IEngineComponent
     {
         /// <summary>
