@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.World
 {
-    public interface ICommonWorldManager<WorldType> : ICommonEngineComponent
-        where WorldType : ICommonWorld
+    public interface ICommonWorldManager<WorldType> : IEngineComponent
+        where WorldType : IWorld
     {
         WorldType World { get; }
     }

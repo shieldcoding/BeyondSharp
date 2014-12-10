@@ -36,20 +36,18 @@ namespace BeyondSharp.Client.Network
         /// </summary>
         public void DispatchConnectRequest()
         {
-            var message = CreateMessage(NetworkProtocol.ConnectRequest, sizeof(double));
-            message.Write(NetworkConstants.VERSION);
+            var message = CreateMessage(NetworkProtocol.ConnectionRequest, sizeof(double));
+            message.Write(CommonNetworkConstants.VERSION);
 
             DispatchMessage(message);
         }
 
-        /// <summary>
-        /// Sends a packet telling the server that the client is disconnecting.
-        /// </summary>
-        /// <param name="reason">The reason for which the client is disconnecting.</param>
-        public void DispatchDisconnect(string reason)
+        internal void DispatchConnectionAuthenticate()
         {
-            var message = CreateMessage(NetworkProtocol.Disconnect);
-            message.Write(reason);
+            var message = CreateMessage(NetworkProtocol.ConnectionAuthenticate);
+            message.Write(Manager.Player.Username);
+            message.Write(Manager.Player.SessionToken.ToString("N"));
+            message.Write(Manager.Player.HardwareToken.ToString("N"));
 
             DispatchMessage(message);
         }

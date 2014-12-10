@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BeyondSharp.Common.Entity.Component
 {
     [SynchronizedComponent(IDENTIFIER)]
-    public class IEntityLightingComponent : ICommonEntityComponent
+    public class IEntityLightingComponent : IEntityComponent
     {
         private const string IDENTIFIER = "Lighting";
     }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace BeyondSharp.Common.Entity
 {
     public interface ICommonEntityController<EntityType, EntityComponentType>
-        where EntityType : ICommonEntity<EntityComponentType>
-        where EntityComponentType : ICommonEntityComponent
+        where EntityType : IEntity<EntityComponentType>
+        where EntityComponentType : IEntityComponent
     {
         EntityType ControlledEntity { get; }   
     }

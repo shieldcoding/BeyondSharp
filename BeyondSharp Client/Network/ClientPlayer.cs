@@ -9,26 +9,18 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Network
 {
-    public class ClientPlayer : ICommonPlayer, ICommonEntityController<ClientEntity, ClientEntityComponent>
+    public class ClientPlayer : IPlayer, ICommonEntityController<ClientEntity, ClientEntityComponent>
     {
-        public string Username
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Username { get; internal set; }
 
-        public Guid AuthenticationToken
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public Guid SessionToken { get; internal set; }
 
-        public Guid HardwareToken
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public Guid HardwareToken { get; internal set; }
 
         public ClientEntity ControlledEntity
         {
-            get { throw new NotImplementedException(); }
+            get;
+            internal set;
         }
     }
 }

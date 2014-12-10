@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common
 {
-    public interface ICommonEngineComponent
+    public interface IEngineComponent
     {
         void Initialize();
 

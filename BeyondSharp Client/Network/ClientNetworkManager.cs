@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Network
 {
-    internal class ClientNetworkManager : ClientEngineComponent, ICommonNetworkManager
+    internal class ClientNetworkManager : ClientEngineComponent, INetworkManager
     {
         public NetClient Client { get; private set; }
 
@@ -22,6 +22,8 @@ namespace BeyondSharp.Client.Network
         public ClientNetworkDispatcher Dispatcher { get; private set; }
 
         public ClientNetworkProcessor Processor { get; private set; }
+
+        public ClientPlayer Player { get; private set; }
 
         public ClientNetworkManager(ClientEngine engine)
             :base(engine)
@@ -45,7 +47,7 @@ namespace BeyondSharp.Client.Network
         /// </summary>
         /// <param name="host">The host to be connected to.</param>
         /// <param name="port">The port with which to connect to the host on.</param>
-        public void Connect(string host, int port = NetworkConstants.DEFAULT_PORT)
+        public void Connect(string host, int port = CommonNetworkConstants.DEFAULT_PORT)
         {
             if (string.IsNullOrWhiteSpace(host))
                 throw new ArgumentNullException();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.World
 {
-    public class ClientWorld : ICommonWorld
+    public class ClientWorld : IWorld
     {
         public ClientWorldManager Manager { get; private set; }
 

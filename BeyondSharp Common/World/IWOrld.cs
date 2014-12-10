@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.World
 {
-    public interface ICommonWorld
+    public interface IWorld
     {
     }
 }

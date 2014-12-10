@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Entity
 {
-    public interface ICommonEntityManager<EntityType, EntityComponentType> : ICommonEngineComponent
-        where EntityType : ICommonEntity<EntityComponentType>
-        where EntityComponentType : ICommonEntityComponent
+    public interface IEntityManager<EntityType, EntityComponentType> : IEngineComponent
+        where EntityType : IEntity<EntityComponentType>
+        where EntityComponentType : IEntityComponent
     {
         /// <summary>
         /// Retrieves an entity with the given unique ID.

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    public class ClientEntityManager : ClientEngineComponent, ICommonEntityManager<ClientEntity, ClientEntityComponent>
+    public class ClientEntityManager : ClientEngineComponent, IEntityManager<ClientEntity, ClientEntityComponent>
     {
         private object _lock = null;
         private List<ClientEntity> _entityList = null;

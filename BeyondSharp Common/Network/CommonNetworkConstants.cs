@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Network
 {
-    public static class NetworkConstants
+    public static class CommonNetworkConstants
     {
         public const string IDENTIFIER = "BeyondSharp";
         public const double VERSION = 0.01;

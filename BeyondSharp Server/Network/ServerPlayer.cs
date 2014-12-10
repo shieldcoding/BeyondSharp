@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Network
 {
-    public class ServerPlayer : ServerEntityController, ICommonPlayer
+    public class ServerPlayer : ServerEntityController, IPlayer
     {
         public string Username { get; internal set; }
 
-        public Guid AuthenticationToken { get; internal set; }
+        public Guid SessionToken { get; internal set; }
 
         public Guid HardwareToken { get; internal set; }
-        
+
+        public bool IsAuthenticated { get; internal set; }
+
         internal NetConnection Connection { get; private set; }
 
         internal ServerPlayer(NetConnection connection)

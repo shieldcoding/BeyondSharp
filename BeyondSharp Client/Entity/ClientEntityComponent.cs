@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    public class ClientEntityComponent : ICommonEntityComponent
+    public class ClientEntityComponent : IEntityComponent
     {
     }
 }

@@ -16,30 +16,23 @@ namespace BeyondSharp.Common.Network
         /// Parameters
         /// (Double) Protocol Version
         /// </summary>
-        ConnectRequest,
+        ConnectionRequest,
 
         /// <summary>
         /// Sent by the server in response to the client's connection request, and is then sent back by the client with authentication details.
         /// 
-        /// Parameters (Client)
+        /// - Parameters (Client)
         /// (String) Username
-        /// (Guid) Token
+        /// (Guid) AuthenticationToken
+        /// (Guid) HardwareToken
         /// </summary>
-        ConnectAuth,
+        ConnectionAuthenticate,
 
         /// <summary>
         /// Sent by the server when the client is clear to connect, and is then sent back by the client to notify the server that the client is ready.
         /// </summary>
         ConnectAccept,
 
-        /// <summary>
-        /// Sent by either side to notify the other that it is terminating the connection gracefully.
-        /// 
-        /// Parameters
-        /// (Boolean) Reason Included
-        /// (String) Reason [Optional]
-        /// </summary>
-        Disconnect,
         WorldData,
         WorldTimeSync,
 

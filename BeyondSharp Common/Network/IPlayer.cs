@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Common.Network
 {
-    public interface ICommonPlayer
+    public interface IPlayer
     {
         string Username { get; }
 
-        Guid AuthenticationToken { get; }
+        Guid SessionToken { get; }
 
         Guid HardwareToken { get; }
     }

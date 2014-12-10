@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    public class ServerEntity : ICommonEntity<ServerEntityComponent>
+    public class ServerEntity : IEntity<ServerEntityComponent>
     {
         public Guid ID { get; internal set; }
 

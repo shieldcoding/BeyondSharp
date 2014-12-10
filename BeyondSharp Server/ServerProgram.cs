@@ -21,18 +21,18 @@ namespace BeyondSharp.Server
         {
             if (ProcessCommandLine(arguments))
             {
-                Console.WriteLine(Localization.Strings.ProgramProcessedCommandLine);
+                Console.WriteLine(Localization.Engine.ProcessedCommandLine);
 
                 if (ProcessConfiguration())
                 {
-                    Console.WriteLine(Localization.Strings.ProgramProcessedConfiguration);
+                    Console.WriteLine(Localization.Engine.ProcessedConfiguration);
                 }
             }
         }
 
         private static bool ProcessCommandLine(string[] arguments)
         {
-            Console.WriteLine(Localization.Strings.ProgramReadingCommandLine);
+            Console.WriteLine(Localization.Engine.ReadingCommandLine);
             return CommandLineParser.Default.ParseArguments(arguments, Options = new ServerProgramOptions());
         }
 
@@ -42,19 +42,19 @@ namespace BeyondSharp.Server
 
             if (File.Exists(Options.ConfigurationPath))
             {
-                Console.WriteLine(Localization.Strings.ProgramReadingConfiguration);
+                Console.WriteLine(Localization.Engine.ReadingConfiguration);
 
                 configurationData = File.ReadAllText(Options.ConfigurationPath);
                 Configuration = JsonConvert.DeserializeObject<ServerProgramConfiguration>(configurationData);
             }
             else
             {
-                Console.WriteLine(Localization.Strings.ProgramNoConfiguration);
+                Console.WriteLine(Localization.Engine.NoConfiguration);
 
                 Configuration = new ServerProgramConfiguration();
             }
 
-            Console.WriteLine(Localization.Strings.ProgramSavingConfiguration);
+            Console.WriteLine(Localization.Engine.SavingConfiguration);
 
             configurationData = JsonConvert.SerializeObject(Configuration);
             File.WriteAllText(Options.ConfigurationPath, configurationData);

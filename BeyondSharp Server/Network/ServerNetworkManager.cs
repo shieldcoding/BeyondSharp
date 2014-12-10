@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Network
 {
-    public class ServerNetworkManager : ServerEngineComponent, ICommonNetworkManager
+    public class ServerNetworkManager : ServerEngineComponent, INetworkManager
     {
         private List<ServerPlayer> _players = new List<ServerPlayer>();
 
@@ -30,10 +30,11 @@ namespace BeyondSharp.Server.Network
 
         public override void Initialize()
         {
-            Configuration = new NetPeerConfiguration(NetworkConstants.IDENTIFIER);
+            Configuration = new NetPeerConfiguration(CommonNetworkConstants.IDENTIFIER);
             Configuration.LocalAddress = IPAddress.Parse(ServerProgram.Configuration.Network.Address);
             Configuration.Port = ServerProgram.Configuration.Network.Port;
             Configuration.MaximumConnections = ServerProgram.Configuration.Network.MaximumConnections;
+            Configuration.SetMessageTypeEnabled(NetIncomingMessageType.ConnectionApproval, true);
 
             Server = new NetServer(Configuration);
             Server.Start();
@@ -99,6 +100,20 @@ namespace BeyondSharp.Server.Network
 
                 _players.Remove(player);
             }
+        }
+    
+        internal void OnPlayerConnecting(ServerPlayer connection)
+        {
+
+        }
+
+        internal void OnPlayerConnected(ServerPlayer connection)
+        {
+        }
+
+        internal void OnPlayerDisconnect(ServerPlayer connection)
+        {
+
         }
     }
 }

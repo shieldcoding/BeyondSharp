@@ -51,10 +51,15 @@
     <Compile Include="Entity\ServerEntityController.cs" />
     <Compile Include="Entity\ServerEntityManager.cs" />
     <Compile Include="Graphics\ServerImage.cs" />
-    <Compile Include="Localization\Strings.Designer.cs">
+    <Compile Include="Localization\Engine.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
+      <DependentUpon>Engine.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Network.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Network.resx</DependentUpon>
     </Compile>
     <Compile Include="Network\ServerNetworkDispatcher.cs" />
     <Compile Include="Network\ServerNetworkManager.cs" />
@@ -86,9 +91,13 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Strings.resx">
+    <EmbeddedResource Include="Localization\Engine.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <LastGenOutput>Engine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Network.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Network.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

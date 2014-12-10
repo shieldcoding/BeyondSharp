@@ -40,18 +40,18 @@ namespace BeyondSharp.Server
             public string Address { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(NetworkConstants.DEFAULT_PORT)]
+            [DefaultValue(CommonNetworkConstants.DEFAULT_PORT)]
             public int Port { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(NetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS)]
+            [DefaultValue(CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS)]
             public int MaximumConnections { get; private set; }
 
             public NetworkConfiguration()
             {
                 Address = IPAddress.Any.ToString();
-                Port = NetworkConstants.DEFAULT_PORT;
-                MaximumConnections = NetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS;
+                Port = CommonNetworkConstants.DEFAULT_PORT;
+                MaximumConnections = CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS;
             }
         }
     }
