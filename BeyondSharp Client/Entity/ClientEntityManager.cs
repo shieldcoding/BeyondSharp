@@ -16,26 +16,16 @@ namespace BeyondSharp.Client.Entity
     using BeyondSharp.Common.Entity;
 
     /// <summary>
-    /// The client entity manager.
+    /// The client-sided entity manager.
     /// </summary>
     public class ClientEntityManager : ClientEngineComponent, IEntityManager<ClientEntity, ClientEntityComponent>
     {
         #region Fields
-
+        
         /// <summary>
-        /// The entities.
+        /// The collection of all registered client entities.
         /// </summary>
-        private List<ClientEntity> entities = null;
-
-        /// <summary>
-        /// The entity lock.
-        /// </summary>
-        private object entityLock = null;
-
-        /// <summary>
-        /// The entity lookup.
-        /// </summary>
-        private Dictionary<Guid, ClientEntity> entityLookup = null;
+        private readonly EntityCollection<ClientEntity, ClientEntityComponent> entityCollection = null; 
 
         #endregion
 
@@ -45,14 +35,12 @@ namespace BeyondSharp.Client.Entity
         /// Initializes a new instance of the <see cref="ClientEntityManager"/> class.
         /// </summary>
         /// <param name="engine">
-        /// The engine.
+        /// The client engine that the client entity manager is registered to.
         /// </param>
         internal ClientEntityManager(ClientEngine engine)
             : base(engine)
         {
-            this.entityLock = new object();
-            this.entities = new List<ClientEntity>();
-            this.entityLookup = new Dictionary<Guid, ClientEntity>();
+            this.entityCollection = new EntityCollection<ClientEntity, ClientEntityComponent>();
         }
 
         #endregion
@@ -60,43 +48,28 @@ namespace BeyondSharp.Client.Entity
         #region Public Methods and Operators
 
         /// <summary>
-        /// The get entities.
+        /// Retrieves all entities registered to the client entity manager.
         /// </summary>
         /// <returns>
         /// An enumeration of all entities registered on the client.
         /// </returns>
         public IEnumerable<ClientEntity> GetEntities()
         {
-            return this.entities.ToList();
+            return this.entityCollection.ToList();
         }
 
         /// <summary>
-        /// The get entity.
+        /// Retrieves the entity with the specified ID or null if there is no entity registered with that ID.
         /// </summary>
-        /// <param name="id">
-        /// The id.
+        /// <param name="entityId">
+        /// The ID of the entity to be retrieved.
         /// </param>
         /// <returns>
         /// The <see cref="ClientEntity"/>.
         /// </returns>
-        public ClientEntity GetEntity(Guid id)
+        public ClientEntity GetEntity(Guid entityId)
         {
-            if (id == default(Guid))
-            {
-                return null;
-            }
-
-            lock (this.entityLock)
-            {
-                if (this.entityLookup.ContainsKey(id))
-                {
-                    return this.entityLookup[id];
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            return entityId == default(Guid) ? null : this.entityCollection.GetEntity(entityId);
         }
 
         /// <summary>
@@ -110,58 +83,49 @@ namespace BeyondSharp.Client.Entity
         }
 
         /// <summary>
-        /// The register entity.
+        /// Registers an entity with the client entity manager.
         /// </summary>
         /// <param name="entity">
-        /// The entity.
+        /// The entity to be registered to the client entity manager.
         /// </param>
         /// <returns>
-        /// The <see cref="Guid"/>.
+        /// The <see cref="Guid"/> of the entity, now that its been registered to the client.
         /// </returns>
         /// <exception cref="ArgumentNullException">
+        /// Tried to register an entity with the client entity manager, but received a null reference.
         /// </exception>
         public Guid RegisterEntity(ClientEntity entity)
         {
-            if (entity == null)
+            if (entity.Equals(null))
             {
                 throw new ArgumentNullException();
             }
 
-            lock (this.entityLock)
-            {
-                if (!this.entities.Contains(entity))
-                {
-                    this.entities.Add(entity);
-                }
-
-                if (!this.entityLookup.ContainsKey(entity.ID))
-                {
-                    this.entityLookup.Add(entity.ID, entity);
-                }
-            }
+            this.entityCollection.Add(entity);
 
             return entity.ID;
         }
 
         /// <summary>
-        /// The unregister entity.
+        /// Unregisters an entity from the client entity manager.
         /// </summary>
         /// <param name="entity">
-        /// The entity.
+        /// The entity to be unregistered from the client entity manager.
         /// </param>
         /// <exception cref="ArgumentNullException">
+        /// Tried to unregister an entity from the client entity manager, but received a null reference.
         /// </exception>
         public void UnregisterEntity(ClientEntity entity)
         {
-            if (entity == null)
+            if (entity.Equals(null))
             {
                 throw new ArgumentNullException();
             }
 
-            lock (this.entityLock)
+            if (this.entityCollection.Remove(entity))
             {
-                this.entities.Remove(entity);
-                this.entityLookup.Remove(entity.ID);
+                // Once the entity has been unregistered we remove its ID.
+                entity.ID = default(Guid);
             }
         }
 

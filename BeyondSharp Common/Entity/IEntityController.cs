@@ -12,21 +12,22 @@ namespace BeyondSharp.Common.Entity
     /// <summary>
     /// The CommonEntityController interface.
     /// </summary>
-    /// <typeparam name="EntityType">
+    /// <typeparam name="TEntityType">
     /// The type of entity this entity controller controls.
     /// </typeparam>
-    /// <typeparam name="EntityComponentType">
+    /// <typeparam name="TEntityComponentType">
     /// The type of entity component contained by entities.
     /// </typeparam>
-    public interface IEntityController<EntityType, EntityComponentType>
-        where EntityType : IEntity<EntityComponentType> where EntityComponentType : IEntityComponent
+    public interface IEntityController<TEntityType, TEntityComponentType>
+        where TEntityType : IEntity<TEntityType, TEntityComponentType>
+        where TEntityComponentType : IEntityComponent<TEntityType, TEntityComponentType>
     {
         #region Public Properties
 
         /// <summary>
         /// Gets the controlled entity.
         /// </summary>
-        EntityType ControlledEntity { get; }
+        TEntityType ControlledEntity { get; }
 
         #endregion
     }

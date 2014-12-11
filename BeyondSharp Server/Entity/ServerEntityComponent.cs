@@ -14,7 +14,7 @@ namespace BeyondSharp.Server.Entity
     /// <summary>
     /// The server entity component.
     /// </summary>
-    public class ServerEntityComponent : IEntityComponent
+    public class ServerEntityComponent : IEntityComponent<ServerEntity, ServerEntityComponent>
     {
     }
 }

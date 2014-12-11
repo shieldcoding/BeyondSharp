@@ -14,11 +14,15 @@ namespace BeyondSharp.Common.Entity
     /// <summary>
     /// The Entity interface.
     /// </summary>
-    /// <typeparam name="EntityComponentType">
+    /// <typeparam name="TEntityType">
+    /// The type of entity.
+    /// </typeparam>
+    /// <typeparam name="TEntityComponentType">
     /// The type of entity component this entity contains.
     /// </typeparam>
-    public interface IEntity<EntityComponentType>
-        where EntityComponentType : IEntityComponent
+    public interface IEntity<TEntityType, TEntityComponentType>
+        where TEntityType : IEntity<TEntityType, TEntityComponentType>
+        where TEntityComponentType : IEntityComponent<TEntityType, TEntityComponentType>
     {
         #region Public Properties
 

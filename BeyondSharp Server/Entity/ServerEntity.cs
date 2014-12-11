@@ -14,9 +14,9 @@ namespace BeyondSharp.Server.Entity
     using BeyondSharp.Common.Entity;
 
     /// <summary>
-    /// The server entity.
+    /// The server-sided representation of an entity.
     /// </summary>
-    public class ServerEntity : IEntity<ServerEntityComponent>
+    public class ServerEntity : IEntity<ServerEntity, ServerEntityComponent>
     {
         #region Public Properties
 

@@ -14,7 +14,7 @@ namespace BeyondSharp.Client.Entity
     /// <summary>
     /// The client entity component.
     /// </summary>
-    public class ClientEntityComponent : IEntityComponent
+    public class ClientEntityComponent : IEntityComponent<ClientEntity, ClientEntityComponent>
     {
     }
 }
