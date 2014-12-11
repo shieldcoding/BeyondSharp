@@ -1,45 +1,73 @@
-﻿using BeyondSharp.Common;
-using BeyondSharp.Server.Entity;
-using BeyondSharp.Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ServerEngine.cs" company="ShieldCoding">
+//   No license available, currently privately owned by Richard Brown-Lang.
+// </copyright>
+// <summary>
+//   The server engine.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BeyondSharp.Server
 {
+    using System;
+    using System.Security;
+    using System.Security.Permissions;
+
+    using BeyondSharp.Common;
+    using BeyondSharp.Server.Entity;
+    using BeyondSharp.Server.Network;
+
+    /// <summary>
+    /// The server engine.
+    /// </summary>
     public class ServerEngine : Engine<ServerEngineComponent>
     {
-        private const string RUNTIME_DOMAIN_FRIENDLY_NAME = "BeyondSharp Runtime Domain";
-
-        public ServerNetworkManager NetworkManager { get; private set; }
-
-        public ServerEntityManager EntityManager { get; private set; }
-
-        internal AppDomain RuntimeDomain { get; private set; }
-
-        internal bool IsRuntimeActive { get; private set; }
-
-        internal ServerEngine()
-        {
-            Side = EngineSide.Server;
-        }
+        #region Constants
 
         /// <summary>
-        /// Stops and restarts all engine components, clearing out the runtime in the process before reloading it.
+        /// The friendly name of the runtime's application domain.
         /// </summary>
-        internal void ResetPlatform()
+        private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
+
+        #endregion
+
+        /// <summary>
+        /// Indicates that this engine is operating as a client.
+        /// </summary>
+        public override EngineSide Side
         {
-
-            if (IsRuntimeActive)
-                UnloadRuntime();
-
-            LoadRuntime();
+            get { return EngineSide.Server; }
         }
 
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the entity manager.
+        /// </summary>
+        public ServerEntityManager EntityManager { get; private set; }
+
+        /// <summary>
+        /// Gets the network manager.
+        /// </summary>
+        public ServerNetworkManager NetworkManager { get; private set; }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets a value indicating whether is runtime active.
+        /// </summary>
+        internal bool IsRuntimeActive { get; private set; }
+
+        /// <summary>
+        /// Gets the runtime domain.
+        /// </summary>
+        internal AppDomain RuntimeDomain { get; private set; }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Loads the runtime into the application domain.
@@ -47,8 +75,10 @@ namespace BeyondSharp.Server
         internal void LoadRuntime()
         {
             // The runtime has to be inactive before we can load it.
-            if (IsRuntimeActive)
-                throw new Exception("");
+            if (this.IsRuntimeActive)
+            {
+                throw new Exception(string.Empty);
+            }
 
             // Creating the runtime security permissions.
             var permissions = new PermissionSet(PermissionState.None);
@@ -56,14 +86,31 @@ namespace BeyondSharp.Server
             var setup = new AppDomainSetup();
             setup.ApplicationBase = ServerProgram.Configuration.Runtime.Path;
 
-
             // Creating the runtime domain.
-            RuntimeDomain = AppDomain.CreateDomain(RUNTIME_DOMAIN_FRIENDLY_NAME);
+            this.RuntimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
         }
 
+        /// <summary>
+        /// Stops and restarts all engine components, clearing out the runtime in the process before reloading it.
+        /// </summary>
+        internal void ResetPlatform()
+        {
+            if (this.IsRuntimeActive)
+            {
+                this.UnloadRuntime();
+            }
+
+            this.LoadRuntime();
+        }
+
+        /// <summary>
+        /// The unload runtime.
+        /// </summary>
         internal void UnloadRuntime()
         {
-            AppDomain.Unload(RuntimeDomain);
+            AppDomain.Unload(this.RuntimeDomain);
         }
+
+        #endregion
     }
 }

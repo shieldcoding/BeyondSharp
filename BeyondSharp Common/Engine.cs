@@ -1,51 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Engine.cs" company="ShieldCoding">
+//   No licenses are currently available, owned by Richard Brown-Lang.
+// </copyright>
+// <summary>
+//   Represents a sided instance of the BeyondSharp engine.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BeyondSharp.Common
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Represents a sided instance of the BeyondSharp engine.
     /// </summary>
-    public abstract class Engine<EngineComponentType>
-        where EngineComponentType : IEngineComponent
+    /// <typeparam name="TEngineComponentType">
+    /// The type of engine component that this engine contains.
+    /// </typeparam>
+    public abstract class Engine<TEngineComponentType>
+        where TEngineComponentType : IEngineComponent
     {
-        /// <summary>
-        /// The sided (client/server) context of the engine.
-        /// </summary>
-        public EngineSide Side { get; protected set; }
+        #region Public Properties
 
-        public List<EngineComponentType> Components { get; private set; }
+        /// <summary>
+        /// Gets the components.
+        /// </summary>
+        public List<TEngineComponentType> Components { get; private set; }
+
+        /// <summary>
+        /// Gets an indicator as to whether the engine is operating as a client or server.
+        /// </summary>
+        public abstract EngineSide Side { get; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// Retrieves the first engine component of the supplied type that is registered with the engine.
+        /// </summary>
+        /// <typeparam name="TFilteredEngineComponentType">
+        /// The type of engine component to retrieve.
+        /// </typeparam>
+        /// <returns>
+        /// The engine component of the supplied type that is registered with the engine, or null if there is none.
+        /// </returns>
+        public TEngineComponentType GetComponent<TFilteredEngineComponentType>()
+            where TFilteredEngineComponentType : TEngineComponentType
+        {
+            return this.Components.OfType<TFilteredEngineComponentType>().FirstOrDefault();
+        }
 
         /// <summary>
         /// Retrieves all engine components owned by this engine.
         /// </summary>
-        /// <returns>All engine components owned by the engine.</returns>
-        public IEnumerable<EngineComponentType> GetComponents()
-        { return Components; }
-
-        public EngineComponentType GetComponent<FilteredEngineComponentType>() where FilteredEngineComponentType : EngineComponentType
-        { return Components.OfType<FilteredEngineComponentType>().FirstOrDefault(); }
-
-        public void RegisterComponent(EngineComponentType engineComponent)
+        /// <returns>An enumeration of all engine components registered with the engine.</returns>
+        public IEnumerable<TEngineComponentType> GetComponents()
         {
-            if (engineComponent == null)
-                throw new ArgumentNullException();
+            return this.Components.ToList();
+        }
 
-            if (Components.Contains(engineComponent))
+        /// <summary>
+        /// Registers an engine component with the engine.
+        /// </summary>
+        /// <param name="engineComponent">
+        /// The engine component to be registered with the engine.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Tried to register a component with the engine, but received a null reference.
+        /// </exception>
+        public void RegisterComponent(TEngineComponentType engineComponent)
+        {
+            if (engineComponent.Equals(null))
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (this.Components.Contains(engineComponent))
+            {
                 return;
+            }
 
-            Components.Add(engineComponent);
+            this.Components.Add(engineComponent);
         }
 
-        public void UnregisterComponent(EngineComponentType engineComponent)
+        /// <summary>
+        /// Unregisters an engine component from the engine.
+        /// </summary>
+        /// <param name="engineComponent">
+        /// The engine component to be unregistered from the engine.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Tried to unregister a component from the engine, but received a null reference.
+        /// </exception>
+        public void UnregisterComponent(TEngineComponentType engineComponent)
         {
-            if (engineComponent == null)
+            if (engineComponent.Equals(null))
+            {
                 throw new ArgumentNullException();
+            }
 
-            Components.Remove(engineComponent);
+            this.Components.Remove(engineComponent);
         }
+
+        #endregion
     }
 }

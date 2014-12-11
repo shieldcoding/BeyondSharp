@@ -1,14 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EngineSide.cs" company="ShieldCoding">
+//   No licenses are currently available, owned by Richard Brown-Lang.
+// </copyright>
+// <summary>
+//   The engine side.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BeyondSharp.Common
 {
+    /// <summary>
+    /// The engine side.
+    /// </summary>
     public enum EngineSide
     {
-        Client,
+        /// <summary>
+        /// The client.
+        /// </summary>
+        Client, 
+
+        /// <summary>
+        /// The server.
+        /// </summary>
         Server
     }
 }

@@ -1,71 +1,176 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageOperation.cs" company="ShieldCoding">
+//   No licenses are currently available, owned by Richard Brown-Lang.
+// </copyright>
+// <summary>
+//   The server stores changes to images as operations to be executed by the client.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BeyondSharp.Common.Graphics
 {
+    using System.Drawing;
+
+    using Newtonsoft.Json;
+
     /// <summary>
     /// The server stores changes to images as operations to be executed by the client.
     /// </summary>
-    public abstract class ImageOperation<ImageType>
-        where ImageType : Image<ImageType>
+    /// <typeparam name="TImageType">
+    /// The server or client image.
+    /// </typeparam>
+    public abstract class ImageOperation<TImageType>
+        where TImageType : Image<TImageType>
     {
+        #region Enums
+
+        /// <summary>
+        /// The image operation type.
+        /// </summary>
+        public enum ImageOperationType
+        {
+            /// <summary>
+            /// The image blend.
+            /// </summary>
+            ImageBlend, 
+
+            /// <summary>
+            /// The color blend.
+            /// </summary>
+            ColorBlend, 
+
+            /// <summary>
+            /// The crop.
+            /// </summary>
+            Crop
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the operation type.
+        /// </summary>
         [JsonProperty]
         public ImageOperationType OperationType { get; private set; }
 
-        public class ImageBlendOperation : ImageOperation<ImageType>
+        #endregion
+
+        /// <summary>
+        /// The color blend operation.
+        /// </summary>
+        public class ColorBlendOperation : ImageOperation<TImageType>
         {
-            [JsonProperty]
-            public ImageType Image { get; private set; }
+            #region Constructors and Destructors
 
-            [JsonProperty]
-            public ImageBlendMethod Method { get; private set; }
-
-            public ImageBlendOperation(ImageType image, ImageBlendMethod method)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ColorBlendOperation"/> class.
+            /// </summary>
+            /// <param name="color">
+            /// The color.
+            /// </param>
+            /// <param name="method">
+            /// The method.
+            /// </param>
+            public ColorBlendOperation(Color color, ImageBlendMethod method)
             {
-                OperationType = ImageOperationType.ImageBlend;
-                Image = image;
-                Method = method;
+                this.OperationType = ImageOperationType.ColorBlend;
+                this.Color = color;
+                this.Method = method;
             }
-        }
 
-        public class ColorBlendOperation : ImageOperation<ImageType>
-        {
+            #endregion
+
+            #region Public Properties
+
+            /// <summary>
+            /// Gets the color.
+            /// </summary>
             [JsonProperty]
             public Color Color { get; private set; }
 
+            /// <summary>
+            /// Gets the method.
+            /// </summary>
             [JsonProperty]
             public ImageBlendMethod Method { get; private set; }
 
-            public ColorBlendOperation(Color color, ImageBlendMethod method)
-            {
-                OperationType = ImageOperationType.ColorBlend;
-                Color = color;
-                Method = method;
-            }
+            #endregion
         }
 
-        public class CropOperation : ImageOperation<ImageType>
+        /// <summary>
+        /// The crop operation.
+        /// </summary>
+        public class CropOperation : ImageOperation<TImageType>
         {
+            #region Constructors and Destructors
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CropOperation"/> class.
+            /// </summary>
+            /// <param name="area">
+            /// The area.
+            /// </param>
+            public CropOperation(Rectangle area)
+            {
+                this.OperationType = ImageOperationType.Crop;
+                this.Area = area;
+            }
+
+            #endregion
+
+            #region Public Properties
+
+            /// <summary>
+            /// Gets the area.
+            /// </summary>
             [JsonProperty]
             public Rectangle Area { get; private set; }
 
-            public CropOperation(Rectangle area)
-            {
-                OperationType = ImageOperationType.Crop;
-                Area = area;
-            }
+            #endregion
         }
 
-        public enum ImageOperationType
+        /// <summary>
+        /// The image blend operation.
+        /// </summary>
+        public class ImageBlendOperation : ImageOperation<TImageType>
         {
-            ImageBlend,
-            ColorBlend,
-            Crop
+            #region Constructors and Destructors
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ImageBlendOperation"/> class.
+            /// </summary>
+            /// <param name="image">
+            /// The image.
+            /// </param>
+            /// <param name="method">
+            /// The method.
+            /// </param>
+            public ImageBlendOperation(TImageType image, ImageBlendMethod method)
+            {
+                this.OperationType = ImageOperationType.ImageBlend;
+                this.Image = image;
+                this.Method = method;
+            }
+
+            #endregion
+
+            #region Public Properties
+
+            /// <summary>
+            /// Gets the image.
+            /// </summary>
+            [JsonProperty]
+            public TImageType Image { get; private set; }
+
+            /// <summary>
+            /// Gets the method.
+            /// </summary>
+            [JsonProperty]
+            public ImageBlendMethod Method { get; private set; }
+
+            #endregion
         }
     }
 }

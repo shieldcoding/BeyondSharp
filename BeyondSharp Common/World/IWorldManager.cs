@@ -1,14 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IWorldManager.cs" company="ShieldCoding">
+//   No licenses are currently available, owned by Richard Brown-Lang.
+// </copyright>
+// <summary>
+//   The CommonWorldManager interface.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BeyondSharp.Common.World
 {
-    public interface ICommonWorldManager<WorldType> : IEngineComponent
-        where WorldType : IWorld
+    /// <summary>
+    /// The CommonWorldManager interface.
+    /// </summary>
+    /// <typeparam name="TWorldType">
+    /// The client or server implementation of the world held by the manager.
+    /// </typeparam>
+    public interface IWorldManager<TWorldType> : IEngineComponent
+        where TWorldType : IWorld
     {
-        WorldType World { get; }
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the world.
+        /// </summary>
+        TWorldType World { get; }
+
+        #endregion
     }
 }
