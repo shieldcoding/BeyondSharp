@@ -1,20 +1,21 @@
-﻿using BeyondSharp.Common.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Server.Entity
+﻿namespace BeyondSharp.Server.Entity
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BeyondSharp.Common.Entity;
+
     public class ServerEntityManager : ServerEngineComponent, IEntityManager<ServerEntity, ServerEntityComponent>
     {
-        private object _lock = null;
-        private List<ServerEntity> _entityList = null;
-        private Dictionary<Guid, ServerEntity> _entityIDLookup = null;
+        private readonly Dictionary<Guid, ServerEntity> _entityIDLookup;
+
+        private readonly List<ServerEntity> _entityList;
+
+        private readonly object _lock;
 
         public ServerEntityManager(ServerEngine engine)
-            :base(engine)
+            : base(engine)
         {
             _lock = new object();
             _entityList = new List<ServerEntity>();
@@ -34,16 +35,21 @@ namespace BeyondSharp.Server.Entity
         public ServerEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
+            {
                 return null;
+            }
 
             if (_entityIDLookup.ContainsKey(id))
+            {
                 return _entityIDLookup[id];
-            else
-                return null;
+            }
+            return null;
         }
 
         public IEnumerable<FilteredEntityType> GetEntities<FilteredEntityType>() where FilteredEntityType : ServerEntity
-        { return _entityList.OfType<FilteredEntityType>(); }
+        {
+            return _entityList.OfType<FilteredEntityType>();
+        }
 
         public Guid RegisterEntity(ServerEntity entity)
         {
@@ -52,7 +58,9 @@ namespace BeyondSharp.Server.Entity
                 if (_entityList.Contains(entity))
                 {
                     if (entity.ID == default(Guid))
+                    {
                         return default(Guid);
+                    }
                 }
                 else
                 {
@@ -70,7 +78,9 @@ namespace BeyondSharp.Server.Entity
         public void UnregisterEntity(ServerEntity entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException();
+            }
 
             lock (_lock)
             {
@@ -78,6 +88,5 @@ namespace BeyondSharp.Server.Entity
                 _entityIDLookup.Remove(entity.ID);
             }
         }
-
     }
 }

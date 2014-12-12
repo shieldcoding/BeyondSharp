@@ -1,26 +1,24 @@
-﻿using BeyondSharp.Common.Network;
-using Lidgren.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client.Network
+﻿namespace BeyondSharp.Client.Network
 {
+    using BeyondSharp.Common.Network;
+
+    using Lidgren.Network;
+
     internal class ClientNetworkDispatcher
     {
-        public ClientNetworkManager Manager { get; private set; }
-
         public ClientNetworkDispatcher(ClientNetworkManager manager)
         {
             Manager = manager;
         }
 
+        public ClientNetworkManager Manager { get; private set; }
+
         protected void DispatchMessage(NetOutgoingMessage message, NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, int channel = 0)
         {
             if (Manager.IsConnected)
+            {
                 Manager.Connection.SendMessage(message, method, channel);
+            }
         }
 
         protected NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
@@ -32,12 +30,12 @@ namespace BeyondSharp.Client.Network
         }
 
         /// <summary>
-        /// Sends the initial connection request packet to the server containing the network protocol version.
+        ///     Sends the initial connection request packet to the server containing the network protocol version.
         /// </summary>
         public void DispatchConnectRequest()
         {
             var message = CreateMessage(NetworkProtocol.ConnectionRequest, sizeof(double));
-            message.Write(CommonNetworkConstants.VERSION);
+            message.Write(CommonNetworkConstants.Version);
 
             DispatchMessage(message);
         }

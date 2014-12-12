@@ -1,12 +1,7 @@
-﻿using Lidgren.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Common.Network
+﻿namespace BeyondSharp.Common.Network
 {
+    using Lidgren.Network;
+
     public interface INetworkManager : IEngineComponent
     {
         NetPeerConfiguration Configuration { get; }

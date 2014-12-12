@@ -1,18 +1,9 @@
-﻿using BeyondSharp.Common.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Server.Entity
+﻿namespace BeyondSharp.Server.Entity
 {
+    using BeyondSharp.Common.Entity;
+
     public class ServerEntityController : ICommonEntityController<ServerEntity, ServerEntityComponent>
     {
-        public ServerEntity ControlledEntity
-        {
-            get;
-            set;
-        }
+        public ServerEntity ControlledEntity { get; set; }
     }
 }

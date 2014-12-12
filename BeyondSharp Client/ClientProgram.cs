@@ -1,13 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client
+﻿namespace BeyondSharp.Client
 {
+    using System.IO;
+
+    using CommandLine;
+
+    using Newtonsoft.Json;
+
     public static class ClientProgram
     {
         public static ClientEngine Engine { get; private set; }
@@ -21,7 +19,9 @@ namespace BeyondSharp.Client
         }
 
         private static bool ProcessCommandLine(string[] arguments)
-        { return CommandLine.Parser.Default.ParseArguments(arguments, Options = new ClientProgramOptions()); }
+        {
+            return Parser.Default.ParseArguments(arguments, Options = new ClientProgramOptions());
+        }
 
         private static bool ProcessConfiguration()
         {
@@ -33,7 +33,9 @@ namespace BeyondSharp.Client
                 Configuration = JsonConvert.DeserializeObject<ClientProgramConfiguration>(configurationData);
             }
             else
+            {
                 Configuration = new ClientProgramConfiguration();
+            }
 
             configurationData = JsonConvert.SerializeObject(Configuration);
             File.WriteAllText(Options.ConfigurationPath, configurationData);

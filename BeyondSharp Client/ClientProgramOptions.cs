@@ -1,17 +1,12 @@
-﻿using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client
+﻿namespace BeyondSharp.Client
 {
+    using CommandLine;
+
     public class ClientProgramOptions
     {
-        private const string DEFAULT_CONFIGURATION_PATH = "client_configuration.json";
+        private const string DefaultConfigurationPath = "client_configuration.json";
 
-        [Option('c', "configuration", DefaultValue = DEFAULT_CONFIGURATION_PATH)]
+        [Option('c', "configuration", DefaultValue = DefaultConfigurationPath)]
         public string ConfigurationPath { get; set; }
     }
 }

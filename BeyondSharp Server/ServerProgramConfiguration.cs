@@ -1,58 +1,55 @@
-﻿using BeyondSharp.Common.Network;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Server
+﻿namespace BeyondSharp.Server
 {
+    using System.ComponentModel;
+    using System.Net;
+
+    using BeyondSharp.Common.Network;
+
+    using Newtonsoft.Json;
+
     public class ServerProgramConfiguration
     {
-        public RuntimeConfiguration Runtime { get; private set; }
-
-        public NetworkConfiguration Network { get; private set; }
-
         public ServerProgramConfiguration()
         {
             Runtime = new RuntimeConfiguration();
             Network = new NetworkConfiguration();
         }
 
+        public RuntimeConfiguration Runtime { get; private set; }
+
+        public NetworkConfiguration Network { get; private set; }
+
         public class RuntimeConfiguration
         {
-            [JsonProperty]
-            [DefaultValue(ServerConstants.DEFAULT_RUNTIME_PATH)]
-            public string Path { get; private set; }
-
             public RuntimeConfiguration()
             {
-                Path = ServerConstants.DEFAULT_RUNTIME_PATH;
+                Path = ServerConstants.DefaultRuntimePath;
             }
+
+            [JsonProperty]
+            [DefaultValue(ServerConstants.DefaultRuntimePath)]
+            public string Path { get; private set; }
         }
 
         public class NetworkConfiguration
         {
+            public NetworkConfiguration()
+            {
+                Address = IPAddress.Any.ToString();
+                Port = CommonNetworkConstants.DefaultPort;
+                MaximumConnections = CommonNetworkConstants.DefaultMaximumConnections;
+            }
+
             [JsonProperty]
             public string Address { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DEFAULT_PORT)]
+            [DefaultValue(CommonNetworkConstants.DefaultPort)]
             public int Port { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS)]
+            [DefaultValue(CommonNetworkConstants.DefaultMaximumConnections)]
             public int MaximumConnections { get; private set; }
-
-            public NetworkConfiguration()
-            {
-                Address = IPAddress.Any.ToString();
-                Port = CommonNetworkConstants.DEFAULT_PORT;
-                MaximumConnections = CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS;
-            }
         }
     }
 }

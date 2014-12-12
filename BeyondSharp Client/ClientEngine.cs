@@ -1,12 +1,7 @@
-﻿using BeyondSharp.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client
+﻿namespace BeyondSharp.Client
 {
+    using BeyondSharp.Common;
+
     public class ClientEngine : Engine<ClientEngineComponent>
     {
         internal ClientEngine()

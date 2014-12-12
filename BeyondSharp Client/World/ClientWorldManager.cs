@@ -1,21 +1,17 @@
-﻿using BeyondSharp.Common.World;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client.World
+﻿namespace BeyondSharp.Client.World
 {
+    using System;
+
+    using BeyondSharp.Common.World;
+
     public class ClientWorldManager : ClientEngineComponent, ICommonWorldManager<ClientWorld>
     {
-        public ClientWorld World { get; private set; }
-
         public ClientWorldManager(ClientEngine engine)
-            :base(engine)
+            : base(engine)
         {
-
         }
+
+        public ClientWorld World { get; private set; }
 
         public override void Initialize()
         {

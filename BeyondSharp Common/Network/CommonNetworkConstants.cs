@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Common.Network
+﻿namespace BeyondSharp.Common.Network
 {
     public static class CommonNetworkConstants
     {
-        public const string IDENTIFIER = "BeyondSharp";
-        public const double VERSION = 0.01;
-        public const int DEFAULT_PORT = 7777;
-        public const int DEFAULT_MAXIMUM_CONNECTIONS = 80;
+        public const string Identifier = "BeyondSharp";
+
+        public const double Version = 0.01;
+
+        public const int DefaultPort = 7777;
+
+        public const int DefaultMaximumConnections = 80;
     }
 }

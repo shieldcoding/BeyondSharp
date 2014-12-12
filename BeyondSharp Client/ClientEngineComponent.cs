@@ -1,21 +1,18 @@
-﻿using BeyondSharp.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client
+﻿namespace BeyondSharp.Client
 {
+    using System;
+
+    using BeyondSharp.Common;
+
     public abstract class ClientEngineComponent : IEngineComponent
     {
-        public ClientEngine Engine { get; private set; }
-
         public ClientEngineComponent(ClientEngine engine)
         {
             Engine = engine;
         }
-        
+
+        public ClientEngine Engine { get; private set; }
+
         public abstract void Initialize();
 
         public abstract void Update(TimeSpan elapsedTime);

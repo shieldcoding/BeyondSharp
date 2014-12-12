@@ -1,23 +1,19 @@
-﻿using BeyondSharp.Common.Network;
-using Lidgren.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client.Network
+﻿namespace BeyondSharp.Client.Network
 {
+    using BeyondSharp.Common.Network;
+
+    using Lidgren.Network;
+
     internal class ClientNetworkProcessor
     {
-        internal ClientNetworkManager Manager { get; private set; }
-
-        internal NetIncomingMessage CurrentMessage { get; private set; }
-
         public ClientNetworkProcessor(ClientNetworkManager manager)
         {
             Manager = manager;
         }
+
+        internal ClientNetworkManager Manager { get; private set; }
+
+        internal NetIncomingMessage CurrentMessage { get; private set; }
 
         internal void Process(NetIncomingMessage message)
         {
@@ -36,7 +32,6 @@ namespace BeyondSharp.Client.Network
 
         private void ProcessStatusChanged()
         {
-
         }
 
         private void ProcessDataMessage()
@@ -52,6 +47,8 @@ namespace BeyondSharp.Client.Network
         }
 
         private void ProcessConnectRequest()
-        { Manager.Dispatcher.DispatchConnectionAuthenticate(); }
+        {
+            Manager.Dispatcher.DispatchConnectionAuthenticate();
+        }
     }
 }

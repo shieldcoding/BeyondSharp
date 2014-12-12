@@ -1,22 +1,17 @@
-﻿using BeyondSharp.Common.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Server.Entity
+﻿namespace BeyondSharp.Server.Entity
 {
+    using System;
+
+    using BeyondSharp.Common.Entity;
+
     public class ServerEntity : IEntity<ServerEntityComponent>
     {
-        public Guid ID { get; internal set; }
-
         public ServerEntityManager Manager { get; internal set; }
+
+        public Guid ID { get; internal set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-
     }
 }

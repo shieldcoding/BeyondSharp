@@ -1,12 +1,7 @@
-﻿using BeyondSharp.Common.Entity.Component.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Common.Entity.Component
+﻿namespace BeyondSharp.Common.Entity.Component
 {
+    using BeyondSharp.Common.Entity.Component.Attributes;
+
     [SynchronizedComponent(IDENTIFIER)]
     public class IEntityLightingComponent : IEntityComponent
     {

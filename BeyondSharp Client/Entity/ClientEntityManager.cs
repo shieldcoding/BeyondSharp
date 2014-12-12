@@ -1,17 +1,18 @@
-﻿using BeyondSharp.Common.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeyondSharp.Client.Entity
+﻿namespace BeyondSharp.Client.Entity
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BeyondSharp.Common.Entity;
+
     public class ClientEntityManager : ClientEngineComponent, IEntityManager<ClientEntity, ClientEntityComponent>
     {
-        private object _lock = null;
-        private List<ClientEntity> _entityList = null;
-        private Dictionary<Guid, ClientEntity> _entityLookup = null;
+        private readonly List<ClientEntity> _entityList;
+
+        private readonly Dictionary<Guid, ClientEntity> _entityLookup;
+
+        private readonly object _lock;
 
         internal ClientEntityManager(ClientEngine engine)
             : base(engine)
@@ -34,32 +35,43 @@ namespace BeyondSharp.Client.Entity
         public ClientEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
+            {
                 return null;
+            }
 
             lock (_lock)
             {
                 if (_entityLookup.ContainsKey(id))
+                {
                     return _entityLookup[id];
-                else
-                    return null;
+                }
+                return null;
             }
         }
 
         public IEnumerable<FilteredType> GetEntities<FilteredType>() where FilteredType : ClientEntity
-        { return _entityList.OfType<FilteredType>(); }
+        {
+            return _entityList.OfType<FilteredType>();
+        }
 
         public Guid RegisterEntity(ClientEntity entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException();
+            }
 
             lock (_lock)
             {
                 if (!_entityList.Contains(entity))
+                {
                     _entityList.Add(entity);
+                }
 
                 if (!_entityLookup.ContainsKey(entity.ID))
+                {
                     _entityLookup.Add(entity.ID, entity);
+                }
             }
 
             return entity.ID;
@@ -68,7 +80,9 @@ namespace BeyondSharp.Client.Entity
         public void UnregisterEntity(ClientEntity entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException();
+            }
 
             lock (_lock)
             {
