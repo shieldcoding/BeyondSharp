@@ -15,15 +15,14 @@ namespace BeyondSharp.Common.Entity
     /// <summary>
     /// The EntityManager interface.
     /// </summary>
-    /// <typeparam name="TEntityType">
+    /// <typeparam name="EntityType">
     /// The type of entity registered with this manager.
     /// </typeparam>
-    /// <typeparam name="TEntityComponentType">
+    /// <typeparam name="EntityComponentType">
     /// The type of entity component held by entities registered with this manager.
     /// </typeparam>
-    public interface IEntityManager<TEntityType, TEntityComponentType> : IEngineComponent
-        where TEntityType : IEntity<TEntityType, TEntityComponentType>
-        where TEntityComponentType : IEntityComponent<TEntityType, TEntityComponentType>
+    public interface IEntityManager<EntityType, EntityComponentType> : IEngineComponent
+        where EntityType : IEntity<EntityComponentType> where EntityComponentType : IEntityComponent
     {
         #region Public Methods and Operators
 
@@ -33,18 +32,18 @@ namespace BeyondSharp.Common.Entity
         /// <returns>
         /// An enumeration of entities registered to this manager.
         /// </returns>
-        IEnumerable<TEntityType> GetEntities();
+        IEnumerable<EntityType> GetEntities();
 
         /// <summary>
         /// Retrieves an entity with the given unique ID.
         /// </summary>
-        /// <param name="entityId">
+        /// <param name="id">
         /// The unique ID to retrieve the entity with.
         /// </param>
         /// <returns>
         /// The entity that has the unique ID.
         /// </returns>
-        TEntityType GetEntity(Guid entityId);
+        EntityType GetEntity(Guid id);
 
         /// <summary>
         /// Registers an entity with the entity manager.
@@ -55,7 +54,7 @@ namespace BeyondSharp.Common.Entity
         /// <returns>
         /// The ID of the entity.
         /// </returns>
-        Guid RegisterEntity(TEntityType entity);
+        Guid RegisterEntity(EntityType entity);
 
         /// <summary>
         /// Unregisters an entity with the entity manager.
@@ -63,7 +62,7 @@ namespace BeyondSharp.Common.Entity
         /// <param name="entity">
         /// The entity to be unregistered.
         /// </param>
-        void UnregisterEntity(TEntityType entity);
+        void UnregisterEntity(EntityType entity);
 
         #endregion
     }

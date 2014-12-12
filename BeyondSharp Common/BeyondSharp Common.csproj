@@ -40,7 +40,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\EntityCollection.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\IEntityController.cs" />
     <Compile Include="Entity\IEntityManager.cs" />

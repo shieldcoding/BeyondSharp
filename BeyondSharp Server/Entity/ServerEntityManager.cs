@@ -16,17 +16,27 @@ namespace BeyondSharp.Server.Entity
     using BeyondSharp.Common.Entity;
 
     /// <summary>
-    /// The server-sided entity manager.
+    /// The server entity manager.
     /// </summary>
     public class ServerEntityManager : ServerEngineComponent, IEntityManager<ServerEntity, ServerEntityComponent>
     {
         #region Fields
-        
+
         /// <summary>
-        /// The collection of all registered server entities.
+        /// The list of all registered server entities.
         /// </summary>
-        private readonly EntityCollection<ServerEntity, ServerEntityComponent> entityCollection = null;
-        
+        private readonly List<ServerEntity> entities = new List<ServerEntity>();
+
+        /// <summary>
+        /// The entity lock.
+        /// </summary>
+        private readonly object entityLock = new object();
+
+        /// <summary>
+        /// A lookup for retrieving an entity by an ID.
+        /// </summary>
+        private readonly Dictionary<Guid, ServerEntity> entityLookup = new Dictionary<Guid, ServerEntity>();
+
         #endregion
 
         #region Constructors and Destructors
@@ -35,12 +45,14 @@ namespace BeyondSharp.Server.Entity
         /// Initializes a new instance of the <see cref="ServerEntityManager"/> class.
         /// </summary>
         /// <param name="engine">
-        /// The server engine that the server entity manager is registered to.
+        /// The engine.
         /// </param>
         public ServerEntityManager(ServerEngine engine)
             : base(engine)
         {
-            this.entityCollection = new EntityCollection<ServerEntity, ServerEntityComponent>();
+            this.entityLock = new object();
+            this.entities = new List<ServerEntity>();
+            this.entityLookup = new Dictionary<Guid, ServerEntity>();
         }
 
         #endregion
@@ -48,28 +60,33 @@ namespace BeyondSharp.Server.Entity
         #region Public Methods and Operators
 
         /// <summary>
-        /// Retrieves all entities registered to the server entity manager.
+        /// Retrieves all entities of the specified type registered to this manager.
         /// </summary>
         /// <returns>
         /// An enumeration of all entities registered on the server.
         /// </returns>
         public IEnumerable<ServerEntity> GetEntities()
         {
-            return this.entityCollection.ToList();
+            return this.entities.ToList();
         }
 
         /// <summary>
-        /// Retrieves the entity with the specified ID or null if there is no entity registered with that ID.
+        /// Gets the entity with the specified ID or null if there is no entity with that ID.
         /// </summary>
-        /// <param name="entityId">
+        /// <param name="id">
         /// The ID of the entity to be retrieved.
         /// </param>
         /// <returns>
-        /// The <see cref="ServerEntity"/>.
+        /// The <see cref="ServerEntity"/> with that ID that is registered on the server.
         /// </returns>
-        public ServerEntity GetEntity(Guid entityId)
+        public ServerEntity GetEntity(Guid id)
         {
-            return entityId == default(Guid) ? null : this.entityCollection.GetEntity(entityId);
+            if (id == default(Guid))
+            {
+                return null;
+            }
+
+            return this.entityLookup.ContainsKey(id) ? this.entityLookup[id] : null;
         }
 
         /// <summary>
@@ -84,57 +101,57 @@ namespace BeyondSharp.Server.Entity
         }
 
         /// <summary>
-        /// Registers an entity with the server entity manager.
+        /// The register entity.
         /// </summary>
         /// <param name="entity">
-        /// The entity to be registered to the server entity manager.
+        /// The entity.
         /// </param>
         /// <returns>
-        /// The <see cref="Guid"/> of the entity, now that its been registered to the server.
+        /// The <see cref="Guid"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// Tried to register an entity with the server entity manager, but received a null reference.
-        /// </exception>
         public Guid RegisterEntity(ServerEntity entity)
         {
-            if (entity.Equals(null))
+            lock (this.entityLock)
             {
-                throw new ArgumentNullException();
+                if (this.entities.Contains(entity))
+                {
+                    if (entity.ID == default(Guid))
+                    {
+                        return default(Guid);
+                    }
+                }
+                else
+                {
+                    entity.ID = Guid.NewGuid();
+                    entity.Manager = this;
+
+                    this.entities.Add(entity);
+                    this.entityLookup.Add(entity.ID, entity);
+                }
             }
-
-            if (this.entityCollection.Contains(entity))
-            {
-                return entity.ID;
-            }
-
-            entity.ID = Guid.NewGuid();
-            entity.Manager = this;
-
-            this.entityCollection.Add(entity);
 
             return entity.ID;
         }
 
         /// <summary>
-        /// Unregisters an entity from the server entity manager.
+        /// The unregister entity.
         /// </summary>
         /// <param name="entity">
-        /// The entity to be unregistered from the server entity manager.
+        /// The entity.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Tried to unregister an entity from the server entity manager, but received a null reference.
         /// </exception>
         public void UnregisterEntity(ServerEntity entity)
         {
-            if (entity.Equals(null))
+            if (entity == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (this.entityCollection.Remove(entity))
+            lock (this.entityLock)
             {
-                // Once the entity has been unregistered we remove its ID.
-                entity.ID = default(Guid);
+                this.entities.Remove(entity);
+                this.entityLookup.Remove(entity.ID);
             }
         }
 
