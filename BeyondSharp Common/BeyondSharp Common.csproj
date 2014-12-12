@@ -40,10 +40,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Component\Attributes\SynchronizedComponentAttribute.cs" />
+    <Compile Include="Entity\Component\IEntityLightingComponent.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\IEntityController.cs" />
     <Compile Include="Entity\IEntityManager.cs" />
-    <Compile Include="Engine.cs" />
+    <Compile Include="CommonEngine.cs" />
     <Compile Include="EngineSide.cs" />
     <Compile Include="Entity\IEntityComponent.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />

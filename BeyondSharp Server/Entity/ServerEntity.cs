@@ -1,45 +1,22 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServerEntity.cs" company="ShieldCoding">
-//   No license available, currently privately owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The server entity.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    using System;
-
-    using BeyondSharp.Common.Entity;
-
-    /// <summary>
-    /// The server entity.
-    /// </summary>
     public class ServerEntity : IEntity<ServerEntityComponent>
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
         public Guid ID { get; internal set; }
 
-        /// <summary>
-        /// Gets the manager.
-        /// </summary>
         public ServerEntityManager Manager { get; internal set; }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
         public string Name { get; set; }
 
-        #endregion
+        public string Description { get; set; }
+
+
     }
 }

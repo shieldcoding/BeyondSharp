@@ -1,93 +1,31 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServerEngine.cs" company="ShieldCoding">
-//   No license available, currently privately owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The server engine.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common;
+using BeyondSharp.Server.Entity;
+using BeyondSharp.Server.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    using System;
-    using System.Security;
-    using System.Security.Permissions;
-
-    using BeyondSharp.Common;
-    using BeyondSharp.Server.Entity;
-    using BeyondSharp.Server.Network;
-
-    /// <summary>
-    /// The server engine.
-    /// </summary>
     public class ServerEngine : Engine<ServerEngineComponent>
     {
-        #region Constants
+        private const string RUNTIME_DOMAIN_FRIENDLY_NAME = "BeyondSharp Runtime Domain";
 
-        /// <summary>
-        /// The friendly name of the runtime's application domain.
-        /// </summary>
-        private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
-
-        #endregion
-
-        /// <summary>
-        /// Indicates that this engine is operating as a client.
-        /// </summary>
-        public override EngineSide Side
-        {
-            get { return EngineSide.Server; }
-        }
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets the entity manager.
-        /// </summary>
-        public ServerEntityManager EntityManager { get; private set; }
-
-        /// <summary>
-        /// Gets the network manager.
-        /// </summary>
         public ServerNetworkManager NetworkManager { get; private set; }
 
-        #endregion
+        public ServerEntityManager EntityManager { get; private set; }
 
-        #region Properties
-
-        /// <summary>
-        /// Gets a value indicating whether is runtime active.
-        /// </summary>
-        internal bool IsRuntimeActive { get; private set; }
-
-        /// <summary>
-        /// Gets the runtime domain.
-        /// </summary>
         internal AppDomain RuntimeDomain { get; private set; }
 
-        #endregion
+        internal bool IsRuntimeActive { get; private set; }
 
-        #region Methods
-
-        /// <summary>
-        /// Loads the runtime into the application domain.
-        /// </summary>
-        internal void LoadRuntime()
+        internal ServerEngine()
         {
-            // The runtime has to be inactive before we can load it.
-            if (this.IsRuntimeActive)
-            {
-                throw new Exception(string.Empty);
-            }
-
-            // Creating the runtime security permissions.
-            var permissions = new PermissionSet(PermissionState.None);
-
-            var setup = new AppDomainSetup();
-            setup.ApplicationBase = ServerProgram.Configuration.Runtime.Path;
-
-            // Creating the runtime domain.
-            this.RuntimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
+            Side = EngineSide.Server;
         }
 
         /// <summary>
@@ -95,22 +33,37 @@ namespace BeyondSharp.Server
         /// </summary>
         internal void ResetPlatform()
         {
-            if (this.IsRuntimeActive)
-            {
-                this.UnloadRuntime();
-            }
 
-            this.LoadRuntime();
+            if (IsRuntimeActive)
+                UnloadRuntime();
+
+            LoadRuntime();
         }
+
 
         /// <summary>
-        /// The unload runtime.
+        /// Loads the runtime into the application domain.
         /// </summary>
-        internal void UnloadRuntime()
+        internal void LoadRuntime()
         {
-            AppDomain.Unload(this.RuntimeDomain);
+            // The runtime has to be inactive before we can load it.
+            if (IsRuntimeActive)
+                throw new Exception("");
+
+            // Creating the runtime security permissions.
+            var permissions = new PermissionSet(PermissionState.None);
+
+            var setup = new AppDomainSetup();
+            setup.ApplicationBase = ServerProgram.Configuration.Runtime.Path;
+
+
+            // Creating the runtime domain.
+            RuntimeDomain = AppDomain.CreateDomain(RUNTIME_DOMAIN_FRIENDLY_NAME);
         }
 
-        #endregion
+        internal void UnloadRuntime()
+        {
+            AppDomain.Unload(RuntimeDomain);
+        }
     }
 }

@@ -1,124 +1,58 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServerProgramConfiguration.cs" company="ShieldCoding">
-//   No license available, currently privately owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The server program configuration.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common.Network;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Server
 {
-    using System.ComponentModel;
-    using System.Net;
-
-    using BeyondSharp.Common.Network;
-
-    using Newtonsoft.Json;
-
-    /// <summary>
-    /// The server program configuration.
-    /// </summary>
     public class ServerProgramConfiguration
     {
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ServerProgramConfiguration"/> class.
-        /// </summary>
-        public ServerProgramConfiguration()
-        {
-            this.Runtime = new RuntimeConfiguration();
-            this.Network = new NetworkConfiguration();
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets the network.
-        /// </summary>
-        public NetworkConfiguration Network { get; private set; }
-
-        /// <summary>
-        /// Gets the runtime.
-        /// </summary>
         public RuntimeConfiguration Runtime { get; private set; }
 
-        #endregion
+        public NetworkConfiguration Network { get; private set; }
 
-        /// <summary>
-        /// The network configuration.
-        /// </summary>
+        public ServerProgramConfiguration()
+        {
+            Runtime = new RuntimeConfiguration();
+            Network = new NetworkConfiguration();
+        }
+
+        public class RuntimeConfiguration
+        {
+            [JsonProperty]
+            [DefaultValue(ServerConstants.DEFAULT_RUNTIME_PATH)]
+            public string Path { get; private set; }
+
+            public RuntimeConfiguration()
+            {
+                Path = ServerConstants.DEFAULT_RUNTIME_PATH;
+            }
+        }
+
         public class NetworkConfiguration
         {
-            #region Constructors and Destructors
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="NetworkConfiguration"/> class.
-            /// </summary>
-            public NetworkConfiguration()
-            {
-                this.Address = IPAddress.Any.ToString();
-                this.Port = CommonNetworkConstants.DefaultPort;
-                this.MaximumConnections = CommonNetworkConstants.DefaultMaximumConnections;
-            }
-
-            #endregion
-
-            #region Public Properties
-
-            /// <summary>
-            /// Gets the address.
-            /// </summary>
             [JsonProperty]
             public string Address { get; private set; }
 
-            /// <summary>
-            /// Gets the maximum connections.
-            /// </summary>
             [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DefaultMaximumConnections)]
-            public int MaximumConnections { get; private set; }
-
-            /// <summary>
-            /// Gets the port.
-            /// </summary>
-            [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DefaultPort)]
+            [DefaultValue(CommonNetworkConstants.DEFAULT_PORT)]
             public int Port { get; private set; }
 
-            #endregion
-        }
-
-        /// <summary>
-        /// The runtime configuration.
-        /// </summary>
-        public class RuntimeConfiguration
-        {
-            #region Constructors and Destructors
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RuntimeConfiguration"/> class.
-            /// </summary>
-            public RuntimeConfiguration()
-            {
-                this.Path = ServerConstants.DefaultRuntimePath;
-            }
-
-            #endregion
-
-            #region Public Properties
-
-            /// <summary>
-            /// Gets the path.
-            /// </summary>
             [JsonProperty]
-            [DefaultValue(ServerConstants.DefaultRuntimePath)]
-            public string Path { get; private set; }
+            [DefaultValue(CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS)]
+            public int MaximumConnections { get; private set; }
 
-            #endregion
+            public NetworkConfiguration()
+            {
+                Address = IPAddress.Any.ToString();
+                Port = CommonNetworkConstants.DEFAULT_PORT;
+                MaximumConnections = CommonNetworkConstants.DEFAULT_MAXIMUM_CONNECTIONS;
+            }
         }
     }
 }

@@ -1,53 +1,22 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServerProgram.cs" company="ShieldCoding">
-//   No license available, currently privately owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The server program.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CommandLineParser = CommandLine.Parser;
 
 namespace BeyondSharp.Server
 {
-    using System;
-    using System.IO;
-
-    using Newtonsoft.Json;
-
-    using CommandLineParser = CommandLine.Parser;
-
-    /// <summary>
-    /// The server program.
-    /// </summary>
     public static class ServerProgram
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets the configuration.
-        /// </summary>
-        public static ServerProgramConfiguration Configuration { get; private set; }
-
-        /// <summary>
-        /// Gets the engine.
-        /// </summary>
         public static ServerEngine Engine { get; private set; }
 
-        /// <summary>
-        /// Gets the options.
-        /// </summary>
+        public static ServerProgramConfiguration Configuration { get; private set; }
+
         public static ServerProgramOptions Options { get; private set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The main.
-        /// </summary>
-        /// <param name="arguments">
-        /// The arguments.
-        /// </param>
         public static void Main(string[] arguments)
         {
             if (ProcessCommandLine(arguments))
@@ -61,31 +30,12 @@ namespace BeyondSharp.Server
             }
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The process command line.
-        /// </summary>
-        /// <param name="arguments">
-        /// The arguments.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
         private static bool ProcessCommandLine(string[] arguments)
         {
             Console.WriteLine(Localization.Engine.ReadingCommandLine);
             return CommandLineParser.Default.ParseArguments(arguments, Options = new ServerProgramOptions());
         }
 
-        /// <summary>
-        /// The process configuration.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
         private static bool ProcessConfiguration()
         {
             string configurationData = null;
@@ -111,7 +61,5 @@ namespace BeyondSharp.Server
 
             return true;
         }
-
-        #endregion
     }
 }

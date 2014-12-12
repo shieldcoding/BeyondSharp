@@ -1,28 +1,18 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServerEntityController.cs" company="ShieldCoding">
-//   No license available, currently privately owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The server entity controller.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Server.Entity
 {
-    using BeyondSharp.Common.Entity;
-
-    /// <summary>
-    /// The server entity controller.
-    /// </summary>
-    public class ServerEntityController : IEntityController<ServerEntity, ServerEntityComponent>
+    public class ServerEntityController : ICommonEntityController<ServerEntity, ServerEntityComponent>
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the controlled entity.
-        /// </summary>
-        public ServerEntity ControlledEntity { get; set; }
-
-        #endregion
+        public ServerEntity ControlledEntity
+        {
+            get;
+            set;
+        }
     }
 }

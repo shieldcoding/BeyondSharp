@@ -1,19 +1,12 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ClientEntityComponent.cs" company="ShieldCoding">
-//   No licenses are currently available, owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The client entity component.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Entity
 {
-    using BeyondSharp.Common.Entity;
-
-    /// <summary>
-    /// The client entity component.
-    /// </summary>
     public class ClientEntityComponent : IEntityComponent
     {
     }

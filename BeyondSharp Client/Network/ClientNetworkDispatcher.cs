@@ -1,118 +1,55 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ClientNetworkDispatcher.cs" company="ShieldCoding">
-//   No licenses are currently available, owned by Richard Brown-Lang.
-// </copyright>
-// <summary>
-//   The client network dispatcher.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using BeyondSharp.Common.Network;
+using Lidgren.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BeyondSharp.Client.Network
 {
-    using System;
-
-    using BeyondSharp.Common.Network;
-
-    using Lidgren.Network;
-
-    /// <summary>
-    /// The client network dispatcher.
-    /// </summary>
     internal class ClientNetworkDispatcher
     {
-        #region Constructors and Destructors
+        public ClientNetworkManager Manager { get; private set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ClientNetworkDispatcher"/> class.
-        /// </summary>
-        /// <param name="manager">
-        /// The manager.
-        /// </param>
-        internal ClientNetworkDispatcher(ClientNetworkManager manager)
+        public ClientNetworkDispatcher(ClientNetworkManager manager)
         {
-            this.Manager = manager;
+            Manager = manager;
         }
 
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the manager.
-        /// </summary>
-        internal ClientNetworkManager Manager { get; private set; }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Sends the initial connection request packet to the server containing the network protocol version.
-        /// </summary>
-        internal void DispatchConnectRequest()
+        protected void DispatchMessage(NetOutgoingMessage message, NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, int channel = 0)
         {
-            var message = this.CreateMessage(NetworkProtocol.ConnectionRequest, sizeof(double));
-            message.Write(CommonNetworkConstants.ProtocolVersion);
-
-            this.DispatchMessage(message);
+            if (Manager.IsConnected)
+                Manager.Connection.SendMessage(message, method, channel);
         }
 
-        /// <summary>
-        /// The dispatch connection authenticate.
-        /// </summary>
-        internal void DispatchConnectionAuthenticate()
+        protected NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
         {
-            var message = this.CreateMessage(NetworkProtocol.ConnectionAuthenticate);
-            message.Write(this.Manager.Player.Username);
-            message.Write(this.Manager.Player.SessionToken.ToString("N"));
-            message.Write(this.Manager.Player.HardwareToken.ToString("N"));
-
-            this.DispatchMessage(message);
-        }
-
-        /// <summary>
-        /// The create message.
-        /// </summary>
-        /// <param name="protocol">
-        /// The protocol.
-        /// </param>
-        /// <param name="additionalCapacity">
-        /// The additional capacity.
-        /// </param>
-        /// <returns>
-        /// The <see cref="NetOutgoingMessage"/>.
-        /// </returns>
-        private NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
-        {
-            var message = this.Manager.Client.CreateMessage(sizeof(short) + Math.Max(0, additionalCapacity));
+            var message = Manager.Client.CreateMessage(sizeof(short) + additionalCapacity);
             message.Write((short)protocol);
 
             return message;
         }
 
         /// <summary>
-        /// The dispatch message.
+        /// Sends the initial connection request packet to the server containing the network protocol version.
         /// </summary>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <param name="method">
-        /// The method.
-        /// </param>
-        /// <param name="channel">
-        /// The channel.
-        /// </param>
-        private void DispatchMessage(
-            NetOutgoingMessage message, 
-            NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, 
-            int channel = 0)
+        public void DispatchConnectRequest()
         {
-            if (this.Manager.IsConnected)
-            {
-                this.Manager.Connection.SendMessage(message, method, channel);
-            }
+            var message = CreateMessage(NetworkProtocol.ConnectionRequest, sizeof(double));
+            message.Write(CommonNetworkConstants.VERSION);
+
+            DispatchMessage(message);
         }
 
-        #endregion
+        internal void DispatchConnectionAuthenticate()
+        {
+            var message = CreateMessage(NetworkProtocol.ConnectionAuthenticate);
+            message.Write(Manager.Player.Username);
+            message.Write(Manager.Player.SessionToken.ToString("N"));
+            message.Write(Manager.Player.HardwareToken.ToString("N"));
+
+            DispatchMessage(message);
+        }
     }
 }
