@@ -4,7 +4,7 @@
 
     using BeyondSharp.Common.Entity;
 
-    public class ServerEntity : IEntity<ServerEntityComponent>
+    public class ServerEntity : IEntity<ServerEntity, ServerEntityComponent>
     {
         public ServerEntityManager Manager { get; internal set; }
 

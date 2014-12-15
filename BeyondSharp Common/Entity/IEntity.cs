@@ -2,8 +2,9 @@
 {
     using System;
 
-    public interface IEntity<EntityComponentType>
-        where EntityComponentType : IEntityComponent
+    public interface IEntity<TEntity, TEntityComponent>
+        where TEntity : IEntity<TEntity, TEntityComponent>
+        where TEntityComponent : IEntityComponent<TEntity, TEntityComponent>
     {
         Guid ID { get; }
 

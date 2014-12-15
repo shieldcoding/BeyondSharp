@@ -12,6 +12,8 @@
     {
         private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
 
+        private AppDomain runtimeDomain = null;
+
         internal ServerEngine()
         {
             Side = EngineSide.Server;
@@ -20,10 +22,19 @@
         public ServerNetworkManager NetworkManager { get; private set; }
 
         public ServerEntityManager EntityManager { get; private set; }
+        
+        public bool IsRuntimeActive { get; private set; }
 
-        internal AppDomain RuntimeDomain { get; private set; }
+        internal void Initialize()
+        {
+            NetworkManager = new ServerNetworkManager(this);
+            EntityManager = new ServerEntityManager(this);
+        }
 
-        internal bool IsRuntimeActive { get; private set; }
+        internal void Run()
+        {
+            
+        }
 
         /// <summary>
         ///     Stops and restarts all engine components, clearing out the runtime in the process before reloading it.
@@ -41,27 +52,29 @@
         /// <summary>
         ///     Loads the runtime into the application domain.
         /// </summary>
-        internal void LoadRuntime()
+        private void LoadRuntime()
         {
             // The runtime has to be inactive before we can load it.
             if (IsRuntimeActive)
-            {
-                throw new Exception("");
-            }
+                throw new Exception();
 
             // Creating the runtime security permissions.
             var permissions = new PermissionSet(PermissionState.None);
 
-            var setup = new AppDomainSetup();
-            setup.ApplicationBase = ServerProgram.Configuration.Runtime.Path;
+            var runtimeDomainSetup = new AppDomainSetup
+            {
+                ApplicationBase = ServerProgram.Configuration.Runtime.Path
+            };
 
             // Creating the runtime domain.
-            RuntimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
+            runtimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
+
+            IsRuntimeActive = true;
         }
 
-        internal void UnloadRuntime()
+        private void UnloadRuntime()
         {
-            AppDomain.Unload(RuntimeDomain);
+            AppDomain.Unload(runtimeDomain);
         }
     }
 }

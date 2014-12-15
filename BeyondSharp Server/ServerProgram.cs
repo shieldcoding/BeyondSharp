@@ -17,15 +17,37 @@ namespace BeyondSharp.Server
 
         public static void Main(string[] arguments)
         {
-            if (ProcessCommandLine(arguments))
-            {
-                Console.WriteLine(Localization.Engine.ProcessedCommandLine);
+            if (Initialize(arguments))
+                Engine.Run();
 
-                if (ProcessConfiguration())
-                {
-                    Console.WriteLine(Localization.Engine.ProcessedConfiguration);
-                }
+            // ReSharper disable once InvertIf
+            if (Options.PauseOnExit)
+            {
+                Console.WriteLine(Localization.Engine.PauseOnExit);
+                Console.ReadKey();
             }
+
+            Console.Write(Localization.Engine.Exit);
+        }
+
+        private static bool Initialize(string[] arguments)
+        {
+            if (!ProcessCommandLine(arguments))
+            {
+                return false;
+            }
+
+            Console.WriteLine(Localization.Engine.ProcessedCommandLine);
+
+            if (!ProcessConfiguration())
+                return false;
+
+            Console.WriteLine(Localization.Engine.ProcessedConfiguration);
+
+            Engine = new ServerEngine();
+            Engine.Initialize();
+
+            return true;
         }
 
         private static bool ProcessCommandLine(string[] arguments)

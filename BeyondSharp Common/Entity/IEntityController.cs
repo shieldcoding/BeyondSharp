@@ -1,9 +1,9 @@
 ﻿namespace BeyondSharp.Common.Entity
 {
-    public interface ICommonEntityController<EntityType, EntityComponentType>
-        where EntityType : IEntity<EntityComponentType>
-        where EntityComponentType : IEntityComponent
+    public interface IEntityController<TEntity, TEntityComponent>
+        where TEntity : IEntity<TEntity, TEntityComponent>
+        where TEntityComponent : IEntityComponent<TEntity, TEntityComponent>
     {
-        EntityType ControlledEntity { get; }
+        TEntity ControlledEntity { get; }
     }
 }

@@ -49,9 +49,9 @@
             }
         }
 
-        public IEnumerable<FilteredType> GetEntities<FilteredType>() where FilteredType : ClientEntity
+        public IEnumerable<ClientEntity> GetEntities()
         {
-            return _entityList.OfType<FilteredType>();
+            return _entityList;
         }
 
         public Guid RegisterEntity(ClientEntity entity)

@@ -3,35 +3,35 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IEntityManager<EntityType, EntityComponentType> : IEngineComponent
-        where EntityType : IEntity<EntityComponentType>
-        where EntityComponentType : IEntityComponent
+    public interface IEntityManager<TEntity, TEntityComponent> : IEngineComponent
+        where TEntity : IEntity<TEntity, TEntityComponent>
+        where TEntityComponent : IEntityComponent<TEntity, TEntityComponent>
     {
         /// <summary>
         ///     Retrieves an entity with the given unique ID.
         /// </summary>
         /// <param name="id">The unique ID to retrieve the entity with.</param>
         /// <returns>The entity that has the unique ID.</returns>
-        EntityType GetEntity(Guid id);
+        TEntity GetEntity(Guid id);
 
         /// <summary>
         ///     Returns an enumeration of entities that match the specified type.
         /// </summary>
         /// <typeparam name="FilteredType"></typeparam>
         /// <returns></returns>
-        IEnumerable<FilteredType> GetEntities<FilteredType>() where FilteredType : EntityType;
+        IEnumerable<TEntity> GetEntities();
 
         /// <summary>
         ///     Registers an entity with the entity manager.
         /// </summary>
         /// <param name="entity">The entity to be registered.</param>
         /// <returns>The ID of the entity.</returns>
-        Guid RegisterEntity(EntityType entity);
+        Guid RegisterEntity(TEntity entity);
 
         /// <summary>
         ///     Unregisters an entity with the entity manager.
         /// </summary>
         /// <param name="entity">The entity to be unregistered.</param>
-        void UnregisterEntity(EntityType entity);
+        void UnregisterEntity(TEntity entity);
     }
 }

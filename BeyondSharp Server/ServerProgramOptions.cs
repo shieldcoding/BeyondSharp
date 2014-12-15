@@ -4,9 +4,13 @@
 
     public class ServerProgramOptions
     {
-        private const string DEFAULT_CONFIGURATION_PATH = "server_configuration.json";
+        private const string DefaultConfigurationPath = "server_configuration.json";
+        private const bool DefaultPauseOnExit = true;
 
-        [Option('c', "configuration", DefaultValue = DEFAULT_CONFIGURATION_PATH)]
+        [Option('c', "configuration", DefaultValue = DefaultConfigurationPath)]
         public string ConfigurationPath { get; set; }
+
+        [Option('p', "pause", DefaultValue = DefaultPauseOnExit)]
+        public bool PauseOnExit { get; set; }
     }
 }

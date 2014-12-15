@@ -8,18 +8,11 @@
 
     public class ServerEntityManager : ServerEngineComponent, IEntityManager<ServerEntity, ServerEntityComponent>
     {
-        private readonly Dictionary<Guid, ServerEntity> _entityIDLookup;
-
-        private readonly List<ServerEntity> _entityList;
-
-        private readonly object _lock;
+        private readonly Dictionary<Guid, ServerEntity> entities = new Dictionary<Guid, ServerEntity>();
 
         public ServerEntityManager(ServerEngine engine)
             : base(engine)
         {
-            _lock = new object();
-            _entityList = new List<ServerEntity>();
-            _entityIDLookup = new Dictionary<Guid, ServerEntity>();
         }
 
         public override void Initialize()
@@ -35,42 +28,28 @@
         public ServerEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
-            {
                 return null;
-            }
 
-            if (_entityIDLookup.ContainsKey(id))
-            {
-                return _entityIDLookup[id];
-            }
-            return null;
+            return entities.ContainsKey(id) ? entities[id] : null;
         }
 
-        public IEnumerable<FilteredEntityType> GetEntities<FilteredEntityType>() where FilteredEntityType : ServerEntity
+        public IEnumerable<ServerEntity> GetEntities()
         {
-            return _entityList.OfType<FilteredEntityType>();
+            return entities.Values.ToList();
         }
 
         public Guid RegisterEntity(ServerEntity entity)
         {
-            lock (_lock)
-            {
-                if (_entityList.Contains(entity))
-                {
-                    if (entity.ID == default(Guid))
-                    {
-                        return default(Guid);
-                    }
-                }
-                else
-                {
-                    entity.ID = Guid.NewGuid();
-                    entity.Manager = this;
+            if (entity == null)
+                throw new ArgumentNullException();
+            
+            if (entities.ContainsKey(entity.ID))
+                return entity.ID;
 
-                    _entityList.Add(entity);
-                    _entityIDLookup.Add(entity.ID, entity);
-                }
-            }
+            entity.ID = Guid.NewGuid();
+            entity.Manager = this;
+
+            entities.Add(entity.ID, entity);
 
             return entity.ID;
         }
@@ -78,15 +57,13 @@
         public void UnregisterEntity(ServerEntity entity)
         {
             if (entity == null)
-            {
                 throw new ArgumentNullException();
-            }
 
-            lock (_lock)
-            {
-                _entityList.Remove(entity);
-                _entityIDLookup.Remove(entity.ID);
-            }
+            if (!entities.Remove(entity.ID))
+                return;
+
+            entity.ID = default(Guid);
+            entity.Manager = null;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     using BeyondSharp.Common.Entity;
 
-    public class ServerEntityController : ICommonEntityController<ServerEntity, ServerEntityComponent>
+    public class ServerEntityController : IEntityController<ServerEntity, ServerEntityComponent>
     {
         public ServerEntity ControlledEntity { get; set; }
     }

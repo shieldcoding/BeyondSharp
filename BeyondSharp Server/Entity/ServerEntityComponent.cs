@@ -2,7 +2,7 @@
 {
     using BeyondSharp.Common.Entity;
 
-    public class ServerEntityComponent : IEntityComponent
+    public class ServerEntityComponent : IEntityComponent<ServerEntity, ServerEntityComponent>
     {
     }
 }

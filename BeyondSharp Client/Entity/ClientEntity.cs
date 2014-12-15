@@ -4,7 +4,7 @@
 
     using BeyondSharp.Common.Entity;
 
-    public class ClientEntity : IEntity<ClientEntityComponent>
+    public class ClientEntity : IEntity<ClientEntity, ClientEntityComponent>
     {
         public Guid ID { get; internal set; }
 
