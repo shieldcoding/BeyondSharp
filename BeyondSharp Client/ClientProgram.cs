@@ -16,6 +16,30 @@
 
         public static void Main(string[] args)
         {
+            if (Initialize(args))
+            {
+                Engine.Run();
+            }
+
+            SaveConfiguration();
+        }
+
+        private static bool Initialize(string[] arguments)
+        {
+            if (!ProcessCommandLine(arguments))
+            {
+                return false;
+            }
+
+            if (!ProcessConfiguration())
+            {
+                return false;
+            }
+
+            Engine = new ClientEngine();
+            Engine.Initialize();
+
+            return true;
         }
 
         private static bool ProcessCommandLine(string[] arguments)
@@ -25,11 +49,9 @@
 
         private static bool ProcessConfiguration()
         {
-            string configurationData = null;
-
             if (File.Exists(Options.ConfigurationPath))
             {
-                configurationData = File.ReadAllText(Options.ConfigurationPath);
+                var configurationData = File.ReadAllText(Options.ConfigurationPath);
                 Configuration = JsonConvert.DeserializeObject<ClientProgramConfiguration>(configurationData);
             }
             else
@@ -37,10 +59,15 @@
                 Configuration = new ClientProgramConfiguration();
             }
 
-            configurationData = JsonConvert.SerializeObject(Configuration);
-            File.WriteAllText(Options.ConfigurationPath, configurationData);
-
+            SaveConfiguration();
             return true;
+        }
+
+        private static void SaveConfiguration()
+        {
+            var configurationData = JsonConvert.SerializeObject(Configuration);
+
+            File.WriteAllText(Options.ConfigurationPath, configurationData);
         }
     }
 }
