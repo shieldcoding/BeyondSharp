@@ -2,6 +2,8 @@
 {
     using Newtonsoft.Json;
 
+    using OpenTK;
+
     public class ClientProgramConfiguration
     {
         internal ClientProgramConfiguration()
@@ -17,10 +19,13 @@
 
             private const int DefaultHeight = 600;
 
+            private const VSyncMode DefaultVSyncMode = VSyncMode.On;
+
             internal GraphicsConfiguration()
             {
                 Width = DefaultWidth;
                 Height = DefaultHeight;
+                VSync = DefaultVSyncMode;
             }
 
             [JsonProperty]
@@ -28,6 +33,9 @@
 
             [JsonProperty]
             public int Height { get; set; }
+
+            [JsonProperty]
+            public VSyncMode VSync { get; set; }
         }
     }
 }

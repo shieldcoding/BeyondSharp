@@ -28,7 +28,9 @@
         public ServerEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
+            {
                 return null;
+            }
 
             return entities.ContainsKey(id) ? entities[id] : null;
         }
@@ -41,10 +43,14 @@
         public Guid RegisterEntity(ServerEntity entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException();
-            
+            }
+
             if (entities.ContainsKey(entity.ID))
+            {
                 return entity.ID;
+            }
 
             entity.ID = Guid.NewGuid();
             entity.Manager = this;
@@ -57,10 +63,14 @@
         public void UnregisterEntity(ServerEntity entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException();
+            }
 
             if (!entities.Remove(entity.ID))
+            {
                 return;
+            }
 
             entity.ID = default(Guid);
             entity.Manager = null;

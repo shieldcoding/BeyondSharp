@@ -1,11 +1,11 @@
 ﻿namespace BeyondSharp.Client
 {
     using System;
-    using System.Runtime.Remoting.Channels;
-
+    using System.Drawing;
     using BeyondSharp.Common;
-
     using OpenTK;
+    using OpenTK.Graphics;
+    using OpenTK.Graphics.OpenGL4;
 
     public class ClientEngine : Engine<ClientEngineComponent>
     {
@@ -21,6 +21,7 @@
             Window = new GameWindow(ClientProgram.Configuration.Graphics.Width, ClientProgram.Configuration.Graphics.Height);
             Window.UpdateFrame += (sender, args) => UpdateFrame(TimeSpan.FromSeconds(args.Time));
             Window.RenderFrame += (sender, args) => RenderFrame(TimeSpan.FromSeconds(args.Time));
+            Window.VSync = ClientProgram.Configuration.Graphics.VSync;
         }
 
         internal void Run()
@@ -42,6 +43,9 @@
 
         private void UpdateFrame(TimeSpan elapsedTime)
         {
+            GL.ClearColor(Color.AliceBlue);
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+            Window.SwapBuffers();
         }
 
         private void RenderFrame(TimeSpan elapsedTime)

@@ -2,9 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     using BeyondSharp.Common.Extensions;
+
+    using System.Linq;
+
     using BeyondSharp.Common.Network;
 
     using Lidgren.Network;

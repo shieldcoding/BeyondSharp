@@ -63,7 +63,7 @@
 
         private static void SaveConfiguration()
         {
-            var configurationData = JsonConvert.SerializeObject(Configuration);
+            var configurationData = JsonConvert.SerializeObject(Configuration, Formatting.Indented);
 
             File.WriteAllText(Options.ConfigurationPath, configurationData);
         }

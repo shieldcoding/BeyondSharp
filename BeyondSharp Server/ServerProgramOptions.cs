@@ -5,6 +5,7 @@
     public class ServerProgramOptions
     {
         private const string DefaultConfigurationPath = "server_configuration.json";
+
         private const bool DefaultPauseOnExit = true;
 
         [Option('c', "configuration", DefaultValue = DefaultConfigurationPath)]

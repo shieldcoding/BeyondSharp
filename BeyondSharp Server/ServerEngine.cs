@@ -12,7 +12,7 @@
     {
         private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
 
-        private AppDomain runtimeDomain = null;
+        private AppDomain runtimeDomain;
 
         internal ServerEngine()
         {
@@ -22,7 +22,7 @@
         public ServerNetworkManager NetworkManager { get; private set; }
 
         public ServerEntityManager EntityManager { get; private set; }
-        
+
         public bool IsRuntimeActive { get; private set; }
 
         internal void Initialize()
@@ -33,7 +33,6 @@
 
         internal void Run()
         {
-            
         }
 
         /// <summary>
@@ -56,15 +55,17 @@
         {
             // The runtime has to be inactive before we can load it.
             if (IsRuntimeActive)
+            {
                 throw new Exception();
+            }
 
             // Creating the runtime security permissions.
             var permissions = new PermissionSet(PermissionState.None);
 
             var runtimeDomainSetup = new AppDomainSetup
-            {
-                ApplicationBase = ServerProgram.Configuration.Runtime.Path
-            };
+                                         {
+                                             ApplicationBase = ServerProgram.Configuration.Runtime.Path
+                                         };
 
             // Creating the runtime domain.
             runtimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
