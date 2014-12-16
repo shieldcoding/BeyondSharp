@@ -20,19 +20,21 @@ namespace BeyondSharp.Server
             if (Initialize(arguments))
                 Engine.Run();
 
+            SaveConfiguration();
+
             // ReSharper disable once InvertIf
             if (Options.PauseOnExit)
             {
                 Console.WriteLine(Localization.Engine.PauseOnExit);
                 Console.ReadKey();
             }
-
+            
             Console.Write(Localization.Engine.Exit);
         }
 
-        private static bool Initialize(string[] arguments)
+        private static bool Initialize(string[] args)
         {
-            if (!ProcessCommandLine(arguments))
+            if (!ProcessCommandLine(args))
             {
                 return false;
             }
@@ -50,21 +52,19 @@ namespace BeyondSharp.Server
             return true;
         }
 
-        private static bool ProcessCommandLine(string[] arguments)
+        private static bool ProcessCommandLine(string[] args)
         {
             Console.WriteLine(Localization.Engine.ReadingCommandLine);
-            return CommandLineParser.Default.ParseArguments(arguments, Options = new ServerProgramOptions());
+            return CommandLineParser.Default.ParseArguments(args, Options = new ServerProgramOptions());
         }
 
         private static bool ProcessConfiguration()
         {
-            string configurationData = null;
-
             if (File.Exists(Options.ConfigurationPath))
             {
                 Console.WriteLine(Localization.Engine.ReadingConfiguration);
 
-                configurationData = File.ReadAllText(Options.ConfigurationPath);
+                var configurationData = File.ReadAllText(Options.ConfigurationPath);
                 Configuration = JsonConvert.DeserializeObject<ServerProgramConfiguration>(configurationData);
             }
             else
@@ -74,12 +74,17 @@ namespace BeyondSharp.Server
                 Configuration = new ServerProgramConfiguration();
             }
 
-            Console.WriteLine(Localization.Engine.SavingConfiguration);
-
-            configurationData = JsonConvert.SerializeObject(Configuration);
-            File.WriteAllText(Options.ConfigurationPath, configurationData);
+            SaveConfiguration();
 
             return true;
+        }
+
+        private static void SaveConfiguration()
+        {
+            Console.WriteLine(Localization.Engine.SavingConfiguration);
+
+            var configurationData = JsonConvert.SerializeObject(Configuration);
+            File.WriteAllText(Options.ConfigurationPath, configurationData);
         }
     }
 }

@@ -17,16 +17,14 @@
         public static void Main(string[] args)
         {
             if (Initialize(args))
-            {
                 Engine.Run();
-            }
-
+            
             SaveConfiguration();
         }
 
-        private static bool Initialize(string[] arguments)
+        private static bool Initialize(string[] args)
         {
-            if (!ProcessCommandLine(arguments))
+            if (!ProcessCommandLine(args))
             {
                 return false;
             }
@@ -42,9 +40,9 @@
             return true;
         }
 
-        private static bool ProcessCommandLine(string[] arguments)
+        private static bool ProcessCommandLine(string[] args)
         {
-            return Parser.Default.ParseArguments(arguments, Options = new ClientProgramOptions());
+            return Parser.Default.ParseArguments(args, Options = new ClientProgramOptions());
         }
 
         private static bool ProcessConfiguration()
