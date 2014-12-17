@@ -1,4 +1,4 @@
-﻿namespace BeyondSharp.Common.Entity
+﻿namespace BeyondSharp.Common.Game.Object
 {
     using System;
     using System.Collections.Generic;

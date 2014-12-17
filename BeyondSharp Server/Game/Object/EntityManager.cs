@@ -1,16 +1,16 @@
-﻿namespace BeyondSharp.Server.Entity
+﻿namespace BeyondSharp.Server.Game.Object
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using BeyondSharp.Common.Entity;
+    using BeyondSharp.Common.Game.Object;
 
-    public class ServerEntityManager : ServerEngineComponent, IEntityManager<ServerEntity, ServerEntityComponent>
+    public class EntityManager : ServerEngineComponent, IEntityManager<Entity, EntityComponent>
     {
-        private readonly Dictionary<Guid, ServerEntity> entities = new Dictionary<Guid, ServerEntity>();
+        private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
 
-        public ServerEntityManager(ServerEngine engine)
+        public EntityManager(ServerEngine engine)
             : base(engine)
         {
         }
@@ -25,7 +25,7 @@
             throw new NotImplementedException();
         }
 
-        public ServerEntity GetEntity(Guid id)
+        public Entity GetEntity(Guid id)
         {
             if (id == default(Guid))
             {
@@ -35,12 +35,12 @@
             return entities.ContainsKey(id) ? entities[id] : null;
         }
 
-        public IEnumerable<ServerEntity> GetEntities()
+        public IEnumerable<Entity> GetEntities()
         {
             return entities.Values.ToList();
         }
 
-        public Guid RegisterEntity(ServerEntity entity)
+        public Guid RegisterEntity(Entity entity)
         {
             if (entity == null)
             {
@@ -60,7 +60,7 @@
             return entity.ID;
         }
 
-        public void UnregisterEntity(ServerEntity entity)
+        public void UnregisterEntity(Entity entity)
         {
             if (entity == null)
             {

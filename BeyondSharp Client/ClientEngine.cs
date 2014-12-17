@@ -2,9 +2,10 @@
 {
     using System;
     using System.Drawing;
+
     using BeyondSharp.Common;
+
     using OpenTK;
-    using OpenTK.Graphics;
     using OpenTK.Graphics.OpenGL4;
 
     public class ClientEngine : Engine<ClientEngineComponent>
@@ -32,7 +33,6 @@
             }
             catch (Exception ex)
             {
-
             }
             finally
             {
@@ -50,7 +50,6 @@
 
         private void RenderFrame(TimeSpan elapsedTime)
         {
-            
         }
     }
 }

@@ -17,8 +17,10 @@
         public static void Main(string[] args)
         {
             if (Initialize(args))
+            {
                 Engine.Run();
-            
+            }
+
             SaveConfiguration();
         }
 

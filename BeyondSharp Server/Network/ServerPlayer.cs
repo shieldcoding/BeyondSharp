@@ -3,11 +3,11 @@
     using System;
 
     using BeyondSharp.Common.Network;
-    using BeyondSharp.Server.Entity;
+    using BeyondSharp.Server.Game.Object;
 
     using Lidgren.Network;
 
-    public class ServerPlayer : ServerEntityController, IPlayer
+    public class ServerPlayer : EntityController, IPlayer
     {
         internal ServerPlayer(NetConnection connection)
         {

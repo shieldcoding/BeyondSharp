@@ -1,8 +1,8 @@
-﻿namespace BeyondSharp.Client.World
+﻿namespace BeyondSharp.Client.Game.Environment
 {
-    using BeyondSharp.Common.World;
+    using BeyondSharp.Common.Game.Environment;
 
-    public class ClientWorld : IWorld
+    public class ClientWorld : IWorld<ClientWorldManager, ClientWorld, ClientWorldTile>
     {
         internal ClientWorld(ClientWorldManager manager)
         {

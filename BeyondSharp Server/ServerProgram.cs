@@ -18,7 +18,9 @@ namespace BeyondSharp.Server
         public static void Main(string[] arguments)
         {
             if (Initialize(arguments))
+            {
                 Engine.Run();
+            }
 
             SaveConfiguration();
 
@@ -28,7 +30,7 @@ namespace BeyondSharp.Server
                 Console.WriteLine(Localization.Engine.PauseOnExit);
                 Console.ReadKey();
             }
-            
+
             Console.Write(Localization.Engine.Exit);
         }
 
@@ -42,7 +44,9 @@ namespace BeyondSharp.Server
             Console.WriteLine(Localization.Engine.ProcessedCommandLine);
 
             if (!ProcessConfiguration())
+            {
                 return false;
+            }
 
             Console.WriteLine(Localization.Engine.ProcessedConfiguration);
 

@@ -2,8 +2,8 @@
 {
     using System;
 
-    using BeyondSharp.Client.Entity;
-    using BeyondSharp.Common.Entity;
+    using BeyondSharp.Client.Game.Object;
+    using BeyondSharp.Common.Game.Object;
     using BeyondSharp.Common.Network;
 
     public class ClientPlayer : IPlayer, IEntityController<ClientEntity, ClientEntityComponent>

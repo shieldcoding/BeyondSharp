@@ -1,10 +1,10 @@
-﻿namespace BeyondSharp.Client.Entity
+﻿namespace BeyondSharp.Client.Game.Object
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using BeyondSharp.Common.Entity;
+    using BeyondSharp.Common.Game.Object;
 
     public class ClientEntityManager : ClientEngineComponent, IEntityManager<ClientEntity, ClientEntityComponent>
     {

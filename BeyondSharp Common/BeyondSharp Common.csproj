@@ -41,11 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine.cs" />
-    <Compile Include="Entity\IEntity.cs" />
-    <Compile Include="Entity\IEntityController.cs" />
-    <Compile Include="Entity\IEntityManager.cs" />
+    <Compile Include="Game\Object\IEntity.cs" />
+    <Compile Include="Game\Object\IEntityController.cs" />
+    <Compile Include="Game\Object\IEntityManager.cs" />
     <Compile Include="EngineSide.cs" />
-    <Compile Include="Entity\IEntityComponent.cs" />
+    <Compile Include="Game\Object\IEntityComponent.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Graphics\Image.cs" />
     <Compile Include="Graphics\ImageBlendMethod.cs" />
@@ -55,8 +55,9 @@
     <Compile Include="Network\IPlayer.cs" />
     <Compile Include="Network\CommonNetworkConstants.cs" />
     <Compile Include="Network\NetworkProtocol.cs" />
-    <Compile Include="World\IWorld.cs" />
-    <Compile Include="World\IWorldManager.cs" />
+    <Compile Include="Game\Environment\IWorld.cs" />
+    <Compile Include="Game\Environment\IWorldManager.cs" />
+    <Compile Include="Game\Environment\IWorldTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">

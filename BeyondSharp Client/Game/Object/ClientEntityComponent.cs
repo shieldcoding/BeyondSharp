@@ -1,6 +1,6 @@
-﻿namespace BeyondSharp.Client.Entity
+﻿namespace BeyondSharp.Client.Game.Object
 {
-    using BeyondSharp.Common.Entity;
+    using BeyondSharp.Common.Game.Object;
 
     public class ClientEntityComponent : IEntityComponent<ClientEntity, ClientEntityComponent>
     {

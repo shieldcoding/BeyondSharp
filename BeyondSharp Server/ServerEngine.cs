@@ -5,7 +5,7 @@
     using System.Security.Permissions;
 
     using BeyondSharp.Common;
-    using BeyondSharp.Server.Entity;
+    using BeyondSharp.Server.Game.Object;
     using BeyondSharp.Server.Network;
 
     public class ServerEngine : Engine<ServerEngineComponent>
@@ -21,14 +21,14 @@
 
         public ServerNetworkManager NetworkManager { get; private set; }
 
-        public ServerEntityManager EntityManager { get; private set; }
+        public EntityManager EntityManager { get; private set; }
 
         public bool IsRuntimeActive { get; private set; }
 
         internal void Initialize()
         {
             NetworkManager = new ServerNetworkManager(this);
-            EntityManager = new ServerEntityManager(this);
+            EntityManager = new EntityManager(this);
         }
 
         internal void Run()
