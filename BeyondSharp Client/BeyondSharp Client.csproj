@@ -59,9 +59,9 @@
     <Compile Include="Network\ClientNetworkManager.cs" />
     <Compile Include="Network\ClientNetworkProcessor.cs" />
     <Compile Include="Network\ClientPlayer.cs" />
-    <Compile Include="Game\Environment\ClientWorld.cs" />
-    <Compile Include="Game\Environment\ClientWorldManager.cs" />
-    <Compile Include="Game\Environment\ClientWorldTile.cs" />
+    <Compile Include="Game\Map\ClientWorld.cs" />
+    <Compile Include="Game\Map\ClientWorldManager.cs" />
+    <Compile Include="Game\Map\ClientWorldTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Awesomium.Core, Version=1.7.5.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86" />

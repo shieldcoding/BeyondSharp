@@ -40,7 +40,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine.cs" />
+    <Compile Include="Data\ISerializable.cs" />
+    <Compile Include="CommonEngine.cs" />
     <Compile Include="Game\Object\IEntity.cs" />
     <Compile Include="Game\Object\IEntityController.cs" />
     <Compile Include="Game\Object\IEntityManager.cs" />
@@ -55,9 +56,9 @@
     <Compile Include="Network\IPlayer.cs" />
     <Compile Include="Network\CommonNetworkConstants.cs" />
     <Compile Include="Network\NetworkProtocol.cs" />
-    <Compile Include="Game\Environment\IWorld.cs" />
-    <Compile Include="Game\Environment\IWorldManager.cs" />
-    <Compile Include="Game\Environment\IWorldTile.cs" />
+    <Compile Include="Game\Map\IWorld.cs" />
+    <Compile Include="Game\Map\IWorldManager.cs" />
+    <Compile Include="Game\Map\IWorldTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">

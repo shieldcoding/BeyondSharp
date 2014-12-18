@@ -23,7 +23,7 @@
         /// <returns>All engine components owned by the engine.</returns>
         public IEnumerable<TEngineComponent> GetComponents()
         {
-            return Components;
+            return Components.ToList();
         }
 
         public void RegisterComponent(TEngineComponent engineComponent)

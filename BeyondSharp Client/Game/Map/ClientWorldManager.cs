@@ -1,17 +1,17 @@
-﻿namespace BeyondSharp.Server.Game.Environment
+﻿namespace BeyondSharp.Client.Game.Environment
 {
     using System;
 
-    using BeyondSharp.Common.Game.Environment;
+    using BeyondSharp.Common.Game.Map;
 
-    public class WorldManager : ServerEngineComponent, IWorldManager<WorldManager, World, WorldTile>
+    public class ClientWorldManager : ClientEngineComponent, IWorldManager<ClientWorldManager, ClientWorld, ClientWorldTile>
     {
-        public WorldManager(ServerEngine engine)
+        public ClientWorldManager(ClientEngine engine)
             : base(engine)
         {
         }
 
-        public World World { get; private set; }
+        public ClientWorld World { get; private set; }
 
         public override void Initialize()
         {
