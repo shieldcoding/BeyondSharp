@@ -15,6 +15,10 @@
 
         public abstract void Initialize();
 
+        protected virtual void OnRuntimeReset()
+        {
+        }
+
         public abstract void Update(TimeSpan elapsedTime);
     }
 }

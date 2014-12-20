@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -65,7 +65,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="BeyondSharp Server_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +84,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Engine.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Program.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Program.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Network.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,7 +98,6 @@
     <Compile Include="Network\ServerNetworkManager.cs" />
     <Compile Include="Network\ServerNetworkProcessor.cs" />
     <Compile Include="Network\ServerPlayer.cs" />
-    <Compile Include="ServerConstants.cs" />
     <Compile Include="ServerEngine.cs" />
     <Compile Include="ServerEngineComponent.cs" />
     <Compile Include="ServerProgram.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Game\Map\ServerWorld.cs" />
     <Compile Include="Game\Map\ServerWorldManager.cs" />
     <Compile Include="Game\Map\ServerWorldTile.cs" />
+    <Compile Include="ServerProgramState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">
@@ -110,6 +114,9 @@
     </Reference>
     <Reference Include="Lidgren.Network">
       <HintPath>..\Dependencies\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -125,6 +132,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Engine.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Program.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Program.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Network.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Network.Designer.cs</LastGenOutput>
@@ -132,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Object\Component\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">

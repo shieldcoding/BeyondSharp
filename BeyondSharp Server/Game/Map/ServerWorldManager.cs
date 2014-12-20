@@ -18,10 +18,17 @@
             throw new NotImplementedException();
         }
 
+        protected override void OnRuntimeReset()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Update(TimeSpan elapsedTime)
         {
             throw new NotImplementedException();
         }
+
+
 
         public ServerWorld LoadWorldFromFile(string path)
         {

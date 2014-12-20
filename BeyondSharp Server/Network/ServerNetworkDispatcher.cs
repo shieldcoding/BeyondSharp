@@ -8,6 +8,7 @@
     using System.Linq;
 
     using BeyondSharp.Common.Network;
+    using BeyondSharp.Server.Game.Map;
 
     using Lidgren.Network;
 
@@ -58,6 +59,13 @@
 
             var message = CreateMessage(NetworkProtocol.ConnectAccept);
             DispatchMessage(message, player);
+        }
+
+        internal void DispatchWorldDataMessage(IEnumerable<ServerPlayer> players, IEnumerable<ServerWorldTile> tiles)
+        {
+            var message = CreateMessage(NetworkProtocol.WorldData);
+
+            DispatchMessage(message, players);
         }
     }
 }

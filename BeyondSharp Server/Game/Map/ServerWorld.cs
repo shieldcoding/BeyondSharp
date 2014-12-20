@@ -1,9 +1,16 @@
 ﻿namespace BeyondSharp.Server.Game.Map
 {
+    using System;
+
     using BeyondSharp.Common.Game.Map;
+
+    using Newtonsoft.Json;
 
     public class ServerWorld : IWorld<ServerWorldManager, ServerWorld, ServerWorldTile>
     {
+        private ServerWorldTile[,] tiles;
+
+        [JsonIgnore]
         public ServerWorldManager Manager { get; private set; }
 
         public int Width { get; private set; }
@@ -12,24 +19,32 @@
 
         public ServerWorldTile GetTile(int x, int y)
         {
-            throw new System.NotImplementedException();
+            if (x < 0 || x >= Width)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (y < 0 || y >= Height)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return tiles[x, y];
         }
 
+        /// <summary>
+        ///     Initializes the world from the given parameters and allocates the tile array.
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         internal void Initialize(ServerWorldManager manager, int width, int height)
         {
             Manager = manager;
             Width = width;
             Height = height;
-        }
 
-        public byte[] Serialize()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Deserialize(byte[] data)
-        {
-            throw new System.NotImplementedException();
+            tiles = new ServerWorldTile[Width, Height];
         }
     }
 }

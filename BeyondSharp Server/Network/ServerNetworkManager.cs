@@ -40,6 +40,11 @@
             Server.Start();
         }
 
+        protected override void OnRuntimeReset()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Update(TimeSpan elapsedTime)
         {
             NetIncomingMessage message = null;

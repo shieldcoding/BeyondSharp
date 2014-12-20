@@ -61,74 +61,11 @@ namespace BeyondSharp.Server.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The program has exited..
+        ///   Looks up a localized string similar to Now starting the designated runtime..
         /// </summary>
-        internal static string Exit {
+        internal static string StartRuntime {
             get {
-                return ResourceManager.GetString("Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration file does not exist, using default configuration..
-        /// </summary>
-        internal static string NoConfiguration {
-            get {
-                return ResourceManager.GetString("NoConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The program has reached the end of the execution thread, press any key to terminate..
-        /// </summary>
-        internal static string PauseOnExit {
-            get {
-                return ResourceManager.GetString("PauseOnExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Command-line arguments have been processed..
-        /// </summary>
-        internal static string ProcessedCommandLine {
-            get {
-                return ResourceManager.GetString("ProcessedCommandLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration file has been processed..
-        /// </summary>
-        internal static string ProcessedConfiguration {
-            get {
-                return ResourceManager.GetString("ProcessedConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reading the program&apos;s command-line..
-        /// </summary>
-        internal static string ReadingCommandLine {
-            get {
-                return ResourceManager.GetString("ReadingCommandLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reading the program&apos;s configuration..
-        /// </summary>
-        internal static string ReadingConfiguration {
-            get {
-                return ResourceManager.GetString("ReadingConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving the program&apos;s configuration..
-        /// </summary>
-        internal static string SavingConfiguration {
-            get {
-                return ResourceManager.GetString("SavingConfiguration", resourceCulture);
+                return ResourceManager.GetString("StartRuntime", resourceCulture);
             }
         }
     }

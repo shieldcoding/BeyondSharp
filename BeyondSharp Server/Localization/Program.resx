@@ -117,7 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="StartRuntime" xml:space="preserve">
-    <value>Now starting the designated runtime.</value>
+  <data name="Exit" xml:space="preserve">
+    <value>The program has exited.</value>
+  </data>
+  <data name="LoggerStarted" xml:space="preserve">
+    <value>The server's logger has been started.</value>
+  </data>
+  <data name="NoConfiguration" xml:space="preserve">
+    <value>Configuration file does not exist, using default configuration.</value>
+  </data>
+  <data name="PauseOnExit" xml:space="preserve">
+    <value>The program has reached the end of the execution thread, press any key to terminate.</value>
+  </data>
+  <data name="ProcessedCommandLine" xml:space="preserve">
+    <value>Command-line arguments have been processed.</value>
+  </data>
+  <data name="ProcessedConfiguration" xml:space="preserve">
+    <value>Configuration file has been processed.</value>
+  </data>
+  <data name="ReadingCommandLine" xml:space="preserve">
+    <value>Reading the program's command-line.</value>
+  </data>
+  <data name="ReadingConfiguration" xml:space="preserve">
+    <value>Reading the program's configuration.</value>
+  </data>
+  <data name="SavingConfiguration" xml:space="preserve">
+    <value>Saving the program's configuration.</value>
   </data>
 </root>

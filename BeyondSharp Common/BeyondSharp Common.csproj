@@ -40,8 +40,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ISerializable.cs" />
-    <Compile Include="CommonEngine.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Game\Object\IEntity.cs" />
     <Compile Include="Game\Object\IEntityController.cs" />
     <Compile Include="Game\Object\IEntityManager.cs" />
@@ -74,7 +73,9 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

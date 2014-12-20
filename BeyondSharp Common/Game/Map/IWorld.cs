@@ -1,7 +1,5 @@
 ﻿namespace BeyondSharp.Common.Game.Map
 {
-    using BeyondSharp.Common.Data;
-
     public interface IWorld<TWorldManager, TWorld, TWorldTile>
         where TWorldManager : IWorldManager<TWorldManager, TWorld, TWorldTile>
         where TWorld : IWorld<TWorldManager, TWorld, TWorldTile>

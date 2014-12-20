@@ -1,6 +1,7 @@
 ﻿namespace BeyondSharp.Server.Game.Map
 {
     using System;
+    using System.IO;
     using System.Linq;
 
     using BeyondSharp.Common.Game.Map;
@@ -16,6 +17,10 @@
         public ServerWorldTile(ServerWorld serverWorld, int x, int y)
         {
             
+        }
+
+        public void Serialize(MemoryStream stream)
+        {
         }
     }
 }
