@@ -27,9 +27,6 @@
 
             switch (message.MessageType)
             {
-                case NetIncomingMessageType.ConnectionApproval:
-                    ProcessConnectionApprovalMessage();
-                    break;
                 case NetIncomingMessageType.StatusChanged:
                     ProcessStatusChangedMessage();
                     break;
@@ -41,13 +38,30 @@
             CurrentMessage = null;
             CurrentPlayer = null;
         }
-
-        private void ProcessConnectionApprovalMessage()
-        {
-        }
-
+        
         private void ProcessStatusChangedMessage()
         {
+            var status = (NetConnectionStatus)CurrentMessage.ReadByte();
+
+            switch (status)
+            {
+                case NetConnectionStatus.Connected:
+                    ProcessConnectedStatusMessage();
+                    break;
+                case NetConnectionStatus.Disconnected:
+                    ProcessDisconnectedStatusMessage();
+                    break;
+            }
+        }
+
+        private void ProcessConnectedStatusMessage()
+        {
+            Manager.OnPlayerConnecting(CurrentPlayer);
+        }
+
+        private void ProcessDisconnectedStatusMessage()
+        {
+            Manager.OnPlayerDisconnect(CurrentPlayer);
         }
 
         private void ProcessDataMessage()

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Net;
 
+    using BeyondSharp.Common.Event;
     using BeyondSharp.Common.Network;
 
     using Lidgren.Network;
@@ -27,6 +28,10 @@
         internal ServerNetworkProcessor Processor { get; private set; }
 
         public NetPeerConfiguration Configuration { get; private set; }
+
+        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerConnected;
+
+        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerDisconnected;
 
         public override void Initialize()
         {
@@ -125,12 +130,16 @@
         {
         }
 
-        internal void OnPlayerConnected(ServerPlayer connection)
+        internal void OnPlayerConnected(ServerPlayer player)
         {
+            if (PlayerConnected != null)
+                PlayerConnected(this, new ValueEventArgs<ServerPlayer>(player));
         }
 
-        internal void OnPlayerDisconnect(ServerPlayer connection)
+        internal void OnPlayerDisconnect(ServerPlayer player)
         {
+            if (PlayerDisconnected != null)
+                PlayerDisconnected(this, new ValueEventArgs<ServerPlayer>(player));
         }
     }
 }

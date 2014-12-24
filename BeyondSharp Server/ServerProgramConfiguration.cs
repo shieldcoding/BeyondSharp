@@ -26,42 +26,41 @@
 
         public class RuntimeConfiguration
         {
-            private const string DefaultApplicationBase = "Runtime";
+            private const string DefaultApplicationDirectory = "Runtime";
 
-            private const bool DefaultRestrictRuntimeDomain = true;
+            private const string DefaultApplicationFile = "";
 
-            private const string DefaultRuntimeDataDirectory = "Runtime Data";
+            private const string DefaultDataDirectory = "Runtime Data";
 
             public RuntimeConfiguration()
             {
-                ApplicationBase = DefaultApplicationBase;
-                RuntimeAssembly = null;
-                RestrictRuntimeDomain = DefaultRestrictRuntimeDomain;
-                RuntimeDataDirectory = DefaultRuntimeDataDirectory;
+                ApplicationDirectory = DefaultApplicationDirectory;
+                ApplicationFile = DefaultApplicationFile;
+                DataDirectory = DefaultDataDirectory;
             }
 
             [JsonProperty]
-            [DefaultValue(DefaultApplicationBase)]
-            public string ApplicationBase { get; private set; }
+            [DefaultValue(DefaultApplicationDirectory)]
+            public string ApplicationDirectory { get; private set; }
 
             [JsonProperty]
-            public string RuntimeAssembly { get; private set; }
+            [DefaultValue(DefaultApplicationFile)]
+            public string ApplicationFile { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(DefaultRestrictRuntimeDomain)]
-            public bool RestrictRuntimeDomain { get; private set; }
-
-            [JsonProperty]
-            [DefaultValue(DefaultRuntimeDataDirectory)]
-            public string RuntimeDataDirectory { get; private set; }
+            [DefaultValue(DefaultDataDirectory)]
+            public string DataDirectory { get; private set; }
 
             internal bool Validate()
             {
-                if (string.IsNullOrEmpty(ApplicationBase))
-                    ApplicationBase = DefaultApplicationBase;
+                if (string.IsNullOrEmpty(ApplicationDirectory))
+                    ApplicationDirectory = DefaultApplicationDirectory;
 
-                if (string.IsNullOrEmpty(RuntimeDataDirectory))
-                    RuntimeDataDirectory = DefaultRuntimeDataDirectory;
+                if (string.IsNullOrEmpty(ApplicationFile))
+                    ApplicationFile = DefaultApplicationFile;
+
+                if (string.IsNullOrEmpty(DataDirectory))
+                    DataDirectory = DefaultDataDirectory;
                 
                 return true;
             }

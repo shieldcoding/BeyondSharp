@@ -78,6 +78,7 @@
     <Compile Include="Game\Object\EntityComponent.cs" />
     <Compile Include="Game\Object\EntityController.cs" />
     <Compile Include="Game\Object\EntityManager.cs" />
+    <Compile Include="Game\ApplicationRuntime.cs" />
     <Compile Include="Graphics\ServerImage.cs" />
     <Compile Include="Localization\Engine.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -163,6 +164,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

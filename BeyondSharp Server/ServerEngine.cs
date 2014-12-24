@@ -2,20 +2,20 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
     using System.Threading.Tasks;
-
     using BeyondSharp.Common;
+    using BeyondSharp.Server.Game;
     using BeyondSharp.Server.Game.Object;
     using BeyondSharp.Server.Network;
 
     public class ServerEngine : Engine<ServerEngineComponent>
     {
         private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
-
-        private AppDomain runtimeDomain = null;
 
         private CancellationTokenSource runtimeCancellationTokenSource = null;
         
@@ -30,98 +30,75 @@
 
         public EntityManager EntityManager { get; private set; }
 
+        public ApplicationRuntime Runtime { get; private set; }
+
         public bool IsRuntimeActive { get; private set; }
         
-        internal void Initialize()
+        internal bool Initialize()
         {
             NetworkManager = new ServerNetworkManager(this);
             EntityManager = new EntityManager(this);
+
+            return LoadRuntime();
+        }
+
+        private bool LoadRuntime()
+        {
+            var runtimePath = Path.Combine(ServerProgram.Configuration.Runtime.ApplicationDirectory, ServerProgram.Configuration.Runtime.ApplicationFile);
+
+            if (!File.Exists(runtimePath))
+            {
+                ServerProgram.Logger.Fatal(Localization.Engine.ApplicationFileNotFound);
+                return false;
+            }
+
+            try
+            {
+                var assemblyData = File.ReadAllBytes(runtimePath);
+                var assembly = AppDomain.CurrentDomain.Load(assemblyData);
+
+                var runtimeCandidates = assembly.GetTypes()
+                    .Where(t => typeof(ApplicationRuntime).IsAssignableFrom(t))
+                    .Where(t => !t.IsAbstract && t.IsPublic)
+                    .ToList();
+
+                if (runtimeCandidates.Count == 0)
+                {
+                    ServerProgram.Logger.Fatal(Localization.Engine.ApplicationFileNoRuntime);
+                    return false;
+                }
+
+                if (runtimeCandidates.Count > 1)
+                {
+                    ServerProgram.Logger.Warn(Localization.Engine.ApplicationFileMultipleRuntimes);
+                }
+
+                var runtimeType = runtimeCandidates.First();
+                Runtime = (ApplicationRuntime) Activator.CreateInstance(runtimeType);
+
+                return true;
+            }
+            catch (BadImageFormatException)
+            {
+                ServerProgram.Logger.Fatal(Localization.Engine.ApplicationFileInvalid);
+            }
+
+            return false;
         }
 
         internal void Run()
         {
-            while (ServerProgram.State == ServerProgramState.Running)
-            {
-                runtimeCancellationTokenSource = new CancellationTokenSource();
+            runtimeCancellationTokenSource = new CancellationTokenSource();
 
-                runtimeTask = Task.Factory.StartNew(() => StartRuntime(), runtimeCancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                runtimeTask.Wait();
-            }
-        }
-        
-        private bool StartRuntime()
-        {
-            if (!LoadRuntime())
-                return false;
-
-            runtimeDomain.GetAssemblies();
-
-            return true;
-        }
-
-
-        private bool LoadRuntime()
-        {
-            if (!UnloadRuntime())
-                return false;
-            
-            var runtimeDomainSetup = new AppDomainSetup
-                {
-                    ApplicationBase = Path.GetFullPath(ServerProgram.Configuration.Runtime.ApplicationBase)
-                };
-
-            var runtimeDomainPermissions = new PermissionSet(PermissionState.Unrestricted);
-
-            if (ServerProgram.Configuration.Runtime.RestrictRuntimeDomain)
-            {
-                runtimeDomainPermissions = new PermissionSet(PermissionState.None);
-
-                var executionPermission = new SecurityPermission(SecurityPermissionFlag.Execution);
-                runtimeDomainPermissions.AddPermission(executionPermission);
-
-                var dataDirectoryPermission = new FileIOPermission(FileIOPermissionAccess.AllAccess, Path.GetFullPath(ServerProgram.Configuration.Runtime.RuntimeDataDirectory));
-                runtimeDomainPermissions.AddPermission(dataDirectoryPermission);
-            }
-
-            runtimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName, null, runtimeDomainSetup, runtimeDomainPermissions);
-
-            return true;
-        }
-
-        private bool UnloadRuntime()
-        {
-            if (runtimeDomain == null)
-                return true;
-
-            if (!UnloadRuntimeDomain())
-                return false;
-
-            runtimeDomain = null;
-
-            return true;
-        }
-        
-        private bool UnloadRuntimeDomain()
-        {
-            if (runtimeDomain == null)
-                return false;
-
-            try
-            {
-                AppDomain.Unload(runtimeDomain);
-            }
-            catch (CannotUnloadAppDomainException)
-            {
-                return false;
-            }
-
-            return true;
+            runtimeTask = Task.Factory.StartNew(ExecuteRuntimeUpdateLoop, runtimeCancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            runtimeTask.Wait();
         }
 
         private void ExecuteRuntimeUpdateLoop()
         {
-            var lastUpdate = DateTime.Now;
+            Runtime.Initialize();
 
+            var lastUpdate = DateTime.Now;
             while (ServerProgram.State == ServerProgramState.Running && !runtimeCancellationTokenSource.IsCancellationRequested)
             {
                 var elapsedTime = DateTime.Now - lastUpdate;
@@ -133,54 +110,10 @@
 
         public void StopRuntime()
         {
-        }
-
-
-
-        /*
-
-
-        /// <summary>
-        ///     Stops and restarts all engine components, clearing out the runtime in the process before reloading it.
-        /// </summary>
-        internal void ResetPlatform()
-        {
-            if (IsRuntimeActive)
+            if (runtimeCancellationTokenSource != null && !runtimeCancellationTokenSource.IsCancellationRequested)
             {
-                UnloadRuntime();
+                runtimeCancellationTokenSource.Cancel();
             }
-
-            LoadRuntime();
         }
-
-        /// <summary>
-        ///     Loads the runtime into the application domain.
-        /// </summary>
-        private void LoadRuntime()
-        {
-            // The runtime has to be inactive before we can load it.
-            if (IsRuntimeActive)
-            {
-                throw new Exception();
-            }
-
-            // Creating the runtime security permissions.
-            var permissions = new PermissionSet(PermissionState.None);
-
-            var runtimeDomainSetup = new AppDomainSetup
-                                         {
-                                             ApplicationBase = ServerProgram.Configuration.Runtime.Path
-                                         };
-
-            // Creating the runtime domain.
-            runtimeDomain = AppDomain.CreateDomain(RuntimeDomainFriendlyName);
-
-            IsRuntimeActive = true;
-        }
-
-        private void UnloadRuntime()
-        {
-            AppDomain.Unload(runtimeDomain);
-        }*/
     }
 }

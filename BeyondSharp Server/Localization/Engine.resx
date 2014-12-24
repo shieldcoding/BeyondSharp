@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationFileInvalid" xml:space="preserve">
+    <value>The application file does not appear to be a valid assembly and cannot be loaded.</value>
+  </data>
+  <data name="ApplicationFileMultipleRuntimes" xml:space="preserve">
+    <value>The application file contains multiple runtimes, only the first one will be loaded.</value>
+  </data>
+  <data name="ApplicationFileNoRuntime" xml:space="preserve">
+    <value>The application file does not contain any valid runtimes.</value>
+  </data>
+  <data name="ApplicationFileNotFound" xml:space="preserve">
+    <value>The application file could not be found.</value>
+  </data>
   <data name="StartRuntime" xml:space="preserve">
     <value>Now starting the designated runtime.</value>
   </data>

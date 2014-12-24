@@ -61,6 +61,42 @@ namespace BeyondSharp.Server.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application file does not appear to be a valid assembly and cannot be loaded..
+        /// </summary>
+        internal static string ApplicationFileInvalid {
+            get {
+                return ResourceManager.GetString("ApplicationFileInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application file contains multiple runtimes, only the first one will be loaded..
+        /// </summary>
+        internal static string ApplicationFileMultipleRuntimes {
+            get {
+                return ResourceManager.GetString("ApplicationFileMultipleRuntimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application file does not contain any valid runtimes..
+        /// </summary>
+        internal static string ApplicationFileNoRuntime {
+            get {
+                return ResourceManager.GetString("ApplicationFileNoRuntime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application file could not be found..
+        /// </summary>
+        internal static string ApplicationFileNotFound {
+            get {
+                return ResourceManager.GetString("ApplicationFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now starting the designated runtime..
         /// </summary>
         internal static string StartRuntime {
