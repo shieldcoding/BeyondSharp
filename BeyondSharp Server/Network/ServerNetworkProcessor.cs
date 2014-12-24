@@ -25,7 +25,7 @@
         {
             CurrentMessage = message;
             CurrentPlayer = Manager.GetOrRegisterPlayer(message.SenderConnection);
-
+            
             switch (message.MessageType)
             {
                 case NetIncomingMessageType.StatusChanged:
@@ -48,10 +48,10 @@
             {
                 case NetConnectionStatus.Connected:
                     ProcessConnectedStatusMessage();
-                    break;
+                    return;
                 case NetConnectionStatus.Disconnected:
                     ProcessDisconnectedStatusMessage();
-                    break;
+                    return;
             }
         }
 
@@ -67,7 +67,7 @@
 
         private void ProcessDisconnectedStatusMessage()
         {
-            string baseLogMessage = Localization.Network.PlayerDisconnected;
+            var baseLogMessage = Localization.Network.PlayerDisconnected;
 
             if (CurrentPlayer.IsAuthenticated)
                 baseLogMessage = Localization.Network.PlayerDisconnectedWithUsername;
@@ -81,47 +81,59 @@
             Manager.OnPlayerDisconnect(CurrentPlayer);
         }
 
-        private void ProcessDataMessage()
+        private bool ProcessDataMessage()
         {
             var protocol = (NetworkProtocol)CurrentMessage.ReadInt16();
 
             switch (protocol)
             {
                 case NetworkProtocol.ConnectionRequest:
-                    ProcessConnectionRequest();
-                    return;
+                    return ProcessConnectionRequest();
                 case NetworkProtocol.ConnectionAuthenticate:
-                    ProcessConnectionAuthenticate();
-                    return;
+                    return ProcessConnectionAuthenticate();
+                case NetworkProtocol.ConnectionAccepted:
+                    return ProcessConnectionAccepted();
             }
+
+            return false;
         }
 
-        private void ProcessConnectionRequest()
+        private bool ProcessConnectionRequest()
         {
             var version = CurrentMessage.ReadDouble();
 
             if (Math.Abs(version - CommonNetworkConstants.Version) > 0)
             {
                 CurrentPlayer.Disconnect(Network.DisconnectProtocolMismatch);
-                return;
+                return false;
             }
 
             Manager.Dispatcher.DispatchConnectionAuthMessage(CurrentPlayer);
+            return true;
         }
 
-        private void ProcessConnectionAuthenticate()
+        private bool ProcessConnectionAuthenticate()
         {
             var username = CurrentMessage.ReadString();
             var sessionToken = Guid.Parse(CurrentMessage.ReadString());
             var hardwareToken = Guid.Parse(CurrentMessage.ReadString());
 
-            // Validate the session token with the login server.
+            //TODO: Validate the session token with the login server.
+
+            CurrentPlayer.Username = username;
+            CurrentPlayer.SessionToken = sessionToken;
+            CurrentPlayer.HardwareToken = hardwareToken;
+            CurrentPlayer.IsAuthenticated = true;
 
             Manager.Dispatcher.DispatchConnectionAcceptedMessage(CurrentPlayer);
+            return true;
         }
 
-        private void ProcessConnectionAccepted()
+        private bool ProcessConnectionAccepted()
         {
+            if (!CurrentPlayer.IsAuthenticated)
+                return false;
+
             var logMessage = Localization.Network.PlayerConnected
                 .FormatKeyWithValue("username", CurrentPlayer.Username)
                 .FormatKeyWithValue("ip", CurrentPlayer.Connection.RemoteEndPoint.ToString());
@@ -129,6 +141,7 @@
             ServerProgram.Logger.Info(logMessage);
 
             Manager.OnPlayerConnected(CurrentPlayer);
+            return true;
         }
     }
 }

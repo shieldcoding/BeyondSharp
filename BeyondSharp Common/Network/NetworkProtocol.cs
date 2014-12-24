@@ -24,7 +24,7 @@
         ///     Sent by the server when the client is clear to connect, and is then sent back by the client to notify the server
         ///     that the client is ready.
         /// </summary>
-        ConnectAccept,
+        ConnectionAccepted,
 
         WorldData,
 

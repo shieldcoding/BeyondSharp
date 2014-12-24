@@ -57,7 +57,7 @@
                 throw new ArgumentNullException();
             }
 
-            var message = CreateMessage(NetworkProtocol.ConnectAccept);
+            var message = CreateMessage(NetworkProtocol.ConnectionAccepted);
             DispatchMessage(message, player);
         }
 
