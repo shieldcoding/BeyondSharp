@@ -68,5 +68,41 @@ namespace BeyondSharp.Server.Localization {
                 return ResourceManager.GetString("DisconnectProtocolMismatch", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {username} has connected. {ip}.
+        /// </summary>
+        internal static string PlayerConnected {
+            get {
+                return ResourceManager.GetString("PlayerConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A player is connecting. {ip}.
+        /// </summary>
+        internal static string PlayerConnecting {
+            get {
+                return ResourceManager.GetString("PlayerConnecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {username} has disconnected. {ip}.
+        /// </summary>
+        internal static string PlayerDisconnected {
+            get {
+                return ResourceManager.GetString("PlayerDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A player has disconnected. {ip}.
+        /// </summary>
+        internal static string PlayerDisconnectedWithUsername {
+            get {
+                return ResourceManager.GetString("PlayerDisconnectedWithUsername", resourceCulture);
+            }
+        }
     }
 }

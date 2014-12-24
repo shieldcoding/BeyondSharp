@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Engine.cs" />
     <Compile Include="Event\ValueEventArgs.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Game\Object\IEntity.cs" />
     <Compile Include="Game\Object\IEntityController.cs" />
     <Compile Include="Game\Object\IEntityManager.cs" />

@@ -2,6 +2,7 @@
 {
     using System;
 
+    using BeyondSharp.Common.Extensions;
     using BeyondSharp.Common.Network;
     using BeyondSharp.Server.Localization;
 
@@ -56,11 +57,27 @@
 
         private void ProcessConnectedStatusMessage()
         {
+            var logMessage = Localization.Network.PlayerConnecting
+                .FormatKeyWithValue("ip", CurrentPlayer.Connection.RemoteEndPoint.ToString());
+
+            ServerProgram.Logger.Info(logMessage);
+
             Manager.OnPlayerConnecting(CurrentPlayer);
         }
 
         private void ProcessDisconnectedStatusMessage()
         {
+            string baseLogMessage = Localization.Network.PlayerDisconnected;
+
+            if (CurrentPlayer.IsAuthenticated)
+                baseLogMessage = Localization.Network.PlayerDisconnectedWithUsername;
+
+            var logMessage = baseLogMessage
+                .FormatKeyWithValue("username", CurrentPlayer.Username)
+                .FormatKeyWithValue("ip", CurrentPlayer.Connection.RemoteEndPoint.ToString());
+
+            ServerProgram.Logger.Info(logMessage);
+
             Manager.OnPlayerDisconnect(CurrentPlayer);
         }
 
@@ -83,7 +100,7 @@
         {
             var version = CurrentMessage.ReadDouble();
 
-            if (version != CommonNetworkConstants.Version)
+            if (Math.Abs(version - CommonNetworkConstants.Version) > 0)
             {
                 CurrentPlayer.Disconnect(Network.DisconnectProtocolMismatch);
                 return;
@@ -105,6 +122,12 @@
 
         private void ProcessConnectionAccepted()
         {
+            var logMessage = Localization.Network.PlayerConnected
+                .FormatKeyWithValue("username", CurrentPlayer.Username)
+                .FormatKeyWithValue("ip", CurrentPlayer.Connection.RemoteEndPoint.ToString());
+
+            ServerProgram.Logger.Info(logMessage);
+
             Manager.OnPlayerConnected(CurrentPlayer);
         }
     }
