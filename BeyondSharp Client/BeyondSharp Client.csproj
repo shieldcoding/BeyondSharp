@@ -55,6 +55,7 @@
     <Compile Include="Game\Object\ClientEntityComponent.cs" />
     <Compile Include="Game\Object\ClientEntityManager.cs" />
     <Compile Include="Graphics\ClientImage.cs" />
+    <Compile Include="Input\InputManager.cs" />
     <Compile Include="Network\ClientNetworkDispatcher.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
     <Compile Include="Network\ClientNetworkProcessor.cs" />

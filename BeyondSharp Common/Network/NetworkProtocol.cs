@@ -26,6 +26,9 @@
         /// </summary>
         ConnectionAccepted,
 
+        /// <summary>
+        ///     Sent by the server to the client to update the observed data of the current world the client is on.
+        /// </summary>
         WorldData,
 
         WorldTimeSync,

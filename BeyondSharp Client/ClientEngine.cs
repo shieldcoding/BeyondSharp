@@ -3,6 +3,8 @@
     using System;
     using System.Drawing;
 
+    using BeyondSharp.Client.Input;
+    using BeyondSharp.Client.Network;
     using BeyondSharp.Common;
 
     using OpenTK;
@@ -15,10 +17,16 @@
             Side = EngineSide.Client;
         }
 
+        internal ClientNetworkManager NetworkManager { get; private set; }
+
+        internal ClientInputManager InputManager { get; private set; }
+
         internal GameWindow Window { get; private set; }
 
         internal void Initialize()
         {
+            NetworkManager = new ClientNetworkManager(this);
+
             Window = new GameWindow(ClientProgram.Configuration.Graphics.Width, ClientProgram.Configuration.Graphics.Height);
             Window.UpdateFrame += (sender, args) => UpdateFrame(TimeSpan.FromSeconds(args.Time));
             Window.RenderFrame += (sender, args) => RenderFrame(TimeSpan.FromSeconds(args.Time));
@@ -43,13 +51,17 @@
 
         private void UpdateFrame(TimeSpan elapsedTime)
         {
-            GL.ClearColor(Color.AliceBlue);
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            Window.SwapBuffers();
+            NetworkManager.Update(elapsedTime);
+
+            InputManager.Update(elapsedTime);
         }
 
         private void RenderFrame(TimeSpan elapsedTime)
         {
+            GL.ClearColor(Color.AliceBlue);
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+
+            Window.SwapBuffers();
         }
     }
 }

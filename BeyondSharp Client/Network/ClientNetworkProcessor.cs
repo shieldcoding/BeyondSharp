@@ -32,6 +32,26 @@
 
         private void ProcessStatusChanged()
         {
+            var status = (NetConnectionStatus)CurrentMessage.ReadByte();
+
+            switch (status)
+            {
+                case NetConnectionStatus.Connected:
+                    ProcessConnectedStatusMessage();
+                    return;
+                case NetConnectionStatus.Disconnected:
+                    ProcessDisconnectedStatusMessage();
+                    return;
+            }
+        }
+        
+        private void ProcessConnectedStatusMessage()
+        {
+            Manager.Dispatcher.DispatchConnectRequest();
+        }
+
+        private void ProcessDisconnectedStatusMessage()
+        {
         }
 
         private void ProcessDataMessage()
@@ -41,14 +61,44 @@
             switch (protocol)
             {
                 case NetworkProtocol.ConnectionRequest:
-                    ProcessConnectRequest();
+                    ProcessConnectionRequest();
+                    return;
+                case NetworkProtocol.EntityRegister:
+                    ProcessEntityRegister();
+                    return;
+                case NetworkProtocol.EntityUnregister:
+                    ProcessEntityUnregister();
                     return;
             }
         }
 
-        private void ProcessConnectRequest()
+        #region Connection message processing
+
+        private void ProcessConnectionRequest()
         {
             Manager.Dispatcher.DispatchConnectionAuthenticate();
         }
+
+        #endregion
+
+        #region World message processing
+
+        private void ProcessWorldData()
+        {
+        }
+
+        #endregion
+
+        #region Entity message processing
+
+        private void ProcessEntityRegister()
+        {
+        }
+
+        private void ProcessEntityUnregister()
+        {
+        }
+
+        #endregion
     }
 }
