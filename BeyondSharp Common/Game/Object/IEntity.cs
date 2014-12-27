@@ -1,15 +1,17 @@
-﻿namespace BeyondSharp.Common.Game.Object
-{
-    using System;
+﻿#region Usings
 
+using System;
+
+#endregion
+
+namespace BeyondSharp.Common.Game.Object
+{
     public interface IEntity<TEntity, TEntityComponent>
         where TEntity : IEntity<TEntity, TEntityComponent>
         where TEntityComponent : IEntityComponent<TEntity, TEntityComponent>
     {
-        Guid ID { get; }
-
-        string Name { get; }
-
         string Description { get; }
+        Guid ID { get; }
+        string Name { get; }
     }
 }

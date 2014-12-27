@@ -1,14 +1,12 @@
-﻿namespace BeyondSharp.Client.Display
+﻿#region Usings
+
+using System;
+using OpenTK;
+
+#endregion
+
+namespace BeyondSharp.Client.Display
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using OpenTK;
-    using OpenTK.Input;
-
     public class DisplayManager : GameWindow
     {
         public void Initialize()

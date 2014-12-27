@@ -1,21 +1,16 @@
-﻿namespace BeyondSharp.Server.Game.Map
+﻿#region Usings
+
+using System;
+using BeyondSharp.Common.Game.Map;
+using Newtonsoft.Json;
+
+#endregion
+
+namespace BeyondSharp.Server.Game.Map
 {
-    using System;
-
-    using BeyondSharp.Common.Game.Map;
-
-    using Newtonsoft.Json;
-
     public class ServerWorld : IWorld<ServerWorldManager, ServerWorld, ServerWorldTile>
     {
         private ServerWorldTile[,] tiles;
-
-        [JsonIgnore]
-        public ServerWorldManager Manager { get; private set; }
-
-        public int Width { get; private set; }
-
-        public int Height { get; private set; }
 
         public ServerWorldTile GetTile(int x, int y)
         {
@@ -31,6 +26,13 @@
 
             return tiles[x, y];
         }
+
+        public int Height { get; private set; }
+
+        [JsonIgnore]
+        public ServerWorldManager Manager { get; private set; }
+
+        public int Width { get; private set; }
 
         /// <summary>
         ///     Initializes the world from the given parameters and allocates the tile array.

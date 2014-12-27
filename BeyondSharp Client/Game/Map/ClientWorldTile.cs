@@ -1,10 +1,12 @@
-﻿namespace BeyondSharp.Client.Game.Map
+﻿#region Usings
+
+using System;
+using BeyondSharp.Common.Game.Map;
+
+#endregion
+
+namespace BeyondSharp.Client.Game.Map
 {
-    using System;
-    using System.Linq;
-
-    using BeyondSharp.Common.Game.Map;
-
     public class ClientWorldTile : IWorldTile<ClientWorldManager, ClientWorld, ClientWorldTile>
     {
         public ClientWorld World

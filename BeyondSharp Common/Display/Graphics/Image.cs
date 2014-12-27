@@ -1,7 +1,11 @@
-﻿namespace BeyondSharp.Common.Display.Graphics
-{
-    using System.Drawing;
+﻿#region Usings
 
+using System.Drawing;
+
+#endregion
+
+namespace BeyondSharp.Common.Display.Graphics
+{
     public abstract class Image<TImage>
         where TImage : Image<TImage>
     {

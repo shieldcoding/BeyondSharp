@@ -1,17 +1,17 @@
-﻿namespace BeyondSharp.Client.Game.Object
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using BeyondSharp.Common.Game.Object;
+
+#endregion
+
+namespace BeyondSharp.Client.Game.Object
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using BeyondSharp.Common.Game.Object;
-
     public class ClientEntityManager : ClientEngineComponent, IEntityManager<ClientEntity, ClientEntityComponent>
     {
         private readonly List<ClientEntity> _entityList;
-
         private readonly Dictionary<Guid, ClientEntity> _entityLookup;
-
         private readonly object _lock;
 
         internal ClientEntityManager(ClientEngine engine)
@@ -32,6 +32,11 @@
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ClientEntity> GetEntities()
+        {
+            return _entityList;
+        }
+
         public ClientEntity GetEntity(Guid id)
         {
             if (id == default(Guid))
@@ -47,11 +52,6 @@
                 }
                 return null;
             }
-        }
-
-        public IEnumerable<ClientEntity> GetEntities()
-        {
-            return _entityList;
         }
 
         public Guid RegisterEntity(ClientEntity entity)

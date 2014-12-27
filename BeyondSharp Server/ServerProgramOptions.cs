@@ -1,11 +1,14 @@
-﻿namespace BeyondSharp.Server
-{
-    using CommandLine;
+﻿#region Usings
 
+using CommandLine;
+
+#endregion
+
+namespace BeyondSharp.Server
+{
     public class ServerProgramOptions
     {
         private const string DefaultConfigurationPath = "server_configuration.json";
-
         private const bool DefaultPauseOnExit = true;
 
         [Option('c', "configuration", DefaultValue = DefaultConfigurationPath)]

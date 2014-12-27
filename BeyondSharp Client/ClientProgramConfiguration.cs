@@ -1,9 +1,12 @@
-﻿namespace BeyondSharp.Client
+﻿#region Usings
+
+using Newtonsoft.Json;
+using OpenTK;
+
+#endregion
+
+namespace BeyondSharp.Client
 {
-    using Newtonsoft.Json;
-
-    using OpenTK;
-
     public class ClientProgramConfiguration
     {
         internal ClientProgramConfiguration()
@@ -15,11 +18,9 @@
 
         public class GraphicsConfiguration
         {
-            private const int DefaultWidth = 800;
-
             private const int DefaultHeight = 600;
-
             private const VSyncMode DefaultVSyncMode = VSyncMode.On;
+            private const int DefaultWidth = 800;
 
             internal GraphicsConfiguration()
             {
@@ -29,13 +30,13 @@
             }
 
             [JsonProperty]
-            public int Width { get; set; }
-
-            [JsonProperty]
             public int Height { get; set; }
 
             [JsonProperty]
             public VSyncMode VSync { get; set; }
+
+            [JsonProperty]
+            public int Width { get; set; }
         }
     }
 }

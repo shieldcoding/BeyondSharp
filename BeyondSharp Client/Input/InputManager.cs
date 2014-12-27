@@ -1,12 +1,11 @@
-﻿namespace BeyondSharp.Client.Input
+﻿#region Usings
+
+using System;
+
+#endregion
+
+namespace BeyondSharp.Client.Input
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-
     public class InputManager : ClientEngineComponent
     {
         public InputManager(ClientEngine engine)

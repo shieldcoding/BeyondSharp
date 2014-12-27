@@ -5,12 +5,9 @@
         where TWorld : IWorld<TWorldManager, TWorld, TWorldTile>
         where TWorldTile : IWorldTile<TWorldManager, TWorld, TWorldTile>
     {
-        TWorldManager Manager { get; }
-
-        int Width { get; }
-
         int Height { get; }
-
+        TWorldManager Manager { get; }
+        int Width { get; }
         TWorldTile GetTile(int x, int y);
     }
 }

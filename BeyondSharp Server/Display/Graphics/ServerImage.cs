@@ -1,20 +1,17 @@
-﻿namespace BeyondSharp.Server.Display.Graphics
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using BeyondSharp.Common.Display.Graphics;
+
+#endregion
+
+namespace BeyondSharp.Server.Display.Graphics
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-
-    using BeyondSharp.Common.Display.Graphics;
-
     public class ServerImage : Image<ServerImage>
     {
         private readonly List<ImageOperation<ServerImage>> _operations = new List<ImageOperation<ServerImage>>();
-
-        private void StoreImageOperation(ImageOperation<ServerImage> operation)
-        {
-            lock (_operations)
-                _operations.Add(operation);
-        }
 
         /// <summary>
         ///     Creates a blend operation of the source image blended with the supplied image using the supplied method.
@@ -61,6 +58,12 @@
             StoreImageOperation(operation);
 
             return this;
+        }
+
+        private void StoreImageOperation(ImageOperation<ServerImage> operation)
+        {
+            lock (_operations)
+                _operations.Add(operation);
         }
     }
 }

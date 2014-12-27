@@ -1,13 +1,15 @@
-﻿namespace BeyondSharp.Common.Network
-{
-    using System;
+﻿#region Usings
 
+using System;
+
+#endregion
+
+namespace BeyondSharp.Common.Network
+{
     public interface INetworkPlayer
     {
-        string Username { get; }
-
-        Guid SessionToken { get; }
-
         Guid HardwareToken { get; }
+        Guid SessionToken { get; }
+        string Username { get; }
     }
 }

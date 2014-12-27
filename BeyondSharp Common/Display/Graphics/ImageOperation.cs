@@ -1,9 +1,12 @@
-﻿namespace BeyondSharp.Common.Display.Graphics
+﻿#region Usings
+
+using System.Drawing;
+using Newtonsoft.Json;
+
+#endregion
+
+namespace BeyondSharp.Common.Display.Graphics
 {
-    using System.Drawing;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     ///     The server stores changes to images as operations to be executed by the client.
     /// </summary>

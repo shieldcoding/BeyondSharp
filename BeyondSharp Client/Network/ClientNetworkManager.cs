@@ -1,11 +1,13 @@
-﻿namespace BeyondSharp.Client.Network
+﻿#region Usings
+
+using System;
+using BeyondSharp.Common.Network;
+using Lidgren.Network;
+
+#endregion
+
+namespace BeyondSharp.Client.Network
 {
-    using System;
-
-    using BeyondSharp.Common.Network;
-
-    using Lidgren.Network;
-
     internal class ClientNetworkManager : ClientEngineComponent, INetworkManager
     {
         public ClientNetworkManager(ClientEngine engine)
@@ -16,18 +18,11 @@
         }
 
         public NetClient Client { get; private set; }
-
         public NetConnection Connection { get; private set; }
-
-        public bool IsConnected { get; private set; }
-
         public ClientNetworkDispatcher Dispatcher { get; private set; }
-
-        public ClientNetworkProcessor Processor { get; private set; }
-
+        public bool IsConnected { get; private set; }
         public ClientPlayer Player { get; private set; }
-
-        public NetPeerConfiguration Configuration { get; private set; }
+        public ClientNetworkProcessor Processor { get; private set; }
 
         public override void Initialize()
         {
@@ -38,6 +33,8 @@
         {
             throw new NotImplementedException();
         }
+
+        public NetPeerConfiguration Configuration { get; private set; }
 
         /// <summary>
         ///     Initiates a new connection to the specified host on the optionally specified port (defaulting if needed).

@@ -1,28 +1,18 @@
-﻿namespace BeyondSharp.Client
+﻿#region Usings
+
+using System.IO;
+using CommandLine;
+using Newtonsoft.Json;
+
+#endregion
+
+namespace BeyondSharp.Client
 {
-    using System.IO;
-
-    using CommandLine;
-
-    using Newtonsoft.Json;
-
     public static class ClientProgram
     {
-        public static ClientEngine Engine { get; private set; }
-
         public static ClientProgramConfiguration Configuration { get; private set; }
-
+        public static ClientEngine Engine { get; private set; }
         public static ClientProgramOptions Options { get; private set; }
-
-        public static void Main(string[] args)
-        {
-            if (Initialize(args))
-            {
-                Engine.Run();
-            }
-
-            SaveConfiguration();
-        }
 
         private static bool Initialize(string[] args)
         {
@@ -40,6 +30,16 @@
             Engine.Initialize();
 
             return true;
+        }
+
+        public static void Main(string[] args)
+        {
+            if (Initialize(args))
+            {
+                Engine.Run();
+            }
+
+            SaveConfiguration();
         }
 
         private static bool ProcessCommandLine(string[] args)

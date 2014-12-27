@@ -1,9 +1,12 @@
-﻿namespace BeyondSharp.Server
+﻿#region Usings
+
+using System;
+using BeyondSharp.Common;
+
+#endregion
+
+namespace BeyondSharp.Server
 {
-    using System;
-
-    using BeyondSharp.Common;
-
     public abstract class ServerEngineComponent : IEngineComponent
     {
         public const bool IsUpdateEnabledByDefault = true;
@@ -16,15 +19,19 @@
         }
 
         public ServerEngine Engine { get; private set; }
-
+        public abstract void Initialize();
         public bool IsUpdateEnabled { get; protected set; }
 
-        public abstract void Initialize();
+        public void Update(TimeSpan elapsedTime)
+        {
+            if (IsUpdateEnabled)
+                OnUpdate(elapsedTime);
+        }
 
         protected virtual void OnRuntimeReset()
         {
         }
 
-        public abstract void Update(TimeSpan elapsedTime);
+        protected abstract void OnUpdate(TimeSpan elapsedTime);
     }
 }

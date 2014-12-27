@@ -1,7 +1,11 @@
-﻿namespace BeyondSharp.Common.Extensions
-{
-    using System.Collections.Generic;
+﻿#region Usings
 
+using System.Collections.Generic;
+
+#endregion
+
+namespace BeyondSharp.Common.Extensions
+{
     public static class IEnumerableExtensions
     {
         /// <summary>

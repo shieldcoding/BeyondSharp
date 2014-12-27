@@ -1,13 +1,16 @@
-﻿namespace BeyondSharp.Client
+﻿#region Usings
+
+using System;
+using BeyondSharp.Common;
+
+#endregion
+
+namespace BeyondSharp.Client
 {
-    using System;
-
-    using BeyondSharp.Common;
-
     public abstract class ClientEngineComponent : IEngineComponent
     {
-        private const bool IsUpdateEnabledByDefault = true;
         private const bool IsRenderEnabledByDefault = false;
+        private const bool IsUpdateEnabledByDefault = true;
 
         public ClientEngineComponent(ClientEngine engine)
         {
@@ -17,14 +20,10 @@
             IsRenderEnabled = IsRenderEnabledByDefault;
         }
 
-        public bool IsUpdateEnabled { get; protected set; }
-
-        public bool IsRenderEnabled { get; protected set; }
-
         public ClientEngine Engine { get; private set; }
-
+        public bool IsRenderEnabled { get; protected set; }
         public abstract void Initialize();
-
+        public bool IsUpdateEnabled { get; protected set; }
         public abstract void Update(TimeSpan elapsedTime);
     }
 }

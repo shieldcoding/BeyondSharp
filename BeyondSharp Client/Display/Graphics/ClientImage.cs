@@ -1,10 +1,13 @@
-﻿namespace BeyondSharp.Client.Display.Graphics
+﻿#region Usings
+
+using System;
+using System.Drawing;
+using BeyondSharp.Common.Display.Graphics;
+
+#endregion
+
+namespace BeyondSharp.Client.Display.Graphics
 {
-    using System;
-    using System.Drawing;
-
-    using BeyondSharp.Common.Display.Graphics;
-
     public class ClientImage : Image<ClientImage>
     {
         /// <summary>

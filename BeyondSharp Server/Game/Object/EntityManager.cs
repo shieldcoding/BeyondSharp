@@ -1,11 +1,14 @@
-﻿namespace BeyondSharp.Server.Game.Object
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using BeyondSharp.Common.Game.Object;
+
+#endregion
+
+namespace BeyondSharp.Server.Game.Object
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using BeyondSharp.Common.Game.Object;
-
     public class EntityManager : ServerEngineComponent, IEntityManager<Entity, EntityComponent>
     {
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
@@ -20,14 +23,9 @@
             throw new NotImplementedException();
         }
 
-        protected override void OnRuntimeReset()
+        public IEnumerable<Entity> GetEntities()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(TimeSpan elapsedTime)
-        {
-            throw new NotImplementedException();
+            return entities.Values.ToList();
         }
 
         public Entity GetEntity(Guid id)
@@ -38,11 +36,6 @@
             }
 
             return entities.ContainsKey(id) ? entities[id] : null;
-        }
-
-        public IEnumerable<Entity> GetEntities()
-        {
-            return entities.Values.ToList();
         }
 
         public Guid RegisterEntity(Entity entity)
@@ -79,6 +72,16 @@
 
             entity.ID = default(Guid);
             entity.Manager = null;
+        }
+
+        protected override void OnRuntimeReset()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnUpdate(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }
