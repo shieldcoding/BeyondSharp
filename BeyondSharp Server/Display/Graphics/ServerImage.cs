@@ -1,10 +1,10 @@
-﻿namespace BeyondSharp.Server.Graphics
+﻿namespace BeyondSharp.Server.Display.Graphics
 {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
 
-    using BeyondSharp.Common.Graphics;
+    using BeyondSharp.Common.Display.Graphics;
 
     public class ServerImage : Image<ServerImage>
     {

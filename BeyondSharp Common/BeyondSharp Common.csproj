@@ -49,9 +49,9 @@
     <Compile Include="EngineSide.cs" />
     <Compile Include="Game\Object\IEntityComponent.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="Graphics\Image.cs" />
-    <Compile Include="Graphics\ImageBlendMethod.cs" />
-    <Compile Include="Graphics\ImageOperation.cs" />
+    <Compile Include="Display\Graphics\Image.cs" />
+    <Compile Include="Display\Graphics\ImageBlendMethod.cs" />
+    <Compile Include="Display\Graphics\ImageOperation.cs" />
     <Compile Include="IEngineComponent.cs" />
     <Compile Include="Network\INetworkManager.cs" />
     <Compile Include="Network\IPlayer.cs" />

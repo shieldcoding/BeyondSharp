@@ -1,4 +1,4 @@
-﻿namespace BeyondSharp.Common.Graphics
+﻿namespace BeyondSharp.Common.Display.Graphics
 {
     using System.Drawing;
 

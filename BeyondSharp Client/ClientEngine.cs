@@ -3,6 +3,8 @@
     using System;
     using System.Drawing;
 
+    using BeyondSharp.Client.Display;
+    using BeyondSharp.Client.Game;
     using BeyondSharp.Client.Input;
     using BeyondSharp.Client.Network;
     using BeyondSharp.Common;
@@ -17,20 +19,36 @@
             Side = EngineSide.Client;
         }
 
+        internal DisplayManager DisplayManager { get; private set; }
+
         internal ClientNetworkManager NetworkManager { get; private set; }
 
-        internal ClientInputManager InputManager { get; private set; }
-
-        internal GameWindow Window { get; private set; }
-
+        internal InputManager InputManager { get; private set; }
+        
         internal void Initialize()
         {
-            NetworkManager = new ClientNetworkManager(this);
 
-            Window = new GameWindow(ClientProgram.Configuration.Graphics.Width, ClientProgram.Configuration.Graphics.Height);
-            Window.UpdateFrame += (sender, args) => UpdateFrame(TimeSpan.FromSeconds(args.Time));
-            Window.RenderFrame += (sender, args) => RenderFrame(TimeSpan.FromSeconds(args.Time));
-            Window.VSync = ClientProgram.Configuration.Graphics.VSync;
+            NetworkManager = new ClientNetworkManager(this);
+            InputManager = new InputManager(this);
+
+            NetworkManager.Initialize();
+            InputManager.Initialize();
+        }
+
+        private bool InitializeDisplay()
+        {
+            DisplayManager = new DisplayManager();
+            DisplayManager.Initialize();
+
+            DisplayManager.UpdateFrame += (sender, args) => UpdateFrame(TimeSpan.FromSeconds(args.Time));
+            DisplayManager.RenderFrame += (sender, args) => RenderFrame(TimeSpan.FromSeconds(args.Time));
+
+            return true;
+        }
+
+        private bool InitializeComponents()
+        {
+            return true;
         }
 
         internal void Run()

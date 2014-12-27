@@ -1,9 +1,9 @@
-﻿namespace BeyondSharp.Common.Graphics
+﻿namespace BeyondSharp.Common.Display.Graphics
 {
     using System.Drawing;
 
-    public abstract class Image<ImageType>
-        where ImageType : Image<ImageType>
+    public abstract class Image<TImage>
+        where TImage : Image<TImage>
     {
         /// <summary>
         ///     Blends the current image with the supplied image using the specified blending method.
@@ -11,7 +11,7 @@
         /// <param name="image">The image to be blended into this one.</param>
         /// <param name="method">The blending method to be used.</param>
         /// <returns>An image representing the source image blended by the supplied image with the supplied method.</returns>
-        public abstract ImageType Blend(ImageType image, ImageBlendMethod method);
+        public abstract TImage Blend(TImage image, ImageBlendMethod method);
 
         /// <summary>
         ///     Blend the current image with the supplied color using the specified blending method.
@@ -20,13 +20,13 @@
         /// <param name="color">The color to be blended into this one.</param>
         /// <param name="method">The blending method to be used.</param>
         /// <returns>An image representing the source image blended by the supplied color with the supplied method.</returns>
-        public abstract ImageType Blend(Color color, ImageBlendMethod method);
+        public abstract TImage Blend(Color color, ImageBlendMethod method);
 
         /// <summary>
         ///     Crops the image to the specified area.
         /// </summary>
         /// <param name="area">The area to crop this image to.</param>
         /// <returns>An image representing the source image cropped to the supplied area.</returns>
-        public abstract ImageType Crop(Rectangle area);
+        public abstract TImage Crop(Rectangle area);
     }
 }

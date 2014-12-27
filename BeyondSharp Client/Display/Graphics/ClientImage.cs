@@ -1,9 +1,9 @@
-﻿namespace BeyondSharp.Client.Graphics
+﻿namespace BeyondSharp.Client.Display.Graphics
 {
     using System;
     using System.Drawing;
 
-    using BeyondSharp.Common.Graphics;
+    using BeyondSharp.Common.Display.Graphics;
 
     public class ClientImage : Image<ClientImage>
     {

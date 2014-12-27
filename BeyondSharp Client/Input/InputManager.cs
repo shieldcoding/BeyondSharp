@@ -7,9 +7,9 @@
     using System.Threading.Tasks;
 
 
-    public class ClientInputManager : ClientEngineComponent
+    public class InputManager : ClientEngineComponent
     {
-        public ClientInputManager(ClientEngine engine)
+        public InputManager(ClientEngine engine)
             : base(engine)
         {
         }

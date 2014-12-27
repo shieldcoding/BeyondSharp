@@ -1,4 +1,4 @@
-﻿namespace BeyondSharp.Client.Game.Environment
+﻿namespace BeyondSharp.Client.Game.Map
 {
     using System;
     using System.Linq;

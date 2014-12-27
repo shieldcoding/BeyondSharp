@@ -1,4 +1,4 @@
-﻿namespace BeyondSharp.Common.Graphics
+﻿namespace BeyondSharp.Common.Display.Graphics
 {
     public enum ImageBlendMethod
     {
