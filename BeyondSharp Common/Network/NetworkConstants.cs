@@ -1,6 +1,6 @@
 ﻿namespace BeyondSharp.Common.Network
 {
-    public static class CommonNetworkConstants
+    public static class NetworkConstants
     {
         public const string Identifier = "BeyondSharp";
 

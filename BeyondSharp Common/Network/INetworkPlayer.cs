@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IPlayer
+    public interface INetworkPlayer
     {
         string Username { get; }
 

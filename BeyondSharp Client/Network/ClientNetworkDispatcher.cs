@@ -35,7 +35,7 @@
         public void DispatchConnectRequest()
         {
             var message = CreateMessage(NetworkProtocol.ConnectionRequest, sizeof(double));
-            message.Write(CommonNetworkConstants.Version);
+            message.Write(NetworkConstants.Version);
 
             DispatchMessage(message);
         }

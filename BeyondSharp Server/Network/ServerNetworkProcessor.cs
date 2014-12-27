@@ -102,7 +102,7 @@
         {
             var version = CurrentMessage.ReadDouble();
 
-            if (Math.Abs(version - CommonNetworkConstants.Version) > 0)
+            if (Math.Abs(version - NetworkConstants.Version) > 0)
             {
                 CurrentPlayer.Disconnect(Network.DisconnectProtocolMismatch);
                 return false;

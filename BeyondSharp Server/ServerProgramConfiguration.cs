@@ -71,28 +71,28 @@
             public NetworkConfiguration()
             {
                 Address = IPAddress.Any.ToString();
-                Port = CommonNetworkConstants.DefaultPort;
-                MaximumConnections = CommonNetworkConstants.DefaultMaximumConnections;
+                Port = NetworkConstants.DefaultPort;
+                MaximumConnections = NetworkConstants.DefaultMaximumConnections;
             }
 
             [JsonProperty]
             public string Address { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DefaultPort)]
+            [DefaultValue(NetworkConstants.DefaultPort)]
             public int Port { get; private set; }
 
             [JsonProperty]
-            [DefaultValue(CommonNetworkConstants.DefaultMaximumConnections)]
+            [DefaultValue(NetworkConstants.DefaultMaximumConnections)]
             public int MaximumConnections { get; private set; }
 
             internal bool Validate()
             {
                 if (Port <= 0)
-                    Port = CommonNetworkConstants.DefaultPort;
+                    Port = NetworkConstants.DefaultPort;
 
                 if (MaximumConnections <= 0)
-                    MaximumConnections = CommonNetworkConstants.DefaultMaximumConnections;
+                    MaximumConnections = NetworkConstants.DefaultMaximumConnections;
 
                 return true;
             }

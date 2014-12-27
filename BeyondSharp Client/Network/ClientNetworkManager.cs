@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="host">The host to be connected to.</param>
         /// <param name="port">The port with which to connect to the host on.</param>
-        public void Connect(string host, int port = CommonNetworkConstants.DefaultPort)
+        public void Connect(string host, int port = NetworkConstants.DefaultPort)
         {
             if (string.IsNullOrWhiteSpace(host))
             {

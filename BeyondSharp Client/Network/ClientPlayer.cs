@@ -6,7 +6,7 @@
     using BeyondSharp.Common.Game.Object;
     using BeyondSharp.Common.Network;
 
-    public class ClientPlayer : IPlayer, IEntityController<ClientEntity, ClientEntityComponent>
+    public class ClientPlayer : INetworkPlayer, IEntityController<ClientEntity, ClientEntityComponent>
     {
         public ClientEntity ControlledEntity { get; internal set; }
 

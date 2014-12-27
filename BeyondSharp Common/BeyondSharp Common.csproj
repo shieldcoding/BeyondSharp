@@ -54,8 +54,8 @@
     <Compile Include="Display\Graphics\ImageOperation.cs" />
     <Compile Include="IEngineComponent.cs" />
     <Compile Include="Network\INetworkManager.cs" />
-    <Compile Include="Network\IPlayer.cs" />
-    <Compile Include="Network\CommonNetworkConstants.cs" />
+    <Compile Include="Network\INetworkPlayer.cs" />
+    <Compile Include="Network\NetworkConstants.cs" />
     <Compile Include="Network\NetworkProtocol.cs" />
     <Compile Include="Game\Map\IWorld.cs" />
     <Compile Include="Game\Map\IWorldManager.cs" />

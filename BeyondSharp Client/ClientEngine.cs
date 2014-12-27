@@ -17,6 +17,9 @@
         internal ClientEngine()
         {
             Side = EngineSide.Client;
+
+            NetworkManager = new ClientNetworkManager(this);
+            InputManager = new InputManager(this);
         }
 
         internal DisplayManager DisplayManager { get; private set; }
@@ -27,12 +30,9 @@
         
         internal void Initialize()
         {
+            InitializeDisplay();
 
-            NetworkManager = new ClientNetworkManager(this);
-            InputManager = new InputManager(this);
-
-            NetworkManager.Initialize();
-            InputManager.Initialize();
+            InitializeComponents();
         }
 
         private bool InitializeDisplay()
@@ -48,23 +48,14 @@
 
         private bool InitializeComponents()
         {
+            NetworkManager.Initialize();
+            InputManager.Initialize();
+
             return true;
         }
 
         internal void Run()
         {
-            try
-            {
-                Window.Run();
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                Window.Dispose();
-                Window = null;
-            }
         }
 
         private void UpdateFrame(TimeSpan elapsedTime)
@@ -76,10 +67,6 @@
 
         private void RenderFrame(TimeSpan elapsedTime)
         {
-            GL.ClearColor(Color.AliceBlue);
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            Window.SwapBuffers();
         }
     }
 }

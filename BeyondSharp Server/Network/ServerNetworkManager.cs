@@ -35,7 +35,7 @@
 
         public override void Initialize()
         {
-            Configuration = new NetPeerConfiguration(CommonNetworkConstants.Identifier);
+            Configuration = new NetPeerConfiguration(NetworkConstants.Identifier);
             Configuration.LocalAddress = IPAddress.Parse(ServerProgram.Configuration.Network.Address);
             Configuration.Port = ServerProgram.Configuration.Network.Port;
             Configuration.MaximumConnections = ServerProgram.Configuration.Network.MaximumConnections;

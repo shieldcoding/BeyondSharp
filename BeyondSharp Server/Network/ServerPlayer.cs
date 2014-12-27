@@ -7,7 +7,7 @@
 
     using Lidgren.Network;
 
-    public class ServerPlayer : EntityController, IPlayer
+    public class ServerPlayer : EntityController, INetworkPlayer
     {
         internal ServerPlayer(NetConnection connection)
         {
