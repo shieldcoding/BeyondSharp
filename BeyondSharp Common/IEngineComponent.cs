@@ -4,6 +4,8 @@
 
     public interface IEngineComponent
     {
+        bool IsUpdateEnabled { get; }
+
         void Initialize();
 
         void Update(TimeSpan elapsedTime);
