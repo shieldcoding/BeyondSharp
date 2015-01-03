@@ -40,8 +40,7 @@ namespace BeyondSharp.Server
                    !runtimeCancellationTokenSource.IsCancellationRequested)
             {
                 var elapsedTime = DateTime.Now - lastUpdate;
-
-
+                
                 lastUpdate = DateTime.Now;
             }
         }
