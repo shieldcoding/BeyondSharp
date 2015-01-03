@@ -1,20 +1,16 @@
-﻿#region Usings
-
-using Lidgren.Network;
-
-#endregion
+﻿using Lidgren.Network;
 
 namespace BeyondSharp.Common.Network
 {
-    public interface INetworkManager<TNetworkManager, TNetworkProcessor, TNetworkDispatcher> : IEngineComponent
+    public interface INetworkProcessor<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
         where TNetworkManager : INetworkManager<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
         where TNetworkProcessor : INetworkProcessor<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
         where TNetworkDispatcher : INetworkDispatcher<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
     {
-        NetPeerConfiguration Configuration { get; }
+        TNetworkManager Manager { get; }
 
-        TNetworkProcessor Processor { get; }
+        NetIncomingMessage CurrentMessage { get; }
 
-        TNetworkDispatcher Dispatcher { get; }
+        void Process(NetIncomingMessage message);
     }
 }

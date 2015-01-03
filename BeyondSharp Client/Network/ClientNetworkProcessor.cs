@@ -7,17 +7,18 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Client.Network
 {
-    internal class ClientNetworkProcessor
+    internal class ClientNetworkProcessor :
+        INetworkProcessor<ClientNetworkManager, ClientNetworkProcessor, ClientNetworkDispatcher>
     {
         public ClientNetworkProcessor(ClientNetworkManager manager)
         {
             Manager = manager;
         }
 
-        internal NetIncomingMessage CurrentMessage { get; private set; }
-        internal ClientNetworkManager Manager { get; private set; }
+        public NetIncomingMessage CurrentMessage { get; private set; }
+        public ClientNetworkManager Manager { get; private set; }
 
-        internal void Process(NetIncomingMessage message)
+        public void Process(NetIncomingMessage message)
         {
             CurrentMessage = message;
 

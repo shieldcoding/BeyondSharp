@@ -12,7 +12,8 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Server.Network
 {
-    public class ServerNetworkManager : ServerEngineComponent, INetworkManager
+    public class ServerNetworkManager : ServerEngineComponent,
+        INetworkManager<ServerNetworkManager, ServerNetworkProcessor, ServerNetworkDispatcher>
     {
         private readonly List<ServerPlayer> _players = new List<ServerPlayer>();
 
@@ -23,8 +24,8 @@ namespace BeyondSharp.Server.Network
             Processor = new ServerNetworkProcessor(this);
         }
 
-        internal ServerNetworkDispatcher Dispatcher { get; private set; }
-        internal ServerNetworkProcessor Processor { get; private set; }
+        public ServerNetworkDispatcher Dispatcher { get; private set; }
+        public ServerNetworkProcessor Processor { get; private set; }
         public NetServer Server { get; private set; }
 
         public override void Initialize()
@@ -95,7 +96,7 @@ namespace BeyondSharp.Server.Network
             NetIncomingMessage message = null;
             while ((message = Server.ReadMessage()) != null)
             {
-                Processor.ProcessMessage(message);
+                Processor.Process(message);
             }
         }
 

@@ -12,9 +12,10 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Server.Network
 {
-    internal class ServerNetworkDispatcher
+    public class ServerNetworkDispatcher :
+        INetworkDispatcher<ServerNetworkManager, ServerNetworkProcessor, ServerNetworkDispatcher>
     {
-        public ServerNetworkDispatcher(ServerNetworkManager manager)
+        internal ServerNetworkDispatcher(ServerNetworkManager manager)
         {
             Manager = manager;
         }

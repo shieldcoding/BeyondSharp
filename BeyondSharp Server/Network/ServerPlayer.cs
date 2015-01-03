@@ -2,6 +2,7 @@
 
 using System;
 using BeyondSharp.Common.Network;
+using BeyondSharp.Server.Display.Web;
 using BeyondSharp.Server.Game.Object;
 using Lidgren.Network;
 
@@ -21,6 +22,7 @@ namespace BeyondSharp.Server.Network
         public Guid HardwareToken { get; internal set; }
         public Guid SessionToken { get; internal set; }
         public string Username { get; internal set; }
+        public ServerPlayerWebInterface PlayerInterface { get; internal set; }
 
         public void Disconnect(string reason = null)
         {

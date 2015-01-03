@@ -9,15 +9,16 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Server.Network
 {
-    internal class ServerNetworkProcessor
+    public class ServerNetworkProcessor :
+        INetworkProcessor<ServerNetworkManager, ServerNetworkProcessor, ServerNetworkDispatcher>
     {
         internal ServerNetworkProcessor(ServerNetworkManager manager)
         {
             Manager = manager;
         }
 
-        public NetIncomingMessage CurrentMessage { get; internal set; }
         public ServerPlayer CurrentPlayer { get; internal set; }
+        public NetIncomingMessage CurrentMessage { get; internal set; }
         public ServerNetworkManager Manager { get; private set; }
 
         private void ProcessConnectedStatusMessage()
@@ -109,7 +110,7 @@ namespace BeyondSharp.Server.Network
             Manager.OnPlayerDisconnect(CurrentPlayer);
         }
 
-        internal void ProcessMessage(NetIncomingMessage message)
+        public void Process(NetIncomingMessage message)
         {
             CurrentMessage = message;
             CurrentPlayer = Manager.GetOrRegisterPlayer(message.SenderConnection);

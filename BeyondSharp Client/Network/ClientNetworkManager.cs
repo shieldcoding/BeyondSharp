@@ -8,7 +8,8 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Client.Network
 {
-    internal class ClientNetworkManager : ClientEngineComponent, INetworkManager
+    internal class ClientNetworkManager : ClientEngineComponent,
+        INetworkManager<ClientNetworkManager, ClientNetworkProcessor, ClientNetworkDispatcher>
     {
         public ClientNetworkManager(ClientEngine engine)
             : base(engine)

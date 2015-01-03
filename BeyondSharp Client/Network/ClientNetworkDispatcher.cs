@@ -7,7 +7,8 @@ using Lidgren.Network;
 
 namespace BeyondSharp.Client.Network
 {
-    internal class ClientNetworkDispatcher
+    internal class ClientNetworkDispatcher :
+        INetworkDispatcher<ClientNetworkManager, ClientNetworkProcessor, ClientNetworkDispatcher>
     {
         public ClientNetworkDispatcher(ClientNetworkManager manager)
         {
