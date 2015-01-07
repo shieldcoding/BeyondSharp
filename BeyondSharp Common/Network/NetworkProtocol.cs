@@ -18,7 +18,18 @@
         ///     (Guid) AuthenticationToken
         ///     (Guid) HardwareToken
         /// </summary>
-        ConnectionAuthenticate,
+        ConnectionAuthRequest,
+
+        /// <summary>
+        ///     Sent by the server to notify the client that it's authentication details have been rejected.
+        /// </summary>
+        ConnectionAuthRejected,
+
+        /// <summary>
+        ///     Sent by the server to notify the client that it's authentication details have been accepted.
+        /// </summary>
+        ConnectionAuthAccepted,
+
 
         /// <summary>
         ///     Sent by the server when the client is clear to connect, and is then sent back by the client to notify the server

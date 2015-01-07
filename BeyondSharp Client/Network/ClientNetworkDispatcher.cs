@@ -25,9 +25,9 @@ namespace BeyondSharp.Client.Network
             return message;
         }
 
-        internal void DispatchConnectionAuthenticate()
+        internal void DispatchConnectionAuthRequest()
         {
-            var message = CreateMessage(NetworkProtocol.ConnectionAuthenticate);
+            var message = CreateMessage(NetworkProtocol.ConnectionAuthRequest);
             message.Write(Manager.Player.Username);
             message.Write(Manager.Player.SessionToken.ToString("N"));
             message.Write(Manager.Player.HardwareToken.ToString("N"));

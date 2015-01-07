@@ -46,7 +46,7 @@ namespace BeyondSharp.Server.Network
             return true;
         }
 
-        private bool ProcessConnectionAuthenticate()
+        private bool ProcessConnectionAuthRequest()
         {
             var username = CurrentMessage.ReadString();
             var sessionToken = Guid.Parse(CurrentMessage.ReadString());
@@ -73,7 +73,7 @@ namespace BeyondSharp.Server.Network
                 return false;
             }
 
-            Manager.Dispatcher.DispatchConnectionAuthMessage(CurrentPlayer);
+            Manager.Dispatcher.DispatchConnectionAuthRequestMessage(CurrentPlayer);
             return true;
         }
 
@@ -85,8 +85,8 @@ namespace BeyondSharp.Server.Network
             {
                 case NetworkProtocol.ConnectionRequest:
                     return ProcessConnectionRequest();
-                case NetworkProtocol.ConnectionAuthenticate:
-                    return ProcessConnectionAuthenticate();
+                case NetworkProtocol.ConnectionAuthRequest:
+                    return ProcessConnectionAuthRequest();
                 case NetworkProtocol.ConnectionAccepted:
                     return ProcessConnectionAccepted();
             }

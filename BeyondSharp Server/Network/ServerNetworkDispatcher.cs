@@ -41,14 +41,14 @@ namespace BeyondSharp.Server.Network
             DispatchMessage(message, player);
         }
 
-        internal void DispatchConnectionAuthMessage(ServerPlayer player)
+        internal void DispatchConnectionAuthRequestMessage(ServerPlayer player)
         {
             if (player == null)
             {
                 throw new ArgumentNullException();
             }
 
-            var message = CreateMessage(NetworkProtocol.ConnectionAuthenticate);
+            var message = CreateMessage(NetworkProtocol.ConnectionAuthRequest);
             DispatchMessage(message, player);
         }
 

@@ -42,7 +42,7 @@ namespace BeyondSharp.Client.Network
 
         private void ProcessConnectionRequest()
         {
-            Manager.Dispatcher.DispatchConnectionAuthenticate();
+            Manager.Dispatcher.DispatchConnectionAuthRequest();
         }
 
         #endregion
