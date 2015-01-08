@@ -1,12 +1,11 @@
 ﻿#region Usings
 
 using System;
-using System.Runtime.Remoting.Channels;
-using BeyondSharp.Client.Display;
 using BeyondSharp.Client.Game;
 using BeyondSharp.Client.Input;
 using BeyondSharp.Client.Network;
 using BeyondSharp.Common;
+using OpenTK;
 
 #endregion
 
@@ -41,19 +40,11 @@ namespace BeyondSharp.Client
             return true;
         }
 
-        private bool InitializeCore()
+        internal void Run()
         {
-            try
-            {
-                GameManager = new GameManager();
-                GameManager.Initialize();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            return true;
+            GameManager.RenderFrame += UpdateFrame;
+            GameManager.UpdateFrame += RenderFrame;
+            GameManager.Run();
         }
 
         private bool InitializeComponents()
@@ -70,27 +61,41 @@ namespace BeyondSharp.Client
 
             return true;
         }
-        
-        internal void Run()
+
+        private bool InitializeCore()
         {
-            GameManager.RenderFrame += (sender, args) => OnRenderFrame(TimeSpan.FromSeconds(args.Time));
-            GameManager.UpdateFrame += (sender, args) => OnUpdateFrame(TimeSpan.FromSeconds(args.Time));
-            GameManager.Run();
-        }
+            try
+            {
+                GameManager = new GameManager();
+                GameManager.Initialize();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
-
-        private void OnUpdateFrame(TimeSpan elapsedTime)
-        {
-
-            NetworkManager.Update(elapsedTime);
-
-            InputManager.Update(elapsedTime);
+            return true;
         }
 
         private void OnRenderFrame(TimeSpan elapsedTime)
         {
-
         }
 
+        private void OnUpdateFrame(TimeSpan elapsedTime)
+        {
+            NetworkManager.UpdateFrame(elapsedTime);
+
+            InputManager.UpdateFrame(elapsedTime);
+        }
+
+        private void RenderFrame(object sender, FrameEventArgs args)
+        {
+            OnRenderFrame(TimeSpan.FromSeconds(args.Time));
+        }
+
+        private void UpdateFrame(object sender, FrameEventArgs args)
+        {
+            OnUpdateFrame(TimeSpan.FromSeconds(args.Time));
+        }
     }
 }

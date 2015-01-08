@@ -15,6 +15,8 @@ namespace BeyondSharp.Client.Network
             Manager = manager;
         }
 
+        #region INetworkProcessor<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
+
         public NetIncomingMessage CurrentMessage { get; private set; }
         public ClientNetworkManager Manager { get; private set; }
 
@@ -32,6 +34,8 @@ namespace BeyondSharp.Client.Network
                     break;
             }
         }
+
+        #endregion
 
         private void ProcessConnectedStatusMessage()
         {

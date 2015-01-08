@@ -22,7 +22,12 @@ namespace BeyondSharp.Client.Game.Map
             throw new NotImplementedException();
         }
 
-        public override void Update(TimeSpan elapsedTime)
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override void OnRenderFrame(TimeSpan elapsedTime)
         {
             throw new NotImplementedException();
         }

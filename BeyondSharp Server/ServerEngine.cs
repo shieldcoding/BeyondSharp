@@ -31,6 +31,34 @@ namespace BeyondSharp.Server
         public ServerNetworkManager NetworkManager { get; private set; }
         public ApplicationRuntime Runtime { get; private set; }
 
+        public void StopRuntime()
+        {
+            if (runtimeCancellationTokenSource != null && !runtimeCancellationTokenSource.IsCancellationRequested)
+            {
+                runtimeCancellationTokenSource.Cancel();
+            }
+        }
+
+        internal bool Initialize()
+        {
+            NetworkManager = new ServerNetworkManager(this);
+            NetworkManager.Initialize();
+
+            EntityManager = new EntityManager(this);
+            EntityManager.Initialize();
+
+            return LoadRuntime();
+        }
+
+        internal void Run()
+        {
+            runtimeCancellationTokenSource = new CancellationTokenSource();
+
+            runtimeTask = Task.Factory.StartNew(ExecuteRuntimeUpdateLoop, runtimeCancellationTokenSource.Token,
+                TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            runtimeTask.Wait();
+        }
+
         private void ExecuteRuntimeUpdateLoop()
         {
             Runtime.Initialize();
@@ -40,17 +68,9 @@ namespace BeyondSharp.Server
                    !runtimeCancellationTokenSource.IsCancellationRequested)
             {
                 var elapsedTime = DateTime.Now - lastUpdate;
-                
+
                 lastUpdate = DateTime.Now;
             }
-        }
-
-        internal bool Initialize()
-        {
-            NetworkManager = new ServerNetworkManager(this);
-            EntityManager = new EntityManager(this);
-
-            return LoadRuntime();
         }
 
         private bool LoadRuntime()
@@ -96,23 +116,6 @@ namespace BeyondSharp.Server
             }
 
             return false;
-        }
-
-        internal void Run()
-        {
-            runtimeCancellationTokenSource = new CancellationTokenSource();
-
-            runtimeTask = Task.Factory.StartNew(ExecuteRuntimeUpdateLoop, runtimeCancellationTokenSource.Token,
-                TaskCreationOptions.LongRunning, TaskScheduler.Default);
-            runtimeTask.Wait();
-        }
-
-        public void StopRuntime()
-        {
-            if (runtimeCancellationTokenSource != null && !runtimeCancellationTokenSource.IsCancellationRequested)
-            {
-                runtimeCancellationTokenSource.Cancel();
-            }
         }
     }
 }

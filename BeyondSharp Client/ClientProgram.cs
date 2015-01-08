@@ -15,6 +15,16 @@ namespace BeyondSharp.Client
         public static ClientEngine Engine { get; private set; }
         public static ClientProgramOptions Options { get; private set; }
 
+        public static void Main(string[] args)
+        {
+            if (Initialize(args))
+            {
+                Engine.Run();
+            }
+
+            SaveConfiguration();
+        }
+
         private static bool Initialize(string[] args)
         {
             if (!ProcessCommandLine(args))
@@ -35,14 +45,19 @@ namespace BeyondSharp.Client
             return true;
         }
 
-        public static void Main(string[] args)
+        private static bool InitializeEngine()
         {
-            if (Initialize(args))
+            try
             {
-                Engine.Run();
+                Engine = new ClientEngine();
+                Engine.Initialize();
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
-            SaveConfiguration();
+            return true;
         }
 
         private static bool ProcessCommandLine(string[] args)
@@ -68,21 +83,6 @@ namespace BeyondSharp.Client
             }
 
             SaveConfiguration();
-            return true;
-        }
-
-        private static bool InitializeEngine()
-        {
-            try
-            {
-                Engine = new ClientEngine();
-                Engine.Initialize();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
             return true;
         }
 

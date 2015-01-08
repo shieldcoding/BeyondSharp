@@ -12,9 +12,7 @@ namespace BeyondSharp.Common.Network
         where TNetworkDispatcher : INetworkDispatcher<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
     {
         NetPeerConfiguration Configuration { get; }
-
         TNetworkProcessor Processor { get; }
-
         TNetworkDispatcher Dispatcher { get; }
     }
 }

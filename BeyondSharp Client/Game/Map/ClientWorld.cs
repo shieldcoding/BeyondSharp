@@ -14,6 +14,8 @@ namespace BeyondSharp.Client.Game.Map
             Manager = manager;
         }
 
+        #region IWorld<ClientWorldManager,ClientWorld,ClientWorldTile> Members
+
         public ClientWorldTile GetTile(int x, int y)
         {
             throw new NotImplementedException();
@@ -22,5 +24,7 @@ namespace BeyondSharp.Client.Game.Map
         public int Height { get; private set; }
         public ClientWorldManager Manager { get; private set; }
         public int Width { get; private set; }
+
+        #endregion
     }
 }

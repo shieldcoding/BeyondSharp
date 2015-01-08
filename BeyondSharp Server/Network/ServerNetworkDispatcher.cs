@@ -20,15 +20,11 @@ namespace BeyondSharp.Server.Network
             Manager = manager;
         }
 
+        #region INetworkDispatcher<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
+
         public ServerNetworkManager Manager { get; private set; }
 
-        private NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
-        {
-            var message = Manager.Server.CreateMessage(sizeof (short) + additionalCapacity);
-            message.Write((short) protocol);
-
-            return message;
-        }
+        #endregion
 
         internal void DispatchConnectionAcceptedMessage(ServerPlayer player)
         {
@@ -52,6 +48,21 @@ namespace BeyondSharp.Server.Network
             DispatchMessage(message, player);
         }
 
+        internal void DispatchWorldDataMessage(IEnumerable<ServerPlayer> players, IEnumerable<ServerWorldTile> tiles)
+        {
+            var message = CreateMessage(NetworkProtocol.WorldData);
+
+            DispatchMessage(message, players);
+        }
+
+        private NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
+        {
+            var message = Manager.Server.CreateMessage(sizeof (short) + additionalCapacity);
+            message.Write((short) protocol);
+
+            return message;
+        }
+
         private void DispatchMessage(NetOutgoingMessage message, IEnumerable<ServerPlayer> recipients,
             NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, int channel = 0)
         {
@@ -63,13 +74,6 @@ namespace BeyondSharp.Server.Network
             NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, int channel = 0)
         {
             DispatchMessage(message, recipient.Yield(), method, channel);
-        }
-
-        internal void DispatchWorldDataMessage(IEnumerable<ServerPlayer> players, IEnumerable<ServerWorldTile> tiles)
-        {
-            var message = CreateMessage(NetworkProtocol.WorldData);
-
-            DispatchMessage(message, players);
         }
     }
 }

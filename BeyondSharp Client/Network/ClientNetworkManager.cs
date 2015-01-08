@@ -20,22 +20,16 @@ namespace BeyondSharp.Client.Network
 
         public NetClient Client { get; private set; }
         public NetConnection Connection { get; private set; }
-        public ClientNetworkDispatcher Dispatcher { get; private set; }
         public bool IsConnected { get; private set; }
         public ClientPlayer Player { get; private set; }
+
+        #region INetworkManager<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
+
+        public ClientNetworkDispatcher Dispatcher { get; private set; }
         public ClientNetworkProcessor Processor { get; private set; }
-
-        public override void Initialize()
-        {
-            Client = new NetClient(Configuration);
-        }
-
-        public override void Update(TimeSpan elapsedTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public NetPeerConfiguration Configuration { get; private set; }
+
+        #endregion
 
         /// <summary>
         ///     Initiates a new connection to the specified host on the optionally specified port (defaulting if needed).
@@ -60,6 +54,21 @@ namespace BeyondSharp.Client.Network
             if (IsConnected)
             {
             }
+        }
+
+        public override void Initialize()
+        {
+            Client = new NetClient(Configuration);
+        }
+
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override void OnRenderFrame(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }

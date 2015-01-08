@@ -16,17 +16,17 @@ namespace BeyondSharp.Server.Game.Map
         {
         }
 
-        public override void Initialize()
-        {
-            throw new NotImplementedException();
-        }
-
         public ServerWorld CreateWorld(int width, int height)
         {
             var world = new ServerWorld();
             world.Initialize(this, width, height);
 
             return world;
+        }
+
+        public override void Initialize()
+        {
+            throw new NotImplementedException();
         }
 
         public ServerWorld LoadWorld(string data)
@@ -42,13 +42,8 @@ namespace BeyondSharp.Server.Game.Map
             var data = File.ReadAllText(path);
             return LoadWorld(data);
         }
-
-        protected override void OnRuntimeReset()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnUpdate(TimeSpan elapsedTime)
+        
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
         {
             throw new NotImplementedException();
         }

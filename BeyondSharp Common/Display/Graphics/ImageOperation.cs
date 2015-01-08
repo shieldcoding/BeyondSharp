@@ -13,6 +13,8 @@ namespace BeyondSharp.Common.Display.Graphics
     public abstract class ImageOperation<ImageType>
         where ImageType : Image<ImageType>
     {
+        #region ImageOperationType enum
+
         public enum ImageOperationType
         {
             ImageBlend,
@@ -22,24 +24,12 @@ namespace BeyondSharp.Common.Display.Graphics
             Crop
         }
 
+        #endregion
+
         [JsonProperty]
         public ImageOperationType OperationType { get; private set; }
 
-        public class ImageBlendOperation : ImageOperation<ImageType>
-        {
-            public ImageBlendOperation(ImageType image, ImageBlendMethod method)
-            {
-                OperationType = ImageOperationType.ImageBlend;
-                Image = image;
-                Method = method;
-            }
-
-            [JsonProperty]
-            public ImageType Image { get; private set; }
-
-            [JsonProperty]
-            public ImageBlendMethod Method { get; private set; }
-        }
+        #region Nested type: ColorBlendOperation
 
         public class ColorBlendOperation : ImageOperation<ImageType>
         {
@@ -57,6 +47,10 @@ namespace BeyondSharp.Common.Display.Graphics
             public ImageBlendMethod Method { get; private set; }
         }
 
+        #endregion
+
+        #region Nested type: CropOperation
+
         public class CropOperation : ImageOperation<ImageType>
         {
             public CropOperation(Rectangle area)
@@ -68,5 +62,27 @@ namespace BeyondSharp.Common.Display.Graphics
             [JsonProperty]
             public Rectangle Area { get; private set; }
         }
+
+        #endregion
+
+        #region Nested type: ImageBlendOperation
+
+        public class ImageBlendOperation : ImageOperation<ImageType>
+        {
+            public ImageBlendOperation(ImageType image, ImageBlendMethod method)
+            {
+                OperationType = ImageOperationType.ImageBlend;
+                Image = image;
+                Method = method;
+            }
+
+            [JsonProperty]
+            public ImageType Image { get; private set; }
+
+            [JsonProperty]
+            public ImageBlendMethod Method { get; private set; }
+        }
+
+        #endregion
     }
 }

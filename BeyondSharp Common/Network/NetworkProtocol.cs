@@ -63,7 +63,8 @@
         EntityMove,
 
         /// <summary>
-        ///     Sent by the server to instruct the client to create a web interface with the supplied ID and the optionally supplied width and height.
+        ///     Sent by the server to instruct the client to create a web interface with the supplied ID and the optionally
+        ///     supplied width and height.
         ///     Parameters:
         ///     (Guid)      Interface ID
         ///     (Integer)   Interface Width             [Optional]
@@ -85,9 +86,10 @@
         ///     (String)    Raw HTML/Javascript
         /// </summary>
         WebInterfaceLoad,
-        
+
         /// <summary>
-        ///     Sent by the server to instruct the client to return a set of values with the corresponding names as JSON-Serialized objects.
+        ///     Sent by the server to instruct the client to return a set of values with the corresponding names as JSON-Serialized
+        ///     objects.
         ///     Parameters:
         ///     (Guid)      Interface ID
         ///     (Integer)   Javascript Object Count
@@ -105,7 +107,8 @@
         WebInterfaceGetValuesResponse,
 
         /// <summary>
-        ///     Sent by the server to instruct the client to set the values of the javascript variables with the specified names to the supplied JSON-Serialized objects.
+        ///     Sent by the server to instruct the client to set the values of the javascript variables with the specified names to
+        ///     the supplied JSON-Serialized objects.
         ///     Parameters:
         ///     (Guid)      Interface ID
         ///     (Integer)   Javascript Object Count

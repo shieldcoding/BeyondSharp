@@ -19,19 +19,16 @@ namespace BeyondSharp.Server
         }
 
         public ServerEngine Engine { get; private set; }
-        public abstract void Initialize();
         public bool IsUpdateEnabled { get; protected set; }
+        public abstract void Initialize();
 
-        public void Update(TimeSpan elapsedTime)
+        public void UpdateFrame(TimeSpan elapsedTime)
         {
             if (IsUpdateEnabled)
-                OnUpdate(elapsedTime);
+                OnUpdateFrame(elapsedTime);
         }
 
-        protected virtual void OnRuntimeReset()
-        {
-        }
 
-        protected abstract void OnUpdate(TimeSpan elapsedTime);
+        protected abstract void OnUpdateFrame(TimeSpan elapsedTime);
     }
 }

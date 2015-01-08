@@ -8,9 +8,7 @@ namespace BeyondSharp.Common.Network
         where TNetworkDispatcher : INetworkDispatcher<TNetworkManager, TNetworkProcessor, TNetworkDispatcher>
     {
         TNetworkManager Manager { get; }
-
         NetIncomingMessage CurrentMessage { get; }
-
         void Process(NetIncomingMessage message);
     }
 }

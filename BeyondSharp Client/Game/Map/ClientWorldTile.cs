@@ -9,6 +9,8 @@ namespace BeyondSharp.Client.Game.Map
 {
     public class ClientWorldTile : IWorldTile<ClientWorldManager, ClientWorld, ClientWorldTile>
     {
+        #region IWorldTile<ClientWorldManager,ClientWorld,ClientWorldTile> Members
+
         public ClientWorld World
         {
             get { throw new NotImplementedException(); }
@@ -23,5 +25,7 @@ namespace BeyondSharp.Client.Game.Map
         {
             get { throw new NotImplementedException(); }
         }
+
+        #endregion
     }
 }

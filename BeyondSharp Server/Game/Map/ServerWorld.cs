@@ -12,6 +12,8 @@ namespace BeyondSharp.Server.Game.Map
     {
         private ServerWorldTile[,] tiles;
 
+        #region IWorld<ServerWorldManager,ServerWorld,ServerWorldTile> Members
+
         public ServerWorldTile GetTile(int x, int y)
         {
             if (x < 0 || x >= Width)
@@ -33,6 +35,8 @@ namespace BeyondSharp.Server.Game.Map
         public ServerWorldManager Manager { get; private set; }
 
         public int Width { get; private set; }
+
+        #endregion
 
         /// <summary>
         ///     Initializes the world from the given parameters and allocates the tile array.

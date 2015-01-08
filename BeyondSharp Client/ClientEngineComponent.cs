@@ -22,8 +22,21 @@ namespace BeyondSharp.Client
 
         public ClientEngine Engine { get; private set; }
         public bool IsRenderEnabled { get; protected set; }
-        public abstract void Initialize();
         public bool IsUpdateEnabled { get; protected set; }
-        public abstract void Update(TimeSpan elapsedTime);
+        public abstract void Initialize();
+        protected abstract void OnUpdateFrame(TimeSpan elapsedTime);
+        internal abstract void OnRenderFrame(TimeSpan elapsedTime);
+
+        internal void RenderFrame(TimeSpan elapsedTime)
+        {
+            if (IsRenderEnabled)
+                OnRenderFrame(elapsedTime);
+        }
+
+        internal void UpdateFrame(TimeSpan elapsedTime)
+        {
+            if (IsUpdateEnabled)
+                OnUpdateFrame(elapsedTime);
+        }
     }
 }

@@ -24,9 +24,25 @@ namespace BeyondSharp.Server.Network
             Processor = new ServerNetworkProcessor(this);
         }
 
+        public NetServer Server { get; private set; }
+
+        #region INetworkManager<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
+
         public ServerNetworkDispatcher Dispatcher { get; private set; }
         public ServerNetworkProcessor Processor { get; private set; }
-        public NetServer Server { get; private set; }
+        public NetPeerConfiguration Configuration { get; private set; }
+
+        #endregion
+
+        /// <summary>
+        ///     Retrieves all players currently connected to the server.
+        /// </summary>
+        /// <returns>A list containing all connected players.</returns>
+        public IEnumerable<ServerPlayer> GetPlayers()
+        {
+            lock (_players)
+                return _players.ToList();
+        }
 
         public override void Initialize()
         {
@@ -40,7 +56,17 @@ namespace BeyondSharp.Server.Network
             Server.Start();
         }
 
-        public NetPeerConfiguration Configuration { get; private set; }
+        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerConnected;
+        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerDisconnected;
+        
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
+        {
+            NetIncomingMessage message = null;
+            while ((message = Server.ReadMessage()) != null)
+            {
+                Processor.Process(message);
+            }
+        }
 
         internal ServerPlayer GetOrRegisterPlayer(NetConnection connection)
         {
@@ -60,16 +86,6 @@ namespace BeyondSharp.Server.Network
             }
         }
 
-        /// <summary>
-        ///     Retrieves all players currently connected to the server.
-        /// </summary>
-        /// <returns>A list containing all connected players.</returns>
-        public IEnumerable<ServerPlayer> GetPlayers()
-        {
-            lock (_players)
-                return _players.ToList();
-        }
-
         internal void OnPlayerConnected(ServerPlayer player)
         {
             if (PlayerConnected != null)
@@ -85,23 +101,6 @@ namespace BeyondSharp.Server.Network
             if (PlayerDisconnected != null)
                 PlayerDisconnected(this, new ValueEventArgs<ServerPlayer>(player));
         }
-
-        protected override void OnRuntimeReset()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnUpdate(TimeSpan elapsedTime)
-        {
-            NetIncomingMessage message = null;
-            while ((message = Server.ReadMessage()) != null)
-            {
-                Processor.Process(message);
-            }
-        }
-
-        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerConnected;
-        public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerDisconnected;
 
         internal void RegisterPlayer(NetConnection connection)
         {

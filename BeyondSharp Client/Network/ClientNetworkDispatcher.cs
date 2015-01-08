@@ -15,25 +15,11 @@ namespace BeyondSharp.Client.Network
             Manager = manager;
         }
 
+        #region INetworkDispatcher<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
+
         public ClientNetworkManager Manager { get; private set; }
 
-        protected NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
-        {
-            var message = Manager.Client.CreateMessage(sizeof (short) + additionalCapacity);
-            message.Write((short) protocol);
-
-            return message;
-        }
-
-        internal void DispatchConnectionAuthRequest()
-        {
-            var message = CreateMessage(NetworkProtocol.ConnectionAuthRequest);
-            message.Write(Manager.Player.Username);
-            message.Write(Manager.Player.SessionToken.ToString("N"));
-            message.Write(Manager.Player.HardwareToken.ToString("N"));
-
-            DispatchMessage(message);
-        }
+        #endregion
 
         /// <summary>
         ///     Sends the initial connection request packet to the server containing the network protocol version.
@@ -46,6 +32,14 @@ namespace BeyondSharp.Client.Network
             DispatchMessage(message);
         }
 
+        protected NetOutgoingMessage CreateMessage(NetworkProtocol protocol, int additionalCapacity = 0)
+        {
+            var message = Manager.Client.CreateMessage(sizeof (short) + additionalCapacity);
+            message.Write((short) protocol);
+
+            return message;
+        }
+
         protected void DispatchMessage(NetOutgoingMessage message,
             NetDeliveryMethod method = NetDeliveryMethod.ReliableOrdered, int channel = 0)
         {
@@ -53,6 +47,16 @@ namespace BeyondSharp.Client.Network
             {
                 Manager.Connection.SendMessage(message, method, channel);
             }
+        }
+
+        internal void DispatchConnectionAuthRequest()
+        {
+            var message = CreateMessage(NetworkProtocol.ConnectionAuthRequest);
+            message.Write(Manager.Player.Username);
+            message.Write(Manager.Player.SessionToken.ToString("N"));
+            message.Write(Manager.Player.HardwareToken.ToString("N"));
+
+            DispatchMessage(message);
         }
     }
 }

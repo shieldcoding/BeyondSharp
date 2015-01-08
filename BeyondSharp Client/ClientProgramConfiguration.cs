@@ -16,6 +16,8 @@ namespace BeyondSharp.Client
 
         public GraphicsConfiguration Graphics { get; private set; }
 
+        #region Nested type: GraphicsConfiguration
+
         public class GraphicsConfiguration
         {
             private const int DefaultHeight = 600;
@@ -43,5 +45,7 @@ namespace BeyondSharp.Client
             [JsonProperty]
             public bool Fullscreen { get; set; }
         }
+
+        #endregion
     }
 }

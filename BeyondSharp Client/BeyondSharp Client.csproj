@@ -53,6 +53,7 @@
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramConfiguration.cs" />
     <Compile Include="ClientProgramOptions.cs" />
+    <Compile Include="Display\UIManager.cs" />
     <Compile Include="Display\Web\ClientPlayerWebInterface.cs" />
     <Compile Include="Game\GameManager.cs" />
     <Compile Include="Game\Object\ClientEntity.cs" />

@@ -18,10 +18,7 @@ namespace BeyondSharp.Server.Game.Object
         {
         }
 
-        public override void Initialize()
-        {
-            throw new NotImplementedException();
-        }
+        #region IEntityManager<Entity,EntityComponent> Members
 
         public IEnumerable<Entity> GetEntities()
         {
@@ -74,12 +71,14 @@ namespace BeyondSharp.Server.Game.Object
             entity.Manager = null;
         }
 
-        protected override void OnRuntimeReset()
+        #endregion
+
+        public override void Initialize()
         {
             throw new NotImplementedException();
         }
-
-        protected override void OnUpdate(TimeSpan elapsedTime)
+        
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
         {
             throw new NotImplementedException();
         }

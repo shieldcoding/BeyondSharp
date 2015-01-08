@@ -1,15 +1,10 @@
-﻿#region Usings
+﻿using System;
 
-using System;
-
-#endregion
-
-namespace BeyondSharp.Client.Input
+namespace BeyondSharp.Client.Display
 {
-    public class InputManager : ClientEngineComponent
+    public class UIManager : ClientEngineComponent
     {
-        public InputManager(ClientEngine engine)
-            : base(engine)
+        public UIManager(ClientEngine engine) : base(engine)
         {
         }
 

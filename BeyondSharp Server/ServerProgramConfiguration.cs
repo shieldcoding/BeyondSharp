@@ -25,6 +25,44 @@ namespace BeyondSharp.Server
             return Runtime.Validate() && Network.Validate();
         }
 
+        #region Nested type: NetworkConfiguration
+
+        public class NetworkConfiguration
+        {
+            public NetworkConfiguration()
+            {
+                Address = IPAddress.Any.ToString();
+                Port = NetworkConstants.DefaultPort;
+                MaximumConnections = NetworkConstants.DefaultMaximumConnections;
+            }
+
+            [JsonProperty]
+            public string Address { get; private set; }
+
+            [JsonProperty]
+            [DefaultValue(NetworkConstants.DefaultMaximumConnections)]
+            public int MaximumConnections { get; private set; }
+
+            [JsonProperty]
+            [DefaultValue(NetworkConstants.DefaultPort)]
+            public int Port { get; private set; }
+
+            internal bool Validate()
+            {
+                if (Port <= 0)
+                    Port = NetworkConstants.DefaultPort;
+
+                if (MaximumConnections <= 0)
+                    MaximumConnections = NetworkConstants.DefaultMaximumConnections;
+
+                return true;
+            }
+        }
+
+        #endregion
+
+        #region Nested type: RuntimeConfiguration
+
         public class RuntimeConfiguration
         {
             private const string DefaultApplicationDirectory = "Runtime";
@@ -65,36 +103,6 @@ namespace BeyondSharp.Server
             }
         }
 
-        public class NetworkConfiguration
-        {
-            public NetworkConfiguration()
-            {
-                Address = IPAddress.Any.ToString();
-                Port = NetworkConstants.DefaultPort;
-                MaximumConnections = NetworkConstants.DefaultMaximumConnections;
-            }
-
-            [JsonProperty]
-            public string Address { get; private set; }
-
-            [JsonProperty]
-            [DefaultValue(NetworkConstants.DefaultMaximumConnections)]
-            public int MaximumConnections { get; private set; }
-
-            [JsonProperty]
-            [DefaultValue(NetworkConstants.DefaultPort)]
-            public int Port { get; private set; }
-
-            internal bool Validate()
-            {
-                if (Port <= 0)
-                    Port = NetworkConstants.DefaultPort;
-
-                if (MaximumConnections <= 0)
-                    MaximumConnections = NetworkConstants.DefaultMaximumConnections;
-
-                return true;
-            }
-        }
+        #endregion
     }
 }
