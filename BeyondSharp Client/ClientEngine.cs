@@ -1,7 +1,9 @@
 ﻿#region Usings
 
 using System;
+using System.Runtime.Remoting.Channels;
 using BeyondSharp.Client.Display;
+using BeyondSharp.Client.Game;
 using BeyondSharp.Client.Input;
 using BeyondSharp.Client.Network;
 using BeyondSharp.Common;
@@ -20,49 +22,75 @@ namespace BeyondSharp.Client
             InputManager = new InputManager(this);
         }
 
-        internal DisplayManager DisplayManager { get; private set; }
+        internal GameManager GameManager { get; private set; }
         internal InputManager InputManager { get; private set; }
         internal ClientNetworkManager NetworkManager { get; private set; }
 
-        internal void Initialize()
+        internal bool Initialize()
         {
-            InitializeDisplay();
+            if (!InitializeCore())
+            {
+                return false;
+            }
 
-            InitializeComponents();
+            if (!InitializeComponents())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool InitializeCore()
+        {
+            try
+            {
+                GameManager = new GameManager();
+                GameManager.Initialize();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private bool InitializeComponents()
         {
-            NetworkManager.Initialize();
-            InputManager.Initialize();
+            try
+            {
+                NetworkManager.Initialize();
+                InputManager.Initialize();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
             return true;
         }
-
-        private bool InitializeDisplay()
-        {
-            DisplayManager = new DisplayManager();
-            DisplayManager.Initialize();
-
-            DisplayManager.UpdateFrame += (sender, args) => UpdateFrame(TimeSpan.FromSeconds(args.Time));
-            DisplayManager.RenderFrame += (sender, args) => RenderFrame(TimeSpan.FromSeconds(args.Time));
-
-            return true;
-        }
-
-        private void RenderFrame(TimeSpan elapsedTime)
-        {
-        }
-
+        
         internal void Run()
         {
+            GameManager.RenderFrame += (sender, args) => OnRenderFrame(TimeSpan.FromSeconds(args.Time));
+            GameManager.UpdateFrame += (sender, args) => OnUpdateFrame(TimeSpan.FromSeconds(args.Time));
+            GameManager.Run();
         }
 
-        private void UpdateFrame(TimeSpan elapsedTime)
+
+        private void OnUpdateFrame(TimeSpan elapsedTime)
         {
+
             NetworkManager.Update(elapsedTime);
 
             InputManager.Update(elapsedTime);
         }
+
+        private void OnRenderFrame(TimeSpan elapsedTime)
+        {
+
+        }
+
     }
 }

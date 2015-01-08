@@ -49,11 +49,12 @@
     <Compile Include="ClientEngine.cs" />
     <Compile Include="ClientEngineComponent.cs" />
     <Compile Include="ClientEngineState.cs" />
+    <Compile Include="ClientEngineWindow.cs" />
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramConfiguration.cs" />
     <Compile Include="ClientProgramOptions.cs" />
-    <Compile Include="Display\DisplayManager.cs" />
     <Compile Include="Display\Web\ClientPlayerWebInterface.cs" />
+    <Compile Include="Game\GameManager.cs" />
     <Compile Include="Game\Object\ClientEntity.cs" />
     <Compile Include="Game\Object\ClientEntityComponent.cs" />
     <Compile Include="Game\Object\ClientEntityManager.cs" />

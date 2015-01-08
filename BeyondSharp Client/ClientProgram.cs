@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.IO;
 using CommandLine;
 using Newtonsoft.Json;
@@ -26,8 +27,10 @@ namespace BeyondSharp.Client
                 return false;
             }
 
-            Engine = new ClientEngine();
-            Engine.Initialize();
+            if (!InitializeEngine())
+            {
+                return false;
+            }
 
             return true;
         }
@@ -49,17 +52,37 @@ namespace BeyondSharp.Client
 
         private static bool ProcessConfiguration()
         {
-            if (File.Exists(Options.ConfigurationPath))
+            try
             {
                 var configurationData = File.ReadAllText(Options.ConfigurationPath);
                 Configuration = JsonConvert.DeserializeObject<ClientProgramConfiguration>(configurationData);
             }
-            else
+            catch (Exception)
+            {
+                Configuration = null;
+            }
+
+            if (Configuration == null)
             {
                 Configuration = new ClientProgramConfiguration();
             }
 
             SaveConfiguration();
+            return true;
+        }
+
+        private static bool InitializeEngine()
+        {
+            try
+            {
+                Engine = new ClientEngine();
+                Engine.Initialize();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
             return true;
         }
 

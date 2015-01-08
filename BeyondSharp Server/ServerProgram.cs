@@ -107,8 +107,27 @@ namespace BeyondSharp.Server
                 Configuration = new ServerProgramConfiguration();
             }
 
-            Configuration.Validate();
+            try
+            {
+                if (!File.Exists(Options.ConfigurationPath))
+                {
+                    throw new FileNotFoundException();
+                }
 
+                var configurationData = File.ReadAllText(Options.ConfigurationPath);
+                Configuration = JsonConvert.DeserializeObject<ServerProgramConfiguration>(configurationData);
+            }
+            catch (Exception)
+            {
+                Configuration = null;
+            }
+
+            if (Configuration == null)
+            {
+                Configuration = new ServerProgramConfiguration();
+            }
+
+            Configuration.Validate();
             SaveConfiguration();
 
             return true;
