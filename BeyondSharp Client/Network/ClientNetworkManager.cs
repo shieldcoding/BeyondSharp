@@ -23,14 +23,6 @@ namespace BeyondSharp.Client.Network
         public bool IsConnected { get; private set; }
         public ClientPlayer Player { get; private set; }
 
-        #region INetworkManager<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
-
-        public ClientNetworkDispatcher Dispatcher { get; private set; }
-        public ClientNetworkProcessor Processor { get; private set; }
-        public NetPeerConfiguration Configuration { get; private set; }
-
-        #endregion
-
         /// <summary>
         ///     Initiates a new connection to the specified host on the optionally specified port (defaulting if needed).
         /// </summary>
@@ -70,5 +62,13 @@ namespace BeyondSharp.Client.Network
         {
             throw new NotImplementedException();
         }
+
+        #region INetworkManager<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
+
+        public ClientNetworkDispatcher Dispatcher { get; private set; }
+        public ClientNetworkProcessor Processor { get; private set; }
+        public NetPeerConfiguration Configuration { get; private set; }
+
+        #endregion
     }
 }

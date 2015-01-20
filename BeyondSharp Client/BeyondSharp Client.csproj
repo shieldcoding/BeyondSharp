@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -49,18 +51,23 @@
     <Compile Include="ClientEngine.cs" />
     <Compile Include="ClientEngineComponent.cs" />
     <Compile Include="ClientEngineState.cs" />
-    <Compile Include="ClientEngineWindow.cs" />
     <Compile Include="ClientProgram.cs" />
     <Compile Include="ClientProgramConfiguration.cs" />
     <Compile Include="ClientProgramOptions.cs" />
     <Compile Include="Display\UIManager.cs" />
     <Compile Include="Display\Web\ClientPlayerWebInterface.cs" />
-    <Compile Include="Game\GameManager.cs" />
+    <Compile Include="Game\GameState.cs" />
+    <Compile Include="Game\GameStateManager.cs" />
     <Compile Include="Game\Object\ClientEntity.cs" />
     <Compile Include="Game\Object\ClientEntityComponent.cs" />
     <Compile Include="Game\Object\ClientEntityManager.cs" />
     <Compile Include="Display\Graphics\ClientImage.cs" />
     <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Localization\Client.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Client.resx</DependentUpon>
+    </Compile>
     <Compile Include="Network\ClientNetworkDispatcher.cs" />
     <Compile Include="Network\ClientNetworkManager.cs" />
     <Compile Include="Network\ClientNetworkProcessor.cs" />
@@ -90,8 +97,20 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Client.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Client.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

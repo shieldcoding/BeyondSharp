@@ -42,7 +42,7 @@ namespace BeyondSharp.Server.Game.Map
             var data = File.ReadAllText(path);
             return LoadWorld(data);
         }
-        
+
         protected override void OnUpdateFrame(TimeSpan elapsedTime)
         {
             throw new NotImplementedException();

@@ -21,14 +21,6 @@ namespace BeyondSharp.Server.Network
         public bool IsAuthenticated { get; internal set; }
         public ServerPlayerWebInterface PlayerInterface { get; internal set; }
 
-        #region INetworkPlayer Members
-
-        public Guid HardwareToken { get; internal set; }
-        public Guid SessionToken { get; internal set; }
-        public string Username { get; internal set; }
-
-        #endregion
-
         public void Disconnect(string reason = null)
         {
             if (Connection == null)
@@ -38,5 +30,13 @@ namespace BeyondSharp.Server.Network
 
             Connection.Disconnect(reason);
         }
+
+        #region INetworkPlayer Members
+
+        public Guid HardwareToken { get; internal set; }
+        public Guid SessionToken { get; internal set; }
+        public string Username { get; internal set; }
+
+        #endregion
     }
 }

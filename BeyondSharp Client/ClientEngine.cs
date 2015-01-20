@@ -6,96 +6,105 @@ using BeyondSharp.Client.Input;
 using BeyondSharp.Client.Network;
 using BeyondSharp.Common;
 using OpenTK;
+using OpenTK.Graphics;
 
 #endregion
 
 namespace BeyondSharp.Client
 {
-    public class ClientEngine : Engine<ClientEngineComponent>
+    public class ClientEngine : GameWindow, IEngine<ClientEngineComponent>
     {
         internal ClientEngine()
+            : base(
+                ClientProgram.Configuration.Graphics.Width, ClientProgram.Configuration.Graphics.Height,
+                GraphicsMode.Default, Localization.Client.DefaultWindowTitle)
         {
-            Side = EngineSide.Client;
+            State = ClientEngineState.Created;
 
             NetworkManager = new ClientNetworkManager(this);
             InputManager = new InputManager(this);
         }
 
-        internal GameManager GameManager { get; private set; }
+        internal ClientEngineState State { get; private set; }
+        internal GameStateManager GameStateManager { get; private set; }
         internal InputManager InputManager { get; private set; }
         internal ClientNetworkManager NetworkManager { get; private set; }
 
+        public EngineSide Side
+        {
+            get { return EngineSide.Client; }
+        }
+
         internal bool Initialize()
         {
-            if (!InitializeCore())
+            try
             {
+                State = ClientEngineState.Initializing;
+
+                InitializeComponents();
+
+                State = ClientEngineState.Initialized;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                State = ClientEngineState.Error;
+
+                CrashAndDisplayException(ex);
+
                 return false;
             }
-
-            if (!InitializeComponents())
-            {
-                return false;
-            }
-
-            return true;
         }
 
-        internal void Run()
+        private void InitializeComponents()
         {
-            GameManager.RenderFrame += UpdateFrame;
-            GameManager.UpdateFrame += RenderFrame;
-            GameManager.Run();
+            NetworkManager.Initialize();
+            InputManager.Initialize();
         }
 
-        private bool InitializeComponents()
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            State = ClientEngineState.Running;
+        }
+
+        internal void CrashAndDisplayException(Exception ex)
         {
             try
             {
-                NetworkManager.Initialize();
-                InputManager.Initialize();
+                Exit();
             }
             catch (Exception)
             {
-                return false;
+                // ignored
             }
-
-            return true;
         }
 
-        private bool InitializeCore()
+        protected override void OnResize(EventArgs e)
         {
-            try
-            {
-                GameManager = new GameManager();
-                GameManager.Initialize();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            base.OnResize(e);
 
-            return true;
+            ClientProgram.Configuration.Graphics.Width = Width;
+            ClientProgram.Configuration.Graphics.Height = Height;
+            ClientProgram.Configuration.Graphics.VSyncMode = VSync;
         }
 
-        private void OnRenderFrame(TimeSpan elapsedTime)
+        protected override void OnWindowStateChanged(EventArgs e)
         {
+            base.OnWindowStateChanged(e);
+
+            ClientProgram.Configuration.Graphics.WindowState = WindowState;
         }
 
-        private void OnUpdateFrame(TimeSpan elapsedTime)
+        protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            NetworkManager.UpdateFrame(elapsedTime);
+            var elapsedTime = TimeSpan.FromSeconds(e.Time);
 
             InputManager.UpdateFrame(elapsedTime);
-        }
 
-        private void RenderFrame(object sender, FrameEventArgs args)
-        {
-            OnRenderFrame(TimeSpan.FromSeconds(args.Time));
-        }
-
-        private void UpdateFrame(object sender, FrameEventArgs args)
-        {
-            OnUpdateFrame(TimeSpan.FromSeconds(args.Time));
+            base.OnUpdateFrame(e);
         }
     }
 }

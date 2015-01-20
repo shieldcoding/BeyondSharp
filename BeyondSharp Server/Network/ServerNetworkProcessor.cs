@@ -19,32 +19,6 @@ namespace BeyondSharp.Server.Network
 
         public ServerPlayer CurrentPlayer { get; internal set; }
 
-        #region INetworkProcessor<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
-
-        public NetIncomingMessage CurrentMessage { get; internal set; }
-        public ServerNetworkManager Manager { get; private set; }
-
-        public void Process(NetIncomingMessage message)
-        {
-            CurrentMessage = message;
-            CurrentPlayer = Manager.GetOrRegisterPlayer(message.SenderConnection);
-
-            switch (message.MessageType)
-            {
-                case NetIncomingMessageType.StatusChanged:
-                    ProcessStatusChangedMessage();
-                    break;
-                case NetIncomingMessageType.Data:
-                    ProcessDataMessage();
-                    break;
-            }
-
-            CurrentMessage = null;
-            CurrentPlayer = null;
-        }
-
-        #endregion
-
         private void ProcessConnectedStatusMessage()
         {
             var logMessage = Localization.Network.PlayerConnecting
@@ -148,5 +122,31 @@ namespace BeyondSharp.Server.Network
                     return;
             }
         }
+
+        #region INetworkProcessor<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
+
+        public NetIncomingMessage CurrentMessage { get; internal set; }
+        public ServerNetworkManager Manager { get; private set; }
+
+        public void Process(NetIncomingMessage message)
+        {
+            CurrentMessage = message;
+            CurrentPlayer = Manager.GetOrRegisterPlayer(message.SenderConnection);
+
+            switch (message.MessageType)
+            {
+                case NetIncomingMessageType.StatusChanged:
+                    ProcessStatusChangedMessage();
+                    break;
+                case NetIncomingMessageType.Data:
+                    ProcessDataMessage();
+                    break;
+            }
+
+            CurrentMessage = null;
+            CurrentPlayer = null;
+        }
+
+        #endregion
     }
 }

@@ -15,28 +15,6 @@ namespace BeyondSharp.Client.Network
             Manager = manager;
         }
 
-        #region INetworkProcessor<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
-
-        public NetIncomingMessage CurrentMessage { get; private set; }
-        public ClientNetworkManager Manager { get; private set; }
-
-        public void Process(NetIncomingMessage message)
-        {
-            CurrentMessage = message;
-
-            switch (CurrentMessage.MessageType)
-            {
-                case NetIncomingMessageType.StatusChanged:
-                    ProcessStatusChanged();
-                    break;
-                case NetIncomingMessageType.Data:
-                    ProcessDataMessage();
-                    break;
-            }
-        }
-
-        #endregion
-
         private void ProcessConnectedStatusMessage()
         {
             Manager.Dispatcher.DispatchConnectRequest();
@@ -92,6 +70,28 @@ namespace BeyondSharp.Client.Network
 
         private void ProcessWorldData()
         {
+        }
+
+        #endregion
+
+        #region INetworkProcessor<ClientNetworkManager,ClientNetworkProcessor,ClientNetworkDispatcher> Members
+
+        public NetIncomingMessage CurrentMessage { get; private set; }
+        public ClientNetworkManager Manager { get; private set; }
+
+        public void Process(NetIncomingMessage message)
+        {
+            CurrentMessage = message;
+
+            switch (CurrentMessage.MessageType)
+            {
+                case NetIncomingMessageType.StatusChanged:
+                    ProcessStatusChanged();
+                    break;
+                case NetIncomingMessageType.Data:
+                    ProcessDataMessage();
+                    break;
+            }
         }
 
         #endregion

@@ -15,7 +15,7 @@ using BeyondSharp.Server.Network;
 
 namespace BeyondSharp.Server
 {
-    public class ServerEngine : Engine<ServerEngineComponent>
+    public class ServerEngine : IEngine<ServerEngineComponent>
     {
         private const string RuntimeDomainFriendlyName = "BeyondSharp Runtime Domain";
         private CancellationTokenSource runtimeCancellationTokenSource;
@@ -23,13 +23,17 @@ namespace BeyondSharp.Server
 
         internal ServerEngine()
         {
-            Side = EngineSide.Server;
         }
 
         public EntityManager EntityManager { get; private set; }
         public bool IsRuntimeActive { get; private set; }
         public ServerNetworkManager NetworkManager { get; private set; }
         public ApplicationRuntime Runtime { get; private set; }
+
+        public EngineSide Side
+        {
+            get { return EngineSide.Server; }
+        }
 
         public void StopRuntime()
         {

@@ -28,7 +28,6 @@ namespace BeyondSharp.Server
                 OnUpdateFrame(elapsedTime);
         }
 
-
         protected abstract void OnUpdateFrame(TimeSpan elapsedTime);
     }
 }

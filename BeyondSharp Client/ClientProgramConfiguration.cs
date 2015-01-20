@@ -23,27 +23,27 @@ namespace BeyondSharp.Client
             private const int DefaultHeight = 600;
             private const VSyncMode DefaultVSyncMode = VSyncMode.On;
             private const int DefaultWidth = 800;
-            public const bool DefaultFullscreen = false;
+            public const WindowState DefaultWindowState = WindowState.Normal;
 
             internal GraphicsConfiguration()
             {
                 Width = DefaultWidth;
                 Height = DefaultHeight;
-                VSync = DefaultVSyncMode;
-                Fullscreen = DefaultFullscreen;
+                VSyncMode = DefaultVSyncMode;
+                WindowState = DefaultWindowState;
             }
 
             [JsonProperty]
             public int Height { get; set; }
 
             [JsonProperty]
-            public VSyncMode VSync { get; set; }
+            public VSyncMode VSyncMode { get; set; }
 
             [JsonProperty]
             public int Width { get; set; }
 
             [JsonProperty]
-            public bool Fullscreen { get; set; }
+            public WindowState WindowState { get; set; }
         }
 
         #endregion

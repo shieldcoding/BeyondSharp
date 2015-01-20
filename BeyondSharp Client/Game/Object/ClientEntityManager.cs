@@ -22,6 +22,21 @@ namespace BeyondSharp.Client.Game.Object
             _entityLookup = new Dictionary<Guid, ClientEntity>();
         }
 
+        public override void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnUpdateFrame(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override void OnRenderFrame(TimeSpan elapsedTime)
+        {
+            throw new NotImplementedException();
+        }
+
         #region IEntityManager<ClientEntity,ClientEntityComponent> Members
 
         public IEnumerable<ClientEntity> GetEntities()
@@ -84,20 +99,5 @@ namespace BeyondSharp.Client.Game.Object
         }
 
         #endregion
-
-        public override void Initialize()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnUpdateFrame(TimeSpan elapsedTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void OnRenderFrame(TimeSpan elapsedTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

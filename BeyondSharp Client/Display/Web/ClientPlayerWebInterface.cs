@@ -14,6 +14,10 @@ namespace BeyondSharp.Client.Display.Web
 
         public WebView View { get; private set; }
 
+        public void Initialize()
+        {
+        }
+
         #region IPlayerWebInterface<ClientPlayer> Members
 
         public Guid Id { get; private set; }
@@ -24,9 +28,5 @@ namespace BeyondSharp.Client.Display.Web
         }
 
         #endregion
-
-        public void Initialize()
-        {
-        }
     }
 }

@@ -13,6 +13,10 @@ namespace BeyondSharp.Server.Game.Map
         {
         }
 
+        public void Serialize(MemoryStream stream)
+        {
+        }
+
         #region IWorldTile<ServerWorldManager,ServerWorld,ServerWorldTile> Members
 
         public ServerWorld World { get; internal set; }
@@ -20,9 +24,5 @@ namespace BeyondSharp.Server.Game.Map
         public int Y { get; internal set; }
 
         #endregion
-
-        public void Serialize(MemoryStream stream)
-        {
-        }
     }
 }

@@ -26,14 +26,6 @@ namespace BeyondSharp.Server.Network
 
         public NetServer Server { get; private set; }
 
-        #region INetworkManager<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
-
-        public ServerNetworkDispatcher Dispatcher { get; private set; }
-        public ServerNetworkProcessor Processor { get; private set; }
-        public NetPeerConfiguration Configuration { get; private set; }
-
-        #endregion
-
         /// <summary>
         ///     Retrieves all players currently connected to the server.
         /// </summary>
@@ -58,7 +50,7 @@ namespace BeyondSharp.Server.Network
 
         public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerConnected;
         public event EventHandler<ValueEventArgs<ServerPlayer>> PlayerDisconnected;
-        
+
         protected override void OnUpdateFrame(TimeSpan elapsedTime)
         {
             NetIncomingMessage message = null;
@@ -140,5 +132,13 @@ namespace BeyondSharp.Server.Network
                 _players.Remove(player);
             }
         }
+
+        #region INetworkManager<ServerNetworkManager,ServerNetworkProcessor,ServerNetworkDispatcher> Members
+
+        public ServerNetworkDispatcher Dispatcher { get; private set; }
+        public ServerNetworkProcessor Processor { get; private set; }
+        public NetPeerConfiguration Configuration { get; private set; }
+
+        #endregion
     }
 }
